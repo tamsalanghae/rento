@@ -1,8 +1,8 @@
 # <b>LÊ THỊ TÂM - 18021118</b>
 
-## Nghiệp vụ
+## 1.Nghiệp vụ
 
-### Với vai trò chủ nhà trọ (owner)
+### 1.1 Với vai trò chủ nhà trọ (owner)
 - Đăng nhập, đăng xuất, đổi mật khẩu
 - Đăng ký tài khoản
 - Đăng bài cho thuê phòng
@@ -14,5 +14,20 @@
 - Chat
 - Thanh toán/Trả phí cho bài đăng
 
+### 1.2 Người thuê trọ (renter):
+- Đăng ký tài khoản user, đăng nhập, đăng xuất, đổi mật khẩu
+- Tìm kiếm phòng trọ
+- Xem thông tin phòng trọ
+- Lưu thông tin phòng trọ vào danh sách yêu thích
+- Review/ bình luận
+- Report bài không hợp lệ
+
+### 1.3 Admin
+- Đăng nhập, đăng xuất, đổi mật khẩu
+- Quản lý tài khoản chủ nhà trọ
+- Quản lý bài đăng (chỉnh sửa, gia hạn bài đăng, bài đăng hiển thị trong thời gian nào đấy, - không đc đăng bài)
+- chat
+- notification
+- Thống kê, phân tích xu hướng thị hiếu
 
 
