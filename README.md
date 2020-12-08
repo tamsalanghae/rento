@@ -1,4 +1,6 @@
-# <b>LÊ THỊ TÂM - 18021118</b>
+# LÊ THỊ TÂM - 18021118
+# NGUYỄN DUY KIÊN - 18020074
+# NGUYỄN HỮU BẰNG - 18021118
 
 ## 1.Nghiệp vụ
 
