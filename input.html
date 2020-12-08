@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tìm trọ</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="./img/logo.png">
+    <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./libs/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="./libs/dropzone/dropzone.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div class="header bg-main">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <div class="d-flex justify-content-start">
+                <a class="navbar-brand" href="">
+                    <img src="./img/logo.png" class="w-40">
+                </a>
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="collapse navbar-collapse" id="navb">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20"><i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20">Nguyên căn</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20">Ở ghép</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20">Phòng trọ</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20"><i class="fas fa-user-circle"></i> Đăng nhập</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="input.html" class="nav-link text-white fs-20 btn btn-post"><i class="fas fa-edit"></i> Đăng bài</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="main-content">
+    <div class="container">
+        <div class="information mt-3 bg-white box-shadow">
+            <div class="row">
+                <div class="col-12">
+                    <div class="p-3">
+                        <fieldset class="scheduler-border">
+                            <legend class="scheduler-border">Thông tin Chủ nhà</legend>
+                            <div class="form-group">
+                                <label>Tiêu đề cho thuê</label>
+                                <input class="form-control" placeholder="Tiêu đề">
+                            </div>
+                            <div class="form-group">
+                                <label>Họ và tên chủ nhà</label>
+                                <input class="form-control" placeholder="Họ và tên chủ nhà">
+                            </div>
+                            <div class="form-group">
+                                <label>SĐT chủ nhà</label>
+                                <input class="form-control" placeholder="SĐT">
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ nhà</label>
+                                <input class="form-control" placeholder="Địa chỉ">
+                            </div>
+                            <div class="form-group">
+                                <label>Mô tả ngắn</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <label class="control-label">Danh sách Ảnh</label>
+                            </div>
+                            <form action="/file-upload" class="dropzone">
+                                <input type="hidden" name="media"/>
+                            </form>
+                        </fieldset>
+                        <button type="button" class="btn btn-success" id="addRoom">
+                            Thêm phòng
+                        </button>
+                        <div class="room-area">
+                            <fieldset class="scheduler-border">
+                                <legend class="scheduler-border">Thông tin phòng</legend>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Diện tích phòng</label>
+                                            <input class="form-control" placeholder="Họ và tên chủ nhà">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Diện tích phòng</label>
+                                            <input class="form-control" placeholder="Họ và tên chủ nhà">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Giá tiền/tháng</label>
+                                            <input class="form-control" placeholder="Giá tiền">
+                                        </div>
+                                    </div>
+                                    <di class="col-6">
+                                        <div class="form-group">
+                                            <label>Khu vực</label>
+                                            <select class="form-control">
+                                                <option>Thanh Xuân</option>
+                                                <option>Xuân Thủy</option>
+                                                <option>Nguyễn Trãi</option>
+                                                <option>Hò Tùng Mậu</option>
+                                                <option>Cầu Giấy</option>
+                                            </select>
+                                        </div>
+                                    </di>
+                                </div>
+                                <div class="text-center">
+                                    <label class="control-label">Danh sách Ảnh</label>
+                                </div>
+                                <form action="/file-upload" class="dropzone">
+                                    <input type="hidden" name="media"/>
+                                </form>
+                            </fieldset>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <button class="btn btn-primary ">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="./libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="./libs/fontawesome/all.min.js"></script>
+<script src="./libs/dropzone/dropzone.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
+<script src="./js/common.js"></script>
+</body>
+</html>
