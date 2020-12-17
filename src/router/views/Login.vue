@@ -8,15 +8,15 @@
         <div class="login-box">
           <h1>Login</h1>
           <div class="textbox">
-            <font-awesome-icon :icon="['fas', 'user-secret']" />
+            <font-awesome-icon :icon="['fas', 'user-secret']"/>
             <input type="text" placeholder="Username" name="" value="">
           </div>
 
           <div class="textbox">
             <i class="fa fa-lock"></i>
-            <input type="text" placeholder="Password" name="" value="">
+            <input type="password" placeholder="Password" name="" value="">
           </div>
-          <a href="screens/index.html"><input class="btn" type="button" name="" value="Sign in" onclick=""></a>
+          <input class="btn" type="button" name="" value="Sign in" onclick="">
         </div>
       </b-card-body>
     </b-card>

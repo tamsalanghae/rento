@@ -1,15 +1,18 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <Home />
   </div>
 </template>
 
 <script>
-import Login from "@/pages/login/Login";
+import Home from './components/Home.vue'
 
 export default {
   name: 'App',
   components: {
+    // eslint-disable-next-line vue/no-unused-components
+    Home
   }
 }
 </script>
