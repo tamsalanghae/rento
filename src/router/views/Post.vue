@@ -6,7 +6,7 @@
 
 
             <div class="d-flex justify-content-start">
-                <a class="navbar-brand" href="">
+                <a class="navbar-brand" href="Home">
                     <img src="@/assets/img/logo.png" class="w-40">
                 </a>
             </div>
@@ -14,22 +14,22 @@
                 <div class="collapse navbar-collapse" id="navb">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item mr-3">
-                            <a href="#" class="nav-link text-white fs-20"><i class="fas fa-home"></i> Home</a>
+                            <a href="Home" class="nav-link text-white fs-20"><i class="fas fa-home"></i> Home</a>
                         </li>
                         <li class="nav-item mr-3">
-                            <a href="#" class="nav-link text-white fs-20">Nguyên căn</a>
+                            <a href="RentoList" class="nav-link text-white fs-20">Nguyên căn</a>
                         </li>
                         <li class="nav-item mr-3">
-                            <a href="#" class="nav-link text-white fs-20">Ở ghép</a>
+                            <a href="RentoList" class="nav-link text-white fs-20">Ở ghép</a>
                         </li>
                         <li class="nav-item mr-3">
-                            <a href="#" class="nav-link text-white fs-20">Phòng trọ</a>
+                            <a href="RentoList" class="nav-link text-white fs-20">Phòng trọ</a>
                         </li>
                         <li class="nav-item mr-3">
-                            <a href="#" class="nav-link text-white fs-20"><i class="fas fa-user-circle"></i> Đăng nhập</a>
+                            <a href="Login" class="nav-link text-white fs-20"><i class="fas fa-user-circle"></i> Đăng nhập</a>
                         </li>
                         <li class="nav-item">
-                            <a href="input.html" class="nav-link text-white fs-20 btn btn-post"><i class="fas fa-edit"></i> Đăng bài</a>
+                            <a href="Post" class="nav-link text-white fs-20 btn btn-post"><i class="fas fa-edit"></i> Đăng bài</a>
                         </li>
                     </ul>
                 </div>

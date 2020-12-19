@@ -16,7 +16,7 @@
             <i class="fa fa-lock"></i>
             <input type="password" placeholder="Password" name="" value="">
           </div>
-          <input class="btn" type="button" name="" value="Sign in" onclick="">
+          <a href="Home"><input class="btn" type="button" name="" value="Sign in" onclick=""></a>
         </div>
       </b-card-body>
     </b-card>

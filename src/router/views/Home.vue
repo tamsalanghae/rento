@@ -4,7 +4,7 @@
       <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
           <div class="d-flex justify-content-start">
-            <a class="navbar-brand" href="">
+            <a class="navbar-brand" href="Home">
               <img src="@/assets/img/logo.png" class="w-40">
 
             </a>
@@ -13,22 +13,22 @@
             <div class="collapse navbar-collapse" id="navb">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item mr-3">
-                  <a href="#" class="nav-link text-white fs-20"><i class="fas fa-home"></i> Home</a>
+                  <a href="Home" class="nav-link text-white fs-20"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <li class="nav-item mr-3">
-                  <a href="#" class="nav-link text-white fs-20">Nguyên căn</a>
+                  <a href="RentoList" class="nav-link text-white fs-20">Nguyên căn</a>
                 </li>
                 <li class="nav-item mr-3">
-                  <a href="#" class="nav-link text-white fs-20">Ở ghép</a>
+                  <a href="RentoList" class="nav-link text-white fs-20">Ở ghép</a>
                 </li>
                 <li class="nav-item mr-3">
-                  <a href="#" class="nav-link text-white fs-20">Phòng trọ</a>
+                  <a href="RentoList" class="nav-link text-white fs-20">Phòng trọ</a>
                 </li>
                 <li class="nav-item mr-3">
-                  <a href="" class="nav-link text-white fs-20"><i class="fas fa-user-circle"></i> Đăng nhập</a>
+                  <a href="Login" class="nav-link text-white fs-20"><i class="fas fa-user-circle"></i> Đăng nhập</a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link text-white fs-20 btn btn-post"><i class="fas fa-edit"></i> Đăng bài</a>
+                  <a href="Post" class="nav-link text-white fs-20 btn btn-post"><i class="fas fa-edit"></i> Đăng bài</a>
                 </li>
               </ul>
             </div>
@@ -45,20 +45,6 @@
           <div class="col-2"></div>
           <div class="col-8">
             <div class="box-search">
-              <nav class="text-center">
-                <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
-                  <a class="nav-item nav-link active text-white" id="nav-all-tab" data-toggle="tab"
-                     href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Tổng hợp</a>
-                  <a class="nav-item nav-link text-white" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-                     role="tab" aria-controls="nav-home" aria-selected="true">Nguyên căn</a>
-                  <a class="nav-item nav-link text-white" id="nav-profile-tab" data-toggle="tab"
-                     href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Ở
-                    ghép</a>
-                  <a class="nav-item nav-link text-white" id="nav-contact-tab" data-toggle="tab"
-                     href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Phòng
-                    trọ</a>
-                </div>
-              </nav>
               <div class="tab-content mt-3" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-all" role="tabpanel"
                      aria-labelledby="nav-all-tab">
@@ -165,7 +151,7 @@
         <div class="zone-1 mt-3">
           <div class="container my-4">
             <hr class="my-4">
-            <a href="#"><h4 class="mb-3 text-main-orange">Nguyên căn</h4></a>
+            <a href="RentoList"><h4 class="mb-3 text-main-orange">Nguyên căn</h4></a>
             <!--Carousel Wrapper-->
             <div id="multi-item-example-1" class="carousel slide carousel-multi-item" data-ride="carousel">
 
@@ -337,7 +323,7 @@
           </div>
           <div class="container my-4 mt-3">
             <hr class="my-4">
-            <a href="#"><h4 class="mb-3 text-main-orange">Ở ghép</h4></a>
+            <a href="RentoList"><h4 class="mb-3 text-main-orange">Ở ghép</h4></a>
             <!--Carousel Wrapper-->
             <div id="multi-item-example-2" class="carousel slide carousel-multi-item" data-ride="carousel">
 
@@ -509,7 +495,7 @@
           </div>
           <div class="container my-4 mt-3">
             <hr class="my-4">
-            <a href="#"><h4 class="mb-3 text-main-orange">Phòng trọ</h4></a>
+            <a href="RentoList"><h4 class="mb-3 text-main-orange">Phòng trọ</h4></a>
             <!--Carousel Wrapper-->
             <div id="multi-item-example-3" class="carousel slide carousel-multi-item" data-ride="carousel">
 

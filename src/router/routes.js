@@ -1,8 +1,8 @@
-import Login from "@/router/views/Login"
-import Home from "@/components/Home";
-import Post from "@/components/Post";
-import RentoList from "@/components/RentoList";
-import RentoDetail from "@/components/RentoDetail";
+import Login from "@/router/views/Login";
+import Home from "@/router/views/Home";
+import Post from "@/router/views/Post";
+import RentoList from "@/router/views/RentoList";
+import RentoDetail from "@/router/views/RentoDetail";
 
 
 export default [

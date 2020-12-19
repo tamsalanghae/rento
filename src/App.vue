@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <router-view>
+      
     <Login/>
     <Home />
     <Post />
@@ -11,11 +12,11 @@
 </template>
 
 <script>
-import Home from './components/Home.vue'
-import Login from "@/router/views/Login"
-import Post from './components/Post.vue'
-import RentoList from './components/RentoList.vue'
-import RentoDetail from './components/RentoDetail.vue';
+import Login from './router/views/Login.vue'
+import Home from './router/views/Home.vue'
+import Post from './router/views/Post.vue'
+import RentoList from './router/views/RentoList.vue'
+import RentoDetail from './router/views/RentoDetail.vue';
 
 export default {
   name: 'App',
