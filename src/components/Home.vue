@@ -67,7 +67,7 @@
                       <input type="text" class="form-control" placeholder="Search this blog">
                       <div class="input-group-append">
                         <button class="btn btn-secondary" type="button">
-                          <i class="fa fa-search"></i>
+                          <font-awesome-icon :icon="['fas', 'search']" />
                         </button>
                       </div>
                     </div>
@@ -79,7 +79,7 @@
                       <input type="text" class="form-control" placeholder="Search this blog">
                       <div class="input-group-append">
                         <button class="btn btn-secondary" type="button">
-                          <i class="fa fa-search"></i>
+                          <font-awesome-icon :icon="['fas', 'search']" />
                         </button>
                       </div>
                     </div>
@@ -92,7 +92,7 @@
                       <input type="text" class="form-control" placeholder="Search this blog">
                       <div class="input-group-append">
                         <button class="btn btn-secondary" type="button">
-                          <i class="fa fa-search"></i>
+                          <font-awesome-icon :icon="['fas', 'search']" />
                         </button>
                       </div>
                     </div>
@@ -105,7 +105,7 @@
                       <input type="text" class="form-control" placeholder="Search this blog">
                       <div class="input-group-append">
                         <button class="btn btn-secondary" type="button">
-                          <i class="fa fa-search"></i>
+                          <font-awesome-icon :icon="['fas', 'search']" />
                         </button>
                       </div>
                     </div>
