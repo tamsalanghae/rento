@@ -263,6 +263,7 @@ export default {
 .uploading-image {
   display: flex;
 }
+
 .banner {
   width: 100%;
   max-height: 450px;
@@ -278,6 +279,7 @@ export default {
 .text-light {
   color: white;
 }
+
 
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
@@ -384,9 +386,11 @@ span.value.upper::before {
   border: 1px solid gray;
   border-radius: 100%;
 }
+
 .min-max-slider > input::-webkit-slider-runnable-track {
   cursor: pointer;
 }
+
 
 .box-shadow {
   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);

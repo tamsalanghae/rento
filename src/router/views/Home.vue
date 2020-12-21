@@ -4,6 +4,7 @@
       <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
           <div class="d-flex justify-content-start">
+
             <a class="navbar-brand" href="">
               <img src="@/assets/img/logo.png" class="w-40" />
             </a>
@@ -12,28 +13,22 @@
             <div class="collapse navbar-collapse" id="navb">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item mr-3">
-                  <a href="#" class="nav-link text-white fs-20"
-                    ><i class="fas fa-home"></i> Home</a
-                  >
+                  <a href="Home" class="nav-link text-white fs-20"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <li class="nav-item mr-3">
-                  <a href="#" class="nav-link text-white fs-20">Nguyên căn</a>
+                  <a href="RentoList" class="nav-link text-white fs-20">Nguyên căn</a>
                 </li>
                 <li class="nav-item mr-3">
-                  <a href="#" class="nav-link text-white fs-20">Ở ghép</a>
+                  <a href="RentoList" class="nav-link text-white fs-20">Ở ghép</a>
                 </li>
                 <li class="nav-item mr-3">
-                  <a href="#" class="nav-link text-white fs-20">Phòng trọ</a>
+                  <a href="RentoList" class="nav-link text-white fs-20">Phòng trọ</a>
                 </li>
                 <li class="nav-item mr-3">
-                  <a href="" class="nav-link text-white fs-20"
-                    ><i class="fas fa-user-circle"></i> Đăng nhập</a
-                  >
+                  <a href="Login" class="nav-link text-white fs-20"><i class="fas fa-user-circle"></i> Đăng nhập</a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link text-white fs-20 btn btn-post"
-                    ><i class="fas fa-edit"></i> Đăng bài</a
-                  >
+                  <a href="Post" class="nav-link text-white fs-20 btn btn-post"><i class="fas fa-edit"></i> Đăng bài</a>
                 </li>
               </ul>
             </div>
@@ -43,7 +38,7 @@
     </div>
     <div class="banner-wrapper">
       <div class="bx-wrapper">
-        <img class="banner" src="@/assets/img/banner.jpg" />
+        <img class="banner" src="@/assets/img/banner.jpg">
       </div>
       <div class="container position-relative">
         <div class="row">
@@ -72,8 +67,8 @@
               <div class="p-4">
                 <div class="row d-table">
                   <div class="col-md-5 d-table-cell align-middle">
-                    <img class="w-100" src="@/assets/img/cat-1.svg" />
-                  </div>
+                    <img class="w-100" src="@/assets/img/cat-1.svg">
+                    </div>
                   <div class="col-md-7 d-table-cell align-middle">
                     <h4>Nguyên căn</h4>
                     <p>4,000 tin mua bán</p>
@@ -85,8 +80,8 @@
               <div class="p-4">
                 <div class="row d-table">
                   <div class="col-md-5 d-table-cell align-middle">
-                    <img class="w-100" src="@/assets/img/cat-2.svg" />
-                  </div>
+                    <img class="w-100" src="@/assets/img/cat-2.svg">
+                    </div>
                   <div class="col-md-7 d-table-cell align-middle">
                     <h4>Ở ghép</h4>
                     <p>4,000 tin mua bán</p>
@@ -98,7 +93,7 @@
               <div class="p-4">
                 <div class="row d-table">
                   <div class="col-md-5 d-table-cell align-middle">
-                    <img class="w-100" src="@/assets/img/cat-3.svg" />
+                    <img class="w-100" src="@/assets/img/cat-3.svg">
                   </div>
                   <div class="col-md-7 d-table-cell align-middle">
                     <h4>Phòng trọ</h4>
@@ -261,6 +256,7 @@ export default {
   z-index: 999;
   position: relative;
 }
+
 .search-box .search-bar {
   display: block;
   width: 100%;
@@ -290,6 +286,7 @@ export default {
 
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
+
   color: #495057 !important;
 }
 .banner-wrapper::after {
@@ -393,9 +390,11 @@ span.value.upper::before {
   border: 1px solid gray;
   border-radius: 100%;
 }
+
 .min-max-slider > input::-webkit-slider-runnable-track {
   cursor: pointer;
 }
+
 
 .box-shadow {
   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
@@ -425,4 +424,5 @@ legend.scheduler-border {
 [data-toggle="collapse"].collapsed .fa:before {
   content: "\f13a";
 }
+
 </style>
