@@ -1,17 +1,33 @@
 <template>
   <div id="app">
-    <Detail/>
+    <router-view>
+      
+    <Login/>
+    <Home />
+    <Post />
+    <RentoList />
+    <RentoDetail />
+    </router-view>
   </div>
 </template>
 
 <script>
-import Detail from './pages/detail/Detail.vue';
+import Login from './router/views/Login.vue'
+import Home from './router/views/Home.vue'
+import Post from './router/views/Post.vue'
+import RentoList from './router/views/RentoList.vue'
+import RentoDetail from './router/views/RentoDetail.vue';
 
 export default {
   name: 'App',
   components: {
+    Login,
+    Post,
+    RentoList,
+    RentoDetail,
+    // eslint-disable-next-line vue/no-unused-components
+    Home,
     
-    Detail
   }
 }
 </script>
