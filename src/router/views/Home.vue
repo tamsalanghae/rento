@@ -4,9 +4,9 @@
       <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
           <div class="d-flex justify-content-start">
-            <a class="navbar-brand" href="Home">
-              <img src="@/assets/img/logo.png" class="w-40">
 
+            <a class="navbar-brand" href="">
+              <img src="@/assets/img/logo.png" class="w-40" />
             </a>
           </div>
           <div class="d-flex justify-content-end">
@@ -44,59 +44,15 @@
         <div class="row">
           <div class="col-2"></div>
           <div class="col-8">
-            <div class="box-search">
-              <div class="tab-content mt-3" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-all" role="tabpanel"
-                     aria-labelledby="nav-all-tab">
-                  <form action="">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Search this blog">
-                      <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button">
-                          <font-awesome-icon :icon="['fas', 'search']" />
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div class="tab-pane fade show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                  <form action="">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Search this blog">
-                      <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button">
-                          <font-awesome-icon :icon="['fas', 'search']" />
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div class="tab-pane fade mt-3" id="nav-profile" role="tabpanel"
-                     aria-labelledby="nav-profile-tab">
-                  <form action="">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Search this blog">
-                      <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button">
-                          <font-awesome-icon :icon="['fas', 'search']" />
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-                <div class="tab-pane fade mt-3" id="nav-contact" role="tabpanel"
-                     aria-labelledby="nav-contact-tab">
-                  <form action="">
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Search this blog">
-                      <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button">
-                          <font-awesome-icon :icon="['fas', 'search']" />
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
+            <div class="search-box">
+              <div class="search-box">
+                <input
+                  type="text"
+                  class="search-bar"
+                  placeholder="Search..."
+                  v-model="query"
+                  @keypress="search"
+                />
               </div>
             </div>
           </div>
@@ -112,7 +68,7 @@
                 <div class="row d-table">
                   <div class="col-md-5 d-table-cell align-middle">
                     <img class="w-100" src="@/assets/img/cat-1.svg">
-                  </div>
+                    </div>
                   <div class="col-md-7 d-table-cell align-middle">
                     <h4>Nguyên căn</h4>
                     <p>4,000 tin mua bán</p>
@@ -125,7 +81,7 @@
                 <div class="row d-table">
                   <div class="col-md-5 d-table-cell align-middle">
                     <img class="w-100" src="@/assets/img/cat-2.svg">
-                  </div>
+                    </div>
                   <div class="col-md-7 d-table-cell align-middle">
                     <h4>Ở ghép</h4>
                     <p>4,000 tin mua bán</p>
@@ -150,520 +106,25 @@
         </div>
         <div class="zone-1 mt-3">
           <div class="container my-4">
-            <hr class="my-4">
-            <a href="RentoList"><h4 class="mb-3 text-main-orange">Nguyên căn</h4></a>
-            <!--Carousel Wrapper-->
-            <div id="multi-item-example-1" class="carousel slide carousel-multi-item" data-ride="carousel">
-
-              <!--Controls-->
-              <div class="left-control position-relative">
-                <a class="btn-floating position-absolute left-chevron-control text-main-orange" href="#multi-item-example-1" data-slide="prev"><i class="fas fa-chevron-circle-left"></i></a>
-              </div>
-              <div class="text-center">
-                <a class="btn-floating position-absolute right-chevron-control text-main-orange" href="#multi-item-example-1" data-slide="next"><i class="fas fa-chevron-circle-right"></i></a>
-              </div>
-              <!--/.Controls-->
-
-              <!--Indicators-->
-              <ol class="carousel-indicators">
-                <li data-target="#multi-item-example-1" data-slide-to="0" class="active"></li>
-                <li data-target="#multi-item-example-1" data-slide-to="1"></li>
-                <li data-target="#multi-item-example-1" data-slide-to="2"></li>
-              </ol>
-              <!--/.Indicators-->
-
-              <!--Slides-->
-              <div class="carousel-inner" role="listbox">
-
-                <!--First slide-->
-                <div class="carousel-item active">
-
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <!--/.First slide-->
-
-                <!--Second slide-->
-                <div class="carousel-item">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <!--/.Second slide-->
-
-                <!--Third slide-->
-                <div class="carousel-item">
-
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <!--/.Third slide-->
-
-              </div>
-              <!--/.Slides-->
-
-            </div>
-            <!--/.Carousel Wrapper-->
-
-
+            <hr class="my-4" />
+            <a href="#"><h4 class="mb-3 text-main-orange">Nguyên căn</h4></a>
+            <!--First slide-->
+            <carousel :items="items" />
+            <!--/.First slide-->
           </div>
           <div class="container my-4 mt-3">
-            <hr class="my-4">
-            <a href="RentoList"><h4 class="mb-3 text-main-orange">Ở ghép</h4></a>
-            <!--Carousel Wrapper-->
-            <div id="multi-item-example-2" class="carousel slide carousel-multi-item" data-ride="carousel">
-
-              <!--Controls-->
-              <div class="left-control position-relative">
-                <a class="btn-floating position-absolute left-chevron-control text-main-orange" href="#multi-item-example-2" data-slide="prev"><i class="fas fa-chevron-circle-left"></i></a>
-              </div>
-              <div class="text-center">
-                <a class="btn-floating position-absolute right-chevron-control text-main-orange" href="#multi-item-example-2" data-slide="next"><i class="fas fa-chevron-circle-right"></i></a>
-              </div>
-              <!--/.Controls-->
-
-              <!--Indicators-->
-              <ol class="carousel-indicators">
-                <li data-target="#multi-item-example-2" data-slide-to="0" class="active"></li>
-                <li data-target="#multi-item-example-2" data-slide-to="1"></li>
-                <li data-target="#multi-item-example-2" data-slide-to="2"></li>
-              </ol>
-              <!--/.Indicators-->
-
-              <!--Slides-->
-              <div class="carousel-inner" role="listbox">
-
-                <!--First slide-->
-                <div class="carousel-item active">
-
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <!--/.First slide-->
-
-                <!--Second slide-->
-                <div class="carousel-item">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <!--/.Second slide-->
-
-                <!--Third slide-->
-                <div class="carousel-item">
-
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <!--/.Third slide-->
-
-              </div>
-              <!--/.Slides-->
-
-            </div>
-            <!--/.Carousel Wrapper-->
-
-
+            <hr class="my-4" />
+            <a href="#"><h4 class="mb-3 text-main-orange">Ở ghép</h4></a>
+            <!--Second slide-->
+            <carousel :items="items" />
+            <!--/.Second slide-->
           </div>
           <div class="container my-4 mt-3">
-            <hr class="my-4">
-            <a href="RentoList"><h4 class="mb-3 text-main-orange">Phòng trọ</h4></a>
-            <!--Carousel Wrapper-->
-            <div id="multi-item-example-3" class="carousel slide carousel-multi-item" data-ride="carousel">
-
-              <!--Controls-->
-              <div class="left-control position-relative">
-                <a class="btn-floating position-absolute left-chevron-control text-main-orange" href="#multi-item-example-3" data-slide="prev"><i class="fas fa-chevron-circle-left"></i></a>
-              </div>
-              <div class="text-center">
-                <a class="btn-floating position-absolute right-chevron-control text-main-orange" href="#multi-item-example-3" data-slide="next"><i class="fas fa-chevron-circle-right"></i></a>
-              </div>
-              <!--/.Controls-->
-
-              <!--Indicators-->
-              <ol class="carousel-indicators">
-                <li data-target="#multi-item-example-3" data-slide-to="0" class="active"></li>
-                <li data-target="#multi-item-example-3" data-slide-to="1"></li>
-                <li data-target="#multi-item-example-3" data-slide-to="2"></li>
-              </ol>
-              <!--/.Indicators-->
-
-              <!--Slides-->
-              <div class="carousel-inner" role="listbox">
-
-                <!--First slide-->
-                <div class="carousel-item active">
-
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <!--/.First slide-->
-
-                <!--Second slide-->
-                <div class="carousel-item">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <!--/.Second slide-->
-
-                <!--Third slide-->
-                <div class="carousel-item">
-
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 clearfix d-none d-md-block">
-                      <div class="card mb-2 single-item">
-                        <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                             alt="Card image cap">
-                        <div class="card-body">
-                          <h4 class="card-title">Card title</h4>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                          <a class="btn btn-primary">Button</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-                <!--/.Third slide-->
-
-              </div>
-              <!--/.Slides-->
-
-            </div>
-            <!--/.Carousel Wrapper-->
-
-
+            <hr class="my-4" />
+            <a href="#"><h4 class="mb-3 text-main-orange">Phòng trọ</h4></a>
+            <!--Third slide-->
+            <carousel :items="items" />
+            <!--/.Third slide-->
           </div>
         </div>
       </div>
@@ -672,20 +133,106 @@
 </template>
 
 <script>
+import Carousel from "../../components/carousel.vue";
+
 export default {
   name: "Home",
-  data() {
-    return {};
+  components: {
+    Carousel,
   },
-
+  data() {
+    return {
+      items: [
+        {
+          title: "Sed non ante non cras amet",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non sagittis leo. Vestibulum sit amet metus nec neque dignissim dapibus.",
+          image: "https://picsum.photos/id/1015/600/600",
+        },
+        {
+          title: "Curabitur sit amet nunc",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id mollis erat. Aliquam erat volutpat. Nunc erat lacus, rhoncus nec.",
+          image: "https://picsum.photos/id/1019/600/600",
+        },
+        {
+          title: "Proin pharetra, ante metus",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac diam ac ex efficitur posuere. Pellentesque cursus pellentesque risus, non.",
+          image: "https://picsum.photos/id/1039/600/600",
+        },
+        {
+          title: "Cras pharetra non enim a",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi malesuada varius nibh, a malesuada nisi feugiat eget. Aenean convallis semper.",
+          image: "https://picsum.photos/id/1042/600/600",
+        },
+        {
+          title: "Proin vulputate, augue eu accumsan",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla tempor libero sit amet mollis. Praesent quis leo erat. Integer.",
+          image: "https://picsum.photos/id/1044/600/600",
+        },
+        {
+          title: "Maecenas feugiat magna sapien in",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet fringilla ante. Quisque at ipsum non lacus consequat dictum.",
+          image: "https://picsum.photos/id/1057/600/600",
+        },
+        {
+          title: "Donec commodo sed enim at",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu condimentum risus. Praesent dignissim, neque nec pharetra vestibulum, libero odio.",
+          image: "https://picsum.photos/id/1063/600/600",
+        },
+        {
+          title: "In bibendum urna et turpis",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae ante volutpat leo vulputate volutpat et sed ex. Vivamus eu.",
+          image: "https://picsum.photos/id/1076/600/600",
+        },
+        {
+          title: "Phasellus iaculis dignissim erat at",
+          content:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis quam scelerisque, eleifend purus gravida, scelerisque orci. Ut et turpis.",
+          image: "https://picsum.photos/id/1083/600/600",
+        },
+      ],
+    
+      url_base: "https://api...",
+      query: "",
+    };
+  },
+  created: function () {
+    // `this` points to the vm instance
+    console.log('a is: ' + this.items)
+    // fetch(`${this.url_base}search?q=${this.query}`)
+    //       .then((res) => {
+    //         return res.json();
+    //       })
+    //       .then(this.setResults);
+  },
+  methods: {
+    search(e) {
+      if (e.key == "Enter") {
+        console.log(this.query);
+        fetch(`${this.url_base}search?q=${this.query}`)
+          .then((res) => {
+            return res.json();
+          })
+          .then(this.setResults);
+      }
+    },
+    setResults(results) {
+      this.weather = results;
+    },
+  },
 };
 </script>
 
 <style scoped>
-
-
 .bg-main {
-  background-color: #FFBA00;
+  background-color: #ffba00;
 }
 .bg-grey {
   background-color: rgb(244, 244, 244);
@@ -700,42 +247,67 @@ export default {
 
 .banner {
   width: 100%;
-  max-height: 450px;
+  max-height: 300px;
   object-fit: cover;
 }
 
-.box-search {
+.search-box {
   margin-top: -15%;
   z-index: 999;
   position: relative;
+}
+
+.search-box .search-bar {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 0%;
+
+  color: #313131;
+  font-size: 20px;
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0px 16px 0px 16px;
+  transition: 0.4s;
+}
+.search-box .search-bar:focus {
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 16px 0px 16px 0px;
 }
 
 .text-light {
   color: white;
 }
 
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+
   color: #495057 !important;
 }
 .banner-wrapper::after {
   content: "";
   position: absolute;
-  bottom: 435px;
+  top: 80px;
   left: 0;
-  height: 120px;
+  height: 300px;
   width: 100%;
   background-color: #000;
   opacity: 0.5;
 }
 .btn-post {
-  background-color: #FC9807;
-  border-color: #FC9807;
+  background-color: #fc9807;
+  border-color: #fc9807;
 }
 .text-main-orange {
-  color: #FC9807;
+  color: #fc9807;
 }
-a.text-main-orange:hover{
-  color: #FC9807;
+a.text-main-orange:hover {
+  color: #fc9807;
 }
 .left-chevron-control {
   font-size: 50px;
@@ -757,22 +329,56 @@ a.text-main-orange:hover{
   border-top-right-radius: 25px !important;
 }
 
-
-.min-max-slider {position: relative; width: 200px; text-align: center; margin-bottom: 20px;}
-.min-max-slider > label {display: none;}
-span.value {height: 1.7em; font-weight: bold; display: inline-block;}
-span.value.lower::before {content: "€"; display: inline-block;}
-span.value.upper::before {content: "- €"; display: inline-block; margin-left: 0.4em;}
-.min-max-slider > .legend {display: flex; justify-content: space-between;}
-.min-max-slider > .legend > * {font-size: small; opacity: 0.25;}
-.min-max-slider > input {cursor: pointer; position: absolute;}
+.min-max-slider {
+  position: relative;
+  width: 200px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.min-max-slider > label {
+  display: none;
+}
+span.value {
+  height: 1.7em;
+  font-weight: bold;
+  display: inline-block;
+}
+span.value.lower::before {
+  content: "€";
+  display: inline-block;
+}
+span.value.upper::before {
+  content: "- €";
+  display: inline-block;
+  margin-left: 0.4em;
+}
+.min-max-slider > .legend {
+  display: flex;
+  justify-content: space-between;
+}
+.min-max-slider > .legend > * {
+  font-size: small;
+  opacity: 0.25;
+}
+.min-max-slider > input {
+  cursor: pointer;
+  position: absolute;
+}
 
 /* webkit specific styling */
 .min-max-slider > input {
   -webkit-appearance: none;
-  outline: none!important;
+  outline: none !important;
   background: transparent;
-  background-image: linear-gradient(to bottom, transparent 0%, transparent 30%, silver 30%, silver 60%, transparent 60%, transparent 100%);
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 30%,
+    silver 30%,
+    silver 60%,
+    transparent 60%,
+    transparent 100%
+  );
 }
 .min-max-slider > input::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
@@ -784,7 +390,11 @@ span.value.upper::before {content: "- €"; display: inline-block; margin-left: 
   border: 1px solid gray;
   border-radius: 100%;
 }
-.min-max-slider > input::-webkit-slider-runnable-track {cursor: pointer;}
+
+.min-max-slider > input::-webkit-slider-runnable-track {
+  cursor: pointer;
+}
+
 
 .box-shadow {
   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
@@ -793,8 +403,8 @@ fieldset.scheduler-border {
   border: 1px groove #ddd !important;
   padding: 0 1.4em 1.4em 1.4em !important;
   margin: 0 0 1.5em 0 !important;
-  -webkit-box-shadow:  0px 0px 0px 0px #000;
-  box-shadow:  0px 0px 0px 0px #000;
+  -webkit-box-shadow: 0px 0px 0px 0px #000;
+  box-shadow: 0px 0px 0px 0px #000;
 }
 
 /*legend.scheduler-border {*/
@@ -803,9 +413,9 @@ fieldset.scheduler-border {
 /*    text-align: left !important;*/
 /*}*/
 legend.scheduler-border {
-  width:inherit; /* Or auto */
-  padding:0 10px; /* To give a bit of padding on the left and right */
-  border-bottom:none;
+  width: inherit; /* Or auto */
+  padding: 0 10px; /* To give a bit of padding on the left and right */
+  border-bottom: none;
 }
 [data-toggle="collapse"] .fa:before {
   content: "\f139";
