@@ -16,7 +16,7 @@ import Login from './router/views/Login.vue'
 import Home from './router/views/Home.vue'
 import Post from './router/views/Post.vue'
 import RentoList from './router/views/RentoList.vue'
-import RentoDetail from './router/views/RentoDetail.vue';
+import RentoDetail from './router/views/RentoDetail.vue'
 
 export default {
   name: 'App',

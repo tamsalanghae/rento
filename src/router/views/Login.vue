@@ -1,22 +1,41 @@
 <template>
   <div id="background" class="d-flex justify-content-center">
-    <b-card
-        tag="article"
-        class="mb-2 col-4"
-    >
+    <b-card tag="article" class="mb-2 col-4">
       <b-card-body>
         <div class="login-box">
           <h1>Login</h1>
           <div class="textbox">
-            <font-awesome-icon :icon="['fas', 'user-secret']"/>
-            <input type="text" placeholder="Username" name="" value="">
+            <font-awesome-icon :icon="['fas', 'user-secret']" />
+            <ValidationObserver>
+              <ValidationProvider rules="required" v-slot="{ errors }">
+                <input
+                  v-model="username"
+                  placeholder="Username"
+                  name="fieldName"
+                />
+                <span>{{ errors[0] }}</span>
+              </ValidationProvider>
+            </ValidationObserver>
           </div>
 
           <div class="textbox">
-            <i class="fa fa-lock"></i>
-            <input type="password" placeholder="Password" name="" value="">
+            <input
+              v-model="password"
+              placeholder="Password"
+              name=""
+              value="PW"
+              :type="passwordType"
+            />
           </div>
-          <a href="Home"><input class="btn" type="button" name="" value="Sign in" onclick=""></a>
+          <input type="checkbox" @click="Show()" />
+
+          <input
+            class="btn"
+            type="button"
+            name=""
+            value="Sign in"
+            @click="signin"
+          />
         </div>
       </b-card-body>
     </b-card>
@@ -24,9 +43,57 @@
 </template>
 
 <script>
+import axios from "axios";
+import { extend } from "vee-validate";
+import { required } from "vee-validate/dist/rules";
+extend('required', {
+    ...required,
+    message: "Bắt buộc",
+});
 export default {
-  name: "Login"
-}
+  name: "Login",
+  data() {
+    return {
+      username: "",
+      password: "",
+      passwordType: "password",
+    };
+  },
+  // mounted() {
+  //   axios
+  //     .post("https://localhost:44334/users/signin", {
+  //       firstName: "Kien",
+  //       lastName: "Nguyen",
+  //       username: "tam2k",
+  //       password: "nkocvoidoi",
+  //       role: "renter",},
+  //     )
+  //     .then( res => localStorage.setItem("token", res.data.token));
+  // },
+  methods: {
+    signin() {
+      axios
+        .post("https://localhost:44334/Users/authenticate", {
+          username: this.username,
+          password: this.password,
+        })
+        .then((res) => {
+          if (res.status == 200) {
+            console.log(res.status == 200);
+          }
+          this.$router.push("/Home");
+        });
+    },
+    Show() {
+      if (this.passwordType == "password") {
+        console.log(this.passwordType);
+        this.passwordType = "text";
+      } else {
+        this.passwordType = "password";
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -47,8 +114,8 @@ export default {
 .login-box h1 {
   float: left;
   font-size: 60px;
-  color: #FC9807;
-  border-bottom: 6px solid #FC9807;
+  color: #fc9807;
+  border-bottom: 6px solid #fc9807;
   margin-bottom: 50%;
   padding: 13px 0;
 }
@@ -59,14 +126,14 @@ export default {
   font-size: 20px;
   padding: 8px 0;
   margin: 8px 0;
-  border-bottom: 1px solid #FC9807;
+  border-bottom: 1px solid #fc9807;
 }
 
 .textbox i {
   width: 30px;
   float: left;
   text-align: center;
-  color: #FC9807;
+  color: #fc9807;
 }
 
 .textbox input {
@@ -84,7 +151,7 @@ export default {
   width: 100%;
   background: none;
   border: 2px solid #eee;
-  color: #FC9807;
+  color: #fc9807;
   padding: 10px;
   font-size: 18px;
   cursor: pointer;
@@ -92,19 +159,18 @@ export default {
 
   outline: none;
   border: #eee;
-  box-shadow: 0 4px #FC9807;
+  box-shadow: 0 4px #fc9807;
 }
 
 .btn:hover {
-  background-color: #FC9807;
+  background-color: #fc9807;
   color: #eeeeee;
 }
 
 .btn:active {
-  background-color: #FC9807;
-  box-shadow: 0 5px #BFBFBF;
+  background-color: #fc9807;
+  box-shadow: 0 5px #bfbfbf;
   transform: translateY(4px);
   color: #eeeeee;
 }
-
 </style>
