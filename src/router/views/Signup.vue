@@ -5,13 +5,6 @@
         <b-card-body>
           <div class="login-box">
             <h1>Sign up</h1>
-            <br />
-            <div>
-              <label class="switch">
-                <input type="checkbox" checked />
-                <span class="slider round"></span>
-              </label>
-            </div>
             <div class="textbox">
               <font-awesome-icon :icon="['fas', 'user-secret']" />
               <ValidationObserver>
@@ -29,37 +22,33 @@
               </ValidationObserver>
             </div>
             <div class="textbox">
-              <font-awesome-icon :icon="['fas', 'user-secret']" />
-              <ValidationObserver>
-                <ValidationProvider rules="required" v-slot="{ errors }">
-                  <input
-                    v-model="password"
-                    placeholder="Password*"
-                    name="fieldName"
-                  />
-                  <br />
-                  <span style="color: red; font-size:14px">{{
-                    errors[0]
-                  }}</span>
-                </ValidationProvider>
-              </ValidationObserver>
-            </div>
+            <ValidationObserver>
+              <ValidationProvider rules="required" v-slot="{ errors }">
+            <input
+              v-model="password"
+              placeholder="Password"
+              name=""
+              :type="passwordType"
+            />
+             <br>
+                <span style="color: red; font-size:14px">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </ValidationObserver>
+          </div>
             <div class="textbox">
-              <font-awesome-icon :icon="['fas', 'user-secret']" />
-              <ValidationObserver>
-                <ValidationProvider rules="required" v-slot="{ errors }">
-                  <input
-                    v-model="comfirmpassword"
-                    placeholder="Comfirm Password*"
-                    name="fieldName"
-                  />
-                  <br />
-                  <span style="color: red; font-size:14px">{{
-                    errors[0]
-                  }}</span>
-                </ValidationProvider>
-              </ValidationObserver>
-            </div>
+            <ValidationObserver>
+              <ValidationProvider rules="required" v-slot="{ errors }">
+            <input
+              v-model="password"
+              placeholder="Password"
+              name=""
+              :type="passwordType"
+            />
+             <br>
+                <span style="color: red; font-size:14px">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </ValidationObserver>
+          </div>
             <div class="textbox">
               <font-awesome-icon :icon="['fas', 'user-secret']" />
               <ValidationObserver>
@@ -93,14 +82,15 @@
                 </ValidationProvider>
               </ValidationObserver>
             </div>
-
-            <input
+            <input type="checkbox" @click="Show()" />
+            <a href="Home"><input
               class="btn"
               type="button"
               name=""
               value="Sign up"
               @click="Signup"
-            />
+            /></a>
+            
           </div>
         </b-card-body>
       </b-card>
@@ -109,10 +99,44 @@
 </template>
 
 <script>
+import axios from "axios";
+import { extend } from "vee-validate";
+import { required } from "vee-validate/dist/rules";
+extend('required', {
+    ...required,
+    message: "* This field cannot be empty",
+});
 export default {
   name: "Signup",
   data() {
-    return {};
+    return {
+      username: "",
+      password: "",
+      passwordType: "password",
+    };
+  },
+  methods: {
+    signin() {
+      axios
+        .post("https://localhost:44334/Users/authenticate", {
+          username: this.username,
+          password: this.password,
+        })
+        .then((res) => {
+          if (res.status == 200) {
+            console.log(res.status == 200);
+          }
+          this.$router.push("/Home");
+        });
+},
+    Show() {
+      if (this.passwordType == "password") {
+        console.log(this.passwordType);
+        this.passwordType = "text";
+      } else {
+        this.passwordType = "password";
+      }
+    },
   },
 };
 </script>
@@ -125,11 +149,9 @@ export default {
 }
 
 .login-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
+    margin-top: 10px;
+    margin-right: 30px;
+    margin-left: 30px;
 }
 
 .login-box h1 {
@@ -194,57 +216,5 @@ export default {
   transform: translateY(4px);
   color: #eeeeee;
 }
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
 
-
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
 </style>

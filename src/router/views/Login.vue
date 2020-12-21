@@ -42,7 +42,7 @@
             value="Sign in"
             @click="signin"
           />
-          <p style="color: black">Bạn chưa có tài khoản?  <a href="Signup">Đăng ký</a></p>
+          <p style="color: black">Bạn chưa có tài khoản?  <a href="ChooseRole">Đăng ký</a></p>
         </div>
       </b-card-body>
     </b-card>
@@ -90,7 +90,7 @@ export default {
           }
           this.$router.push("/Home");
         });
-    },
+},
     Show() {
       if (this.passwordType == "password") {
         console.log(this.passwordType);

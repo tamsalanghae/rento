@@ -4,6 +4,7 @@ import Post from "@/router/views/Post";
 import RentoList from "@/router/views/RentoList";
 import RentoDetail from "@/router/views/RentoDetail";
 import Signup from "@/router/views/Signup";
+import ChooseRole from "@/router/views/ChooseRole";
 
 
 export default [
@@ -42,5 +43,11 @@ export default [
         name: "signup",
         alias: "/",
         component: Signup
+    },
+    {
+        path: "/chooserole",
+        name: "chooserole",
+        alias: "/",
+        component: ChooseRole
     },
 ]

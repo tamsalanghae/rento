@@ -8,6 +8,7 @@
     <RentoList />
     <RentoDetail />
     <Signup />
+    <ChooseRole />
     </router-view>
   </div>
 </template>
@@ -19,7 +20,7 @@ import Post from './router/views/Post.vue'
 import RentoList from './router/views/RentoList.vue'
 import RentoDetail from './router/views/RentoDetail.vue'
 import Signup from './router/views/Signup.vue'
-
+import ChooseRole from './router/views/ChooseRole.vue'
 export default {
   name: 'App',
   components: {
@@ -29,7 +30,8 @@ export default {
     RentoDetail,
     // eslint-disable-next-line vue/no-unused-components
     Home,
-    Signup
+    Signup,
+    ChooseRole,
     
   }
 }
