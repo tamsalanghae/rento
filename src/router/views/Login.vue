@@ -13,19 +13,25 @@
                   placeholder="Username"
                   name="fieldName"
                 />
-                <span>{{ errors[0] }}</span>
+                <br>
+                <span style="color: red; font-size:14px">{{ errors[0] }}</span>
               </ValidationProvider>
             </ValidationObserver>
           </div>
 
           <div class="textbox">
+            <ValidationObserver>
+              <ValidationProvider rules="required" v-slot="{ errors }">
             <input
               v-model="password"
               placeholder="Password"
               name=""
-              value="PW"
               :type="passwordType"
             />
+             <br>
+                <span style="color: red; font-size:14px">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </ValidationObserver>
           </div>
           <input type="checkbox" @click="Show()" />
 
@@ -36,6 +42,7 @@
             value="Sign in"
             @click="signin"
           />
+          <p style="color: black">Bạn chưa có tài khoản?  <a href="Signup">Đăng ký</a></p>
         </div>
       </b-card-body>
     </b-card>
@@ -48,7 +55,7 @@ import { extend } from "vee-validate";
 import { required } from "vee-validate/dist/rules";
 extend('required', {
     ...required,
-    message: "Bắt buộc",
+    message: "* This field cannot be empty",
 });
 export default {
   name: "Login",

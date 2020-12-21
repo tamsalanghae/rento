@@ -7,6 +7,7 @@
     <Post />
     <RentoList />
     <RentoDetail />
+    <Signup />
     </router-view>
   </div>
 </template>
@@ -17,6 +18,7 @@ import Home from './router/views/Home.vue'
 import Post from './router/views/Post.vue'
 import RentoList from './router/views/RentoList.vue'
 import RentoDetail from './router/views/RentoDetail.vue'
+import Signup from './router/views/Signup.vue'
 
 export default {
   name: 'App',
@@ -27,6 +29,7 @@ export default {
     RentoDetail,
     // eslint-disable-next-line vue/no-unused-components
     Home,
+    Signup
     
   }
 }

@@ -3,6 +3,7 @@ import Home from "@/router/views/Home";
 import Post from "@/router/views/Post";
 import RentoList from "@/router/views/RentoList";
 import RentoDetail from "@/router/views/RentoDetail";
+import Signup from "@/router/views/Signup";
 
 
 export default [
@@ -35,5 +36,11 @@ export default [
         name: "RentoDetail",
         alias: "/",
         component: RentoDetail
+    },
+    {
+        path: "/signup",
+        name: "signup",
+        alias: "/",
+        component: Signup
     },
 ]
