@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tìm trọ</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="./img/logo.png">
+    <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./libs/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div class="header bg-main">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <div class="d-flex justify-content-start">
+                <a class="navbar-brand" href="">
+                    <img src="./img/logo.png" class="w-40">
+                </a>
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="collapse navbar-collapse" id="navb">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20"><i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20">Nguyên căn</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20">Ở ghép</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20">Phòng trọ</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20"><i class="fas fa-user-circle"></i> Đăng nhập</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="input.html" class="nav-link text-white fs-20 btn btn-post"><i class="fas fa-edit"></i> Đăng bài</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="main-content">
+    <div class="container">
+        <div class="information mt-3">
+            <div class="row">
+                <div class="col-3 mt-3 ">
+                    <div class="p-3 box-shadow bg-white">
+                        <div class="slider range">
+                            <h5 class="text-main-orange">Chọn khoảng giá</h5>
+                            <div class="min-max-slider" data-legendnum="2">
+                                <label for="min">Minimum price</label>
+                                <input id="min" class="min" name="min" type="range" step="1" min="0" max="3000" />
+                                <label for="max">Maximum price</label>
+                                <input id="max" class="max" name="max" type="range" step="1" min="0" max="3000" />
+                            </div>
+                        </div>
+
+                       <div class="check-box">
+                           <h5 class="text-main-orange">Chọn địa điểm</h5>
+                           <div class="custom-control custom-checkbox">
+                               <input type="checkbox" class="custom-control-input" id="cau-giay">
+                               <label class="custom-control-label" for="cau-giay">Cầu giấy</label>
+                           </div>
+                           <div class="custom-control custom-checkbox">
+                               <input type="checkbox" class="custom-control-input" id="thanh-xuan">
+                               <label class="custom-control-label" for="thanh-xuan">Thanh Xuân</label>
+                           </div>
+                           <div class="custom-control custom-checkbox">
+                               <input type="checkbox" class="custom-control-input" id="xuan-thuy">
+                               <label class="custom-control-label" for="xuan-thuy">Xuân Thủy</label>
+                           </div>
+
+                           <div id="collapse" class="collapse">
+                               <div class="custom-control custom-checkbox">
+                                   <input type="checkbox" class="custom-control-input" id="hoang-quoc-viet">
+                                   <label class="custom-control-label" for="hoang-quoc-viet">Hoàng Quốc Việt</label>
+                               </div>
+                               <div class="custom-control custom-checkbox">
+                                   <input type="checkbox" class="custom-control-input" id="tran-quoc-hoan">
+                                   <label class="custom-control-label" for="tran-quoc-hoan">Trần Quốc Hoàn</label>
+                               </div>
+                               <div class="custom-control custom-checkbox">
+                                   <input type="checkbox" class="custom-control-input" id="nguyen-trai">
+                                   <label class="custom-control-label" for="nguyen-trai">Nguyễn Trãi</label>
+                               </div>
+                           </div>
+                           <a href="#" class="text-main-orange" data-toggle="collapse" data-target="#collapse">Xem thêm</a>
+                       </div>
+                    </div>
+                </div>
+                <div class="col-9 mt-3 ">
+                    <div class="p-3 box-shadow bg-white">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card mb-2 single-item">
+                                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                                         alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card title</h4>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                            card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 d-none d-md-block">
+                                <div class="card mb-2 single-item">
+                                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"
+                                         alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card title</h4>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                            card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 d-none d-md-block">
+                                <div class="card mb-2 single-item">
+                                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg"
+                                         alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card title</h4>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                            card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="card mb-2 single-item">
+                                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                                         alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card title</h4>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                            card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 d-none d-md-block">
+                                <div class="card mb-2 single-item">
+                                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"
+                                         alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card title</h4>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                            card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 d-none d-md-block">
+                                <div class="card mb-2 single-item">
+                                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg"
+                                         alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card title</h4>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                            card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="card mb-2 single-item">
+                                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                                         alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card title</h4>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                            card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 d-none d-md-block">
+                                <div class="card mb-2 single-item">
+                                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"
+                                         alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card title</h4>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                            card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 d-none d-md-block">
+                                <div class="card mb-2 single-item">
+                                    <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg"
+                                         alt="Card image cap">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Card title</h4>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                            card's content.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="paginate text-center align-middle">
+                            <ul class="pagination mt-3">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="./libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="./libs/fontawesome/all.min.js"></script>
+<script src="./libs/navJs/dist/navigatorJS.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
+<script src="./js/common.js"></script>
+</body>
+</html>
+<script>
+    var thumbsize = 14;
+
+    function draw(slider,splitvalue) {
+
+        /* set function vars */
+        var min = slider.querySelector('.min');
+        var max = slider.querySelector('.max');
+        var lower = slider.querySelector('.lower');
+        var upper = slider.querySelector('.upper');
+        var legend = slider.querySelector('.legend');
+        var thumbsize = parseInt(slider.getAttribute('data-thumbsize'));
+        var rangewidth = parseInt(slider.getAttribute('data-rangewidth'));
+        var rangemin = parseInt(slider.getAttribute('data-rangemin'));
+        var rangemax = parseInt(slider.getAttribute('data-rangemax'));
+
+        /* set min and max attributes */
+        min.setAttribute('max',splitvalue);
+        max.setAttribute('min',splitvalue);
+
+        /* set css */
+        min.style.width = parseInt(thumbsize + ((splitvalue - rangemin)/(rangemax - rangemin))*(rangewidth - (2*thumbsize)))+'px';
+        max.style.width = parseInt(thumbsize + ((rangemax - splitvalue)/(rangemax - rangemin))*(rangewidth - (2*thumbsize)))+'px';
+        min.style.left = '0px';
+        max.style.left = parseInt(min.style.width)+'px';
+        min.style.top = lower.offsetHeight+'px';
+        max.style.top = lower.offsetHeight+'px';
+        legend.style.marginTop = min.offsetHeight+'px';
+        slider.style.height = (lower.offsetHeight + min.offsetHeight + legend.offsetHeight)+'px';
+
+        /* correct for 1 off at the end */
+        if(max.value>(rangemax - 1)) max.setAttribute('data-value',rangemax);
+
+        /* write value and labels */
+        max.value = max.getAttribute('data-value');
+        min.value = min.getAttribute('data-value');
+        lower.innerHTML = min.getAttribute('data-value');
+        upper.innerHTML = max.getAttribute('data-value');
+
+    }
+
+    function init(slider) {
+        /* set function vars */
+        var min = slider.querySelector('.min');
+        var max = slider.querySelector('.max');
+        var rangemin = parseInt(min.getAttribute('min'));
+        var rangemax = parseInt(max.getAttribute('max'));
+        var avgvalue = (rangemin + rangemax)/2;
+        var legendnum = slider.getAttribute('data-legendnum');
+
+        /* set data-values */
+        min.setAttribute('data-value',rangemin);
+        max.setAttribute('data-value',rangemax);
+
+        /* set data vars */
+        slider.setAttribute('data-rangemin',rangemin);
+        slider.setAttribute('data-rangemax',rangemax);
+        slider.setAttribute('data-thumbsize',thumbsize);
+        slider.setAttribute('data-rangewidth',slider.offsetWidth);
+
+        /* write labels */
+        var lower = document.createElement('span');
+        var upper = document.createElement('span');
+        lower.classList.add('lower','value');
+        upper.classList.add('upper','value');
+        lower.appendChild(document.createTextNode(rangemin));
+        upper.appendChild(document.createTextNode(rangemax));
+        slider.insertBefore(lower,min.previousElementSibling);
+        slider.insertBefore(upper,min.previousElementSibling);
+
+        /* write legend */
+        var legend = document.createElement('div');
+        legend.classList.add('legend');
+        var legendvalues = [];
+        for (var i = 0; i < legendnum; i++) {
+            legendvalues[i] = document.createElement('div');
+            var val = Math.round(rangemin+(i/(legendnum-1))*(rangemax - rangemin));
+            legendvalues[i].appendChild(document.createTextNode(val));
+            legend.appendChild(legendvalues[i]);
+
+        }
+        slider.appendChild(legend);
+
+        /* draw */
+        draw(slider,avgvalue);
+
+        /* events */
+        min.addEventListener("input", function() {update(min);});
+        max.addEventListener("input", function() {update(max);});
+    }
+
+    function update(el){
+        /* set function vars */
+        var slider = el.parentElement;
+        var min = slider.querySelector('#min');
+        var max = slider.querySelector('#max');
+        var minvalue = Math.floor(min.value);
+        var maxvalue = Math.floor(max.value);
+
+        /* set inactive values before draw */
+        min.setAttribute('data-value',minvalue);
+        max.setAttribute('data-value',maxvalue);
+
+        var avgvalue = (minvalue + maxvalue)/2;
+
+        /* draw */
+        draw(slider,avgvalue);
+    }
+
+    var sliders = document.querySelectorAll('.min-max-slider');
+    sliders.forEach( function(slider) {
+        init(slider);
+    });
+</script>

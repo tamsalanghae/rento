@@ -6,6 +6,7 @@ import RentoDetail from "@/router/views/RentoDetail";
 import Signup from "@/router/views/Signup";
 import ChooseRole from "@/router/views/ChooseRole";
 
+import PostIndex from '@/router/views/admin/Index';
 
 export default [
     {
@@ -50,4 +51,9 @@ export default [
         alias: "/",
         component: ChooseRole
     },
+    {
+        path: "/admin/postIndex",
+        name: "AdminPostIndex",    
+        component: PostIndex
+    }
 ]

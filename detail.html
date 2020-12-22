@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tìm trọ</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="./img/logo.png">
+    <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./libs/fontawesome/fontawesome.min.css">
+    <link rel="stylesheet" href="./libs/dropzone/dropzone.min.css">
+    <link rel="stylesheet" href="./libs/lightgalery/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div class="header bg-main">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <div class="d-flex justify-content-start">
+                <a class="navbar-brand" href="">
+                    <img src="./img/logo.png" class="w-40">
+                </a>
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="collapse navbar-collapse" id="navb">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20"><i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20">Nguyên căn</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20">Ở ghép</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20">Phòng trọ</a>
+                        </li>
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link text-white fs-20"><i class="fas fa-user-circle"></i> Đăng
+                                nhập</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="input.html" class="nav-link text-white fs-20 btn btn-post"><i
+                                    class="fas fa-edit"></i> Đăng bài</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="main-content">
+    <div class="container">
+        <div class="information bg-white box-shadow">
+            <div id="demo" class="carousel slide" data-ride="carousel">
+
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="w-100" src="./img/la.jpg" alt="Los Angeles">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="w-100" src="./img/chicago.jpg" alt="Chicago">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="w-100" src="./img/ny.jpg" alt="New York">
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+            </div>
+            <div class="detail-infor">
+                <h3 class="text-main-orange text-center p-3">Tiêu đề cho thuê</h3>
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <div class="p-3">
+                            <table class="table table-striped p-3">
+                                <tr>
+                                    <th>Tên chủ nhà</th>
+                                    <td>Nguyễn Văn A</td>
+                                </tr>
+                                <tr>
+                                    <th>SĐT</th>
+                                    <td>0123456789</td>
+                                </tr>
+                                <tr>
+                                    <th>Khu vực</th>
+                                    <td>Láng</td>
+                                </tr>
+                                <tr>
+                                    <th>Địa chỉ</th>
+                                    <td>Chùa láng</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-3">
+                            <h5 class="text-center">Mô tả</h5>
+                            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec pharetra lorem. Pellentesque id est sem. Aenean at augue eu tortor convallis interdum. Phasellus id vulputate mi, id pellentesque sapien. Praesent vel eleifend est, vitae cursus urna. Maecenas maximus dui non ex hendrerit, ut mollis ipsum rhoncus. Maecenas augue tellus, dapibus vel quam nec, commodo egestas nisl. Sed rutrum urna tortor, a mollis dui imperdiet quis. Aliquam finibus est augue, ut convallis sapien facilisis at. Quisque ullamcorper tempus sollicitudin. Duis id neque dapibus nisl vehicula scelerisque. Nam sodales ac diam vel dictum. Vestibulum consequat tincidunt dignissim. Vestibulum vehicula turpis id.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-room mt-3">
+                <h3 class="text-main-orange text-center p-3">Danh sách phòng</h3>
+                <div class="container">
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                            aria-expanded="true" aria-controls="collapseOne">
+                                        <i class="fa" aria-hidden="true"></i>
+                                        Phòng 1
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                 data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row mb-2">
+                                        <div class="col-12">
+                                            <span><strong>Diện tích:</strong> 20m2</span>
+                                        </div>
+                                    </div>
+                                    <div class="row lightgallery">
+                                        <a class="col-3" href="./img/img_lights.jpg">
+                                            <img class="w-100" src="./img/img_lights.jpg"/>
+                                        </a>
+                                        <a class="col-3" href="./img/img_mountains.jpg">
+                                            <img class="w-100" src="./img/img_mountains.jpg"/>
+                                        </a>
+                                        <a class="col-3" href="./img/img_nature.jpg">
+                                            <img class="w-100" src="./img/img_nature.jpg"/>
+                                        </a>
+                                        <a class="col-3" href="./img/img_snow.jpg">
+                                            <img class="w-100" src="./img/img_snow.jpg"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse"
+                                            data-target="#collapseTwo" aria-expanded="false"
+                                            aria-controls="collapseTwo">
+                                        <i class="fa" aria-hidden="true"></i>
+                                        Phòng 2
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                 data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row lightgallery">
+                                        <a class="col-3" href="./img/img_lights.jpg">
+                                            <img class="w-100" src="./img/img_lights.jpg"/>
+                                        </a>
+                                        <a class="col-3" href="./img/img_mountains.jpg">
+                                            <img class="w-100" src="./img/img_mountains.jpg"/>
+                                        </a>
+                                        <a class="col-3" href="./img/img_nature.jpg">
+                                            <img class="w-100" src="./img/img_nature.jpg"/>
+                                        </a>
+                                        <a class="col-3" href="./img/img_snow.jpg">
+                                            <img class="w-100" src="./img/img_snow.jpg"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse"
+                                            data-target="#collapseThree" aria-expanded="false"
+                                            aria-controls="collapseThree">
+                                        <i class="fa" aria-hidden="true"></i>
+                                        Phòng 3
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                                 data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row lightgallery">
+                                        <a class="col-3" href="./img/img_lights.jpg">
+                                            <img class="w-100" src="./img/img_lights.jpg"/>
+                                        </a>
+                                        <a class="col-3" href="./img/img_mountains.jpg">
+                                            <img class="w-100" src="./img/img_mountains.jpg"/>
+                                        </a>
+                                        <a class="col-3" href="./img/img_nature.jpg">
+                                            <img class="w-100" src="./img/img_nature.jpg"/>
+                                        </a>
+                                        <a class="col-3" href="./img/img_snow.jpg">
+                                            <img class="w-100" src="./img/img_snow.jpg"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="./libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="./libs/fontawesome/all.min.js"></script>
+<script src="./libs/dropzone/dropzone.min.js"></script>
+<script src="./libs/lightgalery/lightgallery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.min.js"></script>
+<script src="./js/common.js"></script>
+</body>
+</html>
