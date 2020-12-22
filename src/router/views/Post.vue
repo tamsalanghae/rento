@@ -96,21 +96,29 @@
                         <div class="form-group">
                           <label>Diện tích phòng</label>
                           <input
+                            type="text"
                             class="form-control"
                             placeholder="Diện tích phòng"
+                            v-model="area"
                           />
                         </div>
                       </div>
                       <div class="col-6">
                         <div class="form-group">
                           <label>Giá tiền/tháng</label>
-                          <input class="form-control" placeholder="Giá tiền" />
+                          <input
+                            type="number"
+                            class="form-control"
+                            placeholder="Giá tiền"
+                            v-model="rent"
+                          />
                         </div>
                       </div>
                       <div class="col-4">
                         <div class="form-group">
                           <label>Thành phố:</label>
                           <b-form-select
+                            v-on:change="getDistricts"
                             v-model="cityCode"
                             :options="cities"
                           ></b-form-select>
@@ -120,20 +128,48 @@
                         <div class="form-group">
                           <label>Phường:</label>
                           <b-form-select
+                            v-on:change="getWards"
+                            v-if="cityCode == previousCityCode"
                             v-model="districtCode"
                             :options="districts"
                           ></b-form-select>
+                          <b-form-select
+                            v-else
+                            v-model="districtCode"
+                            class="mb-3"
+                            ><b-form-select-option :value="null"
+                              >Chọn khu vực</b-form-select-option
+                            >
+                          </b-form-select>
                         </div>
                       </div>
                       <div class="col-4">
                         <div class="form-group">
                           <label>Xã:</label>
                           <b-form-select
+                            v-if="
+                              districtCode == previousDistrictCode &&
+                              cityCode == previousCityCode
+                            "
                             v-model="wardCode"
                             :options="wards"
                           ></b-form-select>
+                          <b-form-select v-else v-model="wardCode" class="mb-3"
+                            ><b-form-select-option :value="null"
+                              >Chọn khu vực</b-form-select-option
+                            >
+                          </b-form-select>
                         </div>
                       </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Địa chỉ</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Địa chỉ"
+                        v-model="address"
+                      />
                     </div>
                     <div class="form-group">
                       <label>Mô tả ngắn</label>
@@ -160,7 +196,9 @@
                 </div>
                 <div class="row">
                   <div class="col-12 text-center">
-                    <button class="btn btn-primary">Thêm phòng</button>
+                    <button class="btn btn-primary" v-on:click="addRoom">
+                      Thêm phòng
+                    </button>
                   </div>
                 </div>
               </div>
@@ -175,45 +213,37 @@
 <script>
 import VueUploadMultipleImage from "vue-upload-multiple-image";
 import Navbar from "../../components/navbar.vue";
+import axios from "axios";
 
 export default {
   name: "Post",
   components: { VueUploadMultipleImage, Navbar },
   data() {
     return {
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTFkOGJhNDI2YWExMzVkM2MyMWY4MyIsInJvbGUiOiJIb3N0IiwibmJmIjoxNjA4NjM2NjAyLCJleHAiOjE2MDkyNDE0MDIsImlhdCI6MTYwODYzNjYwMn0.OPH5pJquyGripFVwUXwdujJswnq9J1AW5ZchIn7woJo",
       title: "",
       landlord: "",
       phonenumber: "",
       address: "",
       description: "",
       caption: "",
+      rent: 0,
+      previousCityCode: null,
       cityCode: null,
+      previousDistrictCode: null,
       districtCode: null,
       wardCode: null,
       location: "",
+      area: "",
       images: [],
-      cities: [
-        { value: null, text: "Chọn khu vực" },
-        { value: "01", text: "Hà Nội" },
-        { value: "02", text: "Bắc Ninh" },
-        { value: "03", text: "Thanh Hóa" },
-        { value: "04", text: "Hồ Chí Minh" },
-      ],
-      districts: [
-        { value: null, text: "Chọn khu vực" },
-        { value: "01", text: "Thanh Xuân" },
-        { value: "02", text: "Cầu Giấy" },
-        { value: "03", text: "Bắc Từ Liêm" },
-        { value: "04", text: "Cổ Nhuế" },
-      ],
-      wards: [
-        { value: null, text: "Chọn khu vực" },
-        { value: "01", text: "Xuân Đỉnh" },
-        { value: "02", text: "Xuân Tảo" },
-        { value: "03", text: "Xuân La" },
-        { value: "04", text: "Cổ Nhuế" },
-      ],
+      cities: [{ value: null, text: "Chọn khu vực" }],
+      districts: [{ value: null, text: "Chọn khu vực" }],
+      wards: [{ value: null, text: "Chọn khu vực" }],
     };
+  },
+  created: function () {
+    this.getProvinces();
   },
   methods: {
     uploadImageSuccess(formData, index, fileList) {
@@ -234,12 +264,112 @@ export default {
       console.log("edit data", formData, index, fileList);
     },
     addRoom() {
-      console.log(
-        `${this.title} ${this.landlord} ${this.phonenumber} ${this.address} ${this.description}`
-      );
+      return axios
+        .post(
+          "https://localhost:44334/Posts",
+          {
+            id: "",
+            caption: this.caption,
+            wardCode: this.wardCode,
+            address: this.address,
+            rent: this.rent,
+            description: this.description,
+            area: this.area
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`,
+            },
+          }
+        )
+        .then((res) => {
+          if(res.status == 200) {
+            this.$router.replace({path:'/RentoDetail', params: {id: res.id}});
+          }
+        });
     },
     selectLocalCode(index) {
       console.log(index);
+    },
+    getProvinces() {
+      console.log("fetch Provinces");
+      this.cities = [{ value: null, text: "Chọn khu vực" }];
+      this.districts = [{ value: null, text: "Chọn khu vực" }];
+      this.wards = [{ value: null, text: "Chọn khu vực" }];
+      this.districtCode = null;
+      this.wardCode = null;
+      return axios
+        .get(
+          "https://localhost:44334/Locations/provinces",
+          {},
+          {
+            headers: {
+              // Authorization: `Bearer ${this.token}`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data);
+          res.data.forEach((element) => {
+            this.cities.push({
+              value: element.provinceCode,
+              text: element.province,
+            });
+          });
+        });
+    },
+
+    getDistricts() {
+      console.log("fetch Districts");
+      this.districts = [{ value: null, text: "Chọn khu vực" }];
+      this.wards = [{ value: null, text: "Chọn khu vực" }];
+      this.wardCode = null;
+      this.districtCode = null;
+
+      this.previousCityCode = this.cityCode;
+      return axios
+        .get("https://localhost:44334/Locations/districts", {
+          headers: {
+            // Authorization: `Bearer ${this.token}`,
+          },
+          params: {
+            provinceCode: this.cityCode,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          res.data.forEach((element) => {
+            this.districts.push({
+              value: element.districtCode,
+              text: element.district,
+            });
+          });
+        });
+    },
+    getWards() {
+      this.wards = [{ value: null, text: "Chọn khu vực" }];
+      this.wardCode = null;
+
+      console.log("fetch Wards");
+      this.previousDistrictCode = this.districtCode;
+      return axios
+        .get("https://localhost:44334/Locations/wards", {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+          params: {
+            districtCode: this.districtCode,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          res.data.forEach((element) => {
+            this.wards.push({
+              value: element.wardCode,
+              text: element.ward,
+            });
+          });
+        });
     },
   },
 };
