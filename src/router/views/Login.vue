@@ -13,7 +13,7 @@
                   placeholder="Username"
                   name="fieldName"
                 />
-                <br>
+                <br />
                 <span style="color: red; font-size:14px">{{ errors[0] }}</span>
               </ValidationProvider>
             </ValidationObserver>
@@ -22,13 +22,13 @@
           <div class="textbox">
             <ValidationObserver>
               <ValidationProvider rules="required" v-slot="{ errors }">
-            <input
-              v-model="password"
-              placeholder="Password"
-              name=""
-              :type="passwordType"
-            />
-             <br>
+                <input
+                  v-model="password"
+                  placeholder="Password"
+                  name=""
+                  :type="passwordType"
+                />
+                <br />
                 <span style="color: red; font-size:14px">{{ errors[0] }}</span>
               </ValidationProvider>
             </ValidationObserver>
@@ -42,7 +42,9 @@
             value="Sign in"
             @click="signin"
           />
-          <p style="color: black">Bạn chưa có tài khoản?  <a href="ChooseRole">Đăng ký</a></p>
+          <p style="color: black">
+            Bạn chưa có tài khoản? <a href="ChooseRole">Đăng ký</a>
+          </p>
         </div>
       </b-card-body>
     </b-card>
@@ -53,9 +55,9 @@
 import axios from "axios";
 import { extend } from "vee-validate";
 import { required } from "vee-validate/dist/rules";
-extend('required', {
-    ...required,
-    message: "* This field cannot be empty",
+extend("required", {
+  ...required,
+  message: "* This field cannot be empty",
 });
 export default {
   name: "Login",
@@ -66,31 +68,40 @@ export default {
       passwordType: "password",
     };
   },
-  // mounted() {
-  //   axios
-  //     .post("https://localhost:44334/users/signin", {
-  //       firstName: "Kien",
-  //       lastName: "Nguyen",
-  //       username: "tam2k",
-  //       password: "nkocvoidoi",
-  //       role: "renter",},
-  //     )
-  //     .then( res => localStorage.setItem("token", res.data.token));
-  // },
+
+  beforeCreate: function() {
+    if (
+      localStorage.getItem("username") != null &&
+      localStorage.getItem("password") != null
+    ) {
+      this.username = localStorage.getItem("username");
+      this.password = localStorage.getItem("password");
+      console.log("this.signin();");
+
+      this.signin();
+    }
+  },
   methods: {
     signin() {
+      console.log(localStorage.getItem("username"));
+      console.log(localStorage.getItem("password"));
       axios
-        .post("https://localhost:44334/Users/authenticate", {
-          username: this.username,
-          password: this.password,
+        .post("https://localhost:44334/Users/login", {
+          username: "tamtam",
+          password: "111",
         })
         .then((res) => {
+          console.log(res);
           if (res.status == 200) {
+            localStorage.setItem("username", this.username);
+            localStorage.setItem("password", this.password);
+            localStorage.setItem("token", res.data.token);
             console.log(res.status == 200);
+            console.log(localStorage.getItem("username"));
+            this.$router.push("/Home");
           }
-          this.$router.push("/Home");
         });
-},
+    },
     Show() {
       if (this.passwordType == "password") {
         console.log(this.passwordType);

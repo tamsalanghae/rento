@@ -18,6 +18,7 @@
                 <img
                   class="w-100"
                   src="@/assets/img/la.jpg"
+                  
                   alt="Los Angeles"
                 />
               </div>

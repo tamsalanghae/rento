@@ -4,7 +4,7 @@
       <b-card tag="article" class="mb-2 col-4">
         <b-card-body>
           <div class="login-box">
-            <h1>Sign up</h1>
+            <h2>Create Account</h2>
             <div class="textbox">
               <font-awesome-icon :icon="['fas', 'user-secret']" />
               <ValidationObserver>
@@ -22,37 +22,27 @@
               </ValidationObserver>
             </div>
             <div class="textbox">
-            <ValidationObserver>
-              <ValidationProvider rules="required" v-slot="{ errors }">
-            <input
-              v-model="password"
-              placeholder="Password"
-              name=""
-              :type="passwordType"
-            />
-             <br>
-                <span style="color: red; font-size:14px">{{ errors[0] }}</span>
-              </ValidationProvider>
-            </ValidationObserver>
-          </div>
-            <div class="textbox">
-            <ValidationObserver>
-              <ValidationProvider rules="required" v-slot="{ errors }">
-            <input
-              v-model="password"
-              placeholder="Password"
-              name=""
-              :type="passwordType"
-            />
-             <br>
-                <span style="color: red; font-size:14px">{{ errors[0] }}</span>
-              </ValidationProvider>
-            </ValidationObserver>
-          </div>
+              <ValidationObserver>
+                <ValidationProvider rules="required" v-slot="{ errors }">
+                  <input
+                    v-model="password"
+                    placeholder="Password*"
+                    name=""
+                    :type="passwordType"
+                    ref="password"
+                  />
+                  <br />
+                  <span style="color: red; font-size:14px">{{
+                    errors[0]
+                  }}</span>
+                </ValidationProvider>
+              </ValidationObserver>
+            </div>
+
             <div class="textbox">
               <font-awesome-icon :icon="['fas', 'user-secret']" />
               <ValidationObserver>
-                <ValidationProvider rules="required" v-slot="{ errors }">
+                <ValidationProvider rules="email" v-slot="{ errors }">
                   <input
                     v-model="email"
                     placeholder="Email*"
@@ -65,15 +55,14 @@
                 </ValidationProvider>
               </ValidationObserver>
             </div>
-
             <div class="textbox">
+              <font-awesome-icon :icon="['fas', 'user-secret']" />
               <ValidationObserver>
-                <ValidationProvider rules="required" v-slot="{ errors }">
+                <ValidationProvider rules="numeric" v-slot="{ errors }">
                   <input
-                    v-model="phonenumber"
+                    v-model="phoneNumber"
                     placeholder="Phone Number*"
-                    name=""
-                    :type="passwordType"
+                    name="fieldName"
                   />
                   <br />
                   <span style="color: red; font-size:14px">{{
@@ -82,15 +71,15 @@
                 </ValidationProvider>
               </ValidationObserver>
             </div>
+
             <input type="checkbox" @click="Show()" />
-            <a href="Home"><input
+            <input
               class="btn"
               type="button"
               name=""
               value="Sign up"
-              @click="Signup"
-            /></a>
-            
+              @click="signup"
+            />
           </div>
         </b-card-body>
       </b-card>
@@ -101,10 +90,18 @@
 <script>
 import axios from "axios";
 import { extend } from "vee-validate";
-import { required } from "vee-validate/dist/rules";
-extend('required', {
-    ...required,
-    message: "* This field cannot be empty",
+import { required, email, numeric } from "vee-validate/dist/rules";
+extend("required", {
+  ...required,
+  message: "*This field cannot be empty",
+});
+extend("email", {
+  ...email,
+  message: "*The email invalid",
+});
+extend("numeric", {
+  ...numeric,
+  message: "*The field invalid",
 });
 export default {
   name: "Signup",
@@ -113,22 +110,33 @@ export default {
       username: "",
       password: "",
       passwordType: "password",
+      email: "",
+      phoneNumber: "",
+      role: "Renter",
     };
   },
   methods: {
-    signin() {
+    signup() {
       axios
-        .post("https://localhost:44334/Users/authenticate", {
-          username: this.username,
-          password: this.password,
-        })
-        .then((res) => {
-          if (res.status == 200) {
-            console.log(res.status == 200);
+        .post(
+          "https://localhost:44334/Users/signup",
+          {
+            username: this.username,
+            password: this.password,
+            role: this.role,
+            email: this.email,
+            phoneNumber: this.phoneNumber,
+          },
+          { headers: { "Content-type": "application/json" } }
+        )
+        .then(() => {
+          if (this.role === "Renter"){
+            this.$router.push("/Home")
           }
-          this.$router.push("/Home");
-        });
-},
+          else this.$router.push("/WaitingApprove")
+        }
+        );
+    },
     Show() {
       if (this.passwordType == "password") {
         console.log(this.passwordType);
@@ -149,17 +157,17 @@ export default {
 }
 
 .login-box {
-    margin-top: 10px;
-    margin-right: 30px;
-    margin-left: 30px;
+  margin-top: 10px;
+  margin-right: 30px;
+  margin-left: 30px;
 }
 
-.login-box h1 {
+.login-box h2 {
   float: left;
-  font-size: 50px;
+  font-size: 47px;
   color: #fc9807;
   border-bottom: 6px solid #fc9807;
-  margin-bottom: 20%;
+  margin-bottom: 10%;
   padding: 13px 0;
 }
 
@@ -216,5 +224,4 @@ export default {
   transform: translateY(4px);
   color: #eeeeee;
 }
-
 </style>

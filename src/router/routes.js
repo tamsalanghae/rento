@@ -5,7 +5,7 @@ import RentoList from "@/router/views/RentoList";
 import RentoDetail from "@/router/views/RentoDetail";
 import Signup from "@/router/views/Signup";
 import ChooseRole from "@/router/views/ChooseRole";
-
+import WaitingApprove from "@/router/views/WaitingApprove";
 import PostIndex from '@/router/views/admin/Index';
 
 export default [
@@ -52,8 +52,15 @@ export default [
         component: ChooseRole
     },
     {
+        path: "/waitingApprove",
+        name: "WaitingApprove",
+        alias: "/",
+        component: WaitingApprove
+    },
+    
+    {
         path: "/admin/postIndex",
         name: "AdminPostIndex",    
         component: PostIndex
-    }
+    },
 ]
