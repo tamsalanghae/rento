@@ -5,7 +5,7 @@
         <div class="login-box">
           <h1>Login</h1>
           <div class="textbox">
-            <font-awesome-icon :icon="['fas', 'user-secret']" />
+            
             <ValidationObserver>
               <ValidationProvider rules="required" v-slot="{ errors }">
                 <input

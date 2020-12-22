@@ -7,28 +7,38 @@
           <br /><br />
           <div class="form-check">
             <div class="row">
-              <div class="col">
-                <div class="img-container">
-                  <img src="@/assets/img/cat-2.svg" @click='role="Host"'/>
+              <div class="card" @click="setRole('Host')">
+                <img
+                  src="@/assets/img/cat-2.svg"
+                  alt="Avatar"
+                  style="width:50%"
+                />
+                <div class="container">
+                  <h5><b>Cho thuê</b></h5>
                 </div>
-                <p>Cho thuê</p>
               </div>
-              <div class="row">
-                <div class="img-container">
-                  <img src="@/assets/img/cat-2.svg" @click='role="Renter"'/>
+
+              <div class="card" @click="setRole('Renter')">
+                <img
+                  src="@/assets/img/cat-2.svg"
+                  alt="Avatar"
+                  style="width:50%"
+                />
+                <div class="container">
+                  <h5><b>Người thuê</b></h5>
                 </div>
-                <p>Người thuê</p>
               </div>
+
             </div>
           </div>
           <br />
           <input
-              class="float-right btn btn-primary"
-              type="submit"
-              value="Tiếp tục"
-              @click="submit"
-              style="background-color: #fc9807; border-color: #fc9807"
-            />
+            class="float-right btn btn-primary"
+            type="submit"
+            value="Tiếp tục"
+            @click="submit"
+            style="background-color: #fc9807; border-color: #fc9807"
+          />
         </div>
       </b-card-body>
     </b-card>
@@ -36,19 +46,26 @@
 </template>
 
 <script>
+
 export default {
   name: "ChooseRole",
   data() {
     return {
-      role : "",
+      role: "",
     };
   },
   methods: {
-    submit(){
-    console.log(this.role);
-    
-  }
-  }
+    setRole(value){
+      this.role = value;
+        localStorage.setItem("role", this.role);
+        console.log(this.role);
+  },
+    submit() {
+      // 
+     this.$router.push("/Signup");
+    },
+  },
+  
 };
 </script>
 <style scoped>
@@ -65,24 +82,24 @@ export default {
 input {
   margin-top: 20%;
 }
-.img-container {
-  border-radius: 3px;
-  overflow: hidden;
-  position: relative;
-  width: 50%;
-  height: 100%;
-  padding-top: 20%;
-  margin-right: 0%;
-  margin-left: 0%;
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 45%;
+  margin-right: 15px;
+  text-align: center;
 }
-img {
-  object-fit: cover;
-  width: 100%;
-  height: 50%;
-  margin-right: 0%;
-  margin-left: 0%;
+.card :active {
 }
-p {
-  margin-bottom: 20px;
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(134, 2, 2, 0.493);
+}
+.card img {
+  height: 100px;
+  margin-left: 25%;
+}
+.container {
 }
 </style>

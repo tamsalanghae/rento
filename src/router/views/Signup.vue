@@ -6,7 +6,7 @@
           <div class="login-box">
             <h2>Create Account</h2>
             <div class="textbox">
-              <font-awesome-icon :icon="['fas', 'user-secret']" />
+              
               <ValidationObserver>
                 <ValidationProvider rules="required" v-slot="{ errors }">
                   <input
@@ -40,7 +40,7 @@
             </div>
 
             <div class="textbox">
-              <font-awesome-icon :icon="['fas', 'user-secret']" />
+              
               <ValidationObserver>
                 <ValidationProvider rules="email" v-slot="{ errors }">
                   <input
@@ -56,7 +56,7 @@
               </ValidationObserver>
             </div>
             <div class="textbox">
-              <font-awesome-icon :icon="['fas', 'user-secret']" />
+              
               <ValidationObserver>
                 <ValidationProvider rules="numeric" v-slot="{ errors }">
                   <input
@@ -112,7 +112,7 @@ export default {
       passwordType: "password",
       email: "",
       phoneNumber: "",
-      role: "Renter",
+      role: localStorage.getItem('role'),
     };
   },
   methods: {
@@ -133,7 +133,7 @@ export default {
           if (this.role === "Renter"){
             this.$router.push("/Home")
           }
-          else this.$router.push("/WaitingApprove")
+          else if(this.role === "Host") this.$router.push("/WaitingApprove")
         }
         );
     },

@@ -5,10 +5,31 @@
   <br> 
   NGUYỄN HỮU BẰNG - 18021118
 
+## Project setup
+```
+npm install
+```
 
-## 1.Nghiệp vụ
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-### 1.1 Với vai trò chủ nhà trọ (owner)
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+## Nghiệp vụ
+
+### 1.Với vai trò chủ nhà trọ (owner)
 - Đăng nhập, đăng xuất, đổi mật khẩu
 - Đăng ký tài khoản
 - Đăng bài cho thuê phòng
@@ -20,7 +41,7 @@
 - Chat
 - Thanh toán/Trả phí cho bài đăng
 
-### 1.2 Người thuê trọ (renter):
+### 2.Người thuê trọ (renter):
 - Đăng ký tài khoản user, đăng nhập, đăng xuất, đổi mật khẩu
 - Tìm kiếm phòng trọ
 - Xem thông tin phòng trọ
@@ -28,7 +49,7 @@
 - Review/ bình luận
 - Report bài không hợp lệ
 
-### 1.3 Admin
+### 3.Admin
 - Đăng nhập, đăng xuất, đổi mật khẩu
 - Quản lý tài khoản chủ nhà trọ
 - Quản lý bài đăng (chỉnh sửa, gia hạn bài đăng, bài đăng hiển thị trong thời gian nào đấy, - không đc đăng bài)
