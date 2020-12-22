@@ -1,239 +1,316 @@
 <template>
   <div>
-<div class="header bg-main">
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <div class="d-flex justify-content-start">
-                <a class="navbar-brand" href="Home">
-                    <img src="@/assets/img/logo.png" class="w-40">
-                </a>
-            </div>
-            <div class="d-flex justify-content-end">
-                <div class="collapse navbar-collapse" id="navb">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item mr-3">
-                            <a href="Home" class="nav-link text-white fs-20"><i class="fas fa-home"></i> Home</a>
-                        </li>
-                        <li class="nav-item mr-3">
-                            <a href="RentoList" class="nav-link text-white fs-20">Nguyên căn</a>
-                        </li>
-                        <li class="nav-item mr-3">
-                            <a href="RentoList" class="nav-link text-white fs-20">Ở ghép</a>
-                        </li>
-                        <li class="nav-item mr-3">
-                            <a href="RentoList" class="nav-link text-white fs-20">Phòng trọ</a>
-                        </li>
-                        <li class="nav-item mr-3">
-                            <a href="Login" class="nav-link text-white fs-20"><i class="fas fa-user-circle"></i> Đăng nhập</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="Post" class="nav-link text-white fs-20 btn btn-post"><i class="fas fa-edit"></i> Đăng bài</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
-</div>
-<div class="main-content">
-    <div class="container">
+    <navbar />
+    <div class="main-content">
+      <div class="container">
         <div class="information mt-3">
-            <div class="row">
-                <div class="col-3 mt-3 ">
-                    <div class="p-3 box-shadow bg-white">
-                        <div class="slider range">
-                            <h5 class="text-main-orange">Chọn khoảng giá</h5>
-                            <div class="min-max-slider" data-legendnum="2">
-                                <label for="min">Minimum price</label>
-                                <input id="min" class="min" name="min" type="range" step="1" min="0" max="3000" />
-                                <label for="max">Maximum price</label>
-                                <input id="max" class="max" name="max" type="range" step="1" min="0" max="3000" />
-                            </div>
-                        </div>
-
-                       <div class="check-box">
-                           <h5 class="text-main-orange">Chọn địa điểm</h5>
-                           <div class="custom-control custom-checkbox">
-                               <input type="checkbox" class="custom-control-input" id="cau-giay">
-                               <label class="custom-control-label" for="cau-giay">Cầu giấy</label>
-                           </div>
-                           <div class="custom-control custom-checkbox">
-                               <input type="checkbox" class="custom-control-input" id="thanh-xuan">
-                               <label class="custom-control-label" for="thanh-xuan">Thanh Xuân</label>
-                           </div>
-                           <div class="custom-control custom-checkbox">
-                               <input type="checkbox" class="custom-control-input" id="xuan-thuy">
-                               <label class="custom-control-label" for="xuan-thuy">Xuân Thủy</label>
-                           </div>
-
-                           <div id="collapse" class="collapse">
-                               <div class="custom-control custom-checkbox">
-                                   <input type="checkbox" class="custom-control-input" id="hoang-quoc-viet">
-                                   <label class="custom-control-label" for="hoang-quoc-viet">Hoàng Quốc Việt</label>
-                               </div>
-                               <div class="custom-control custom-checkbox">
-                                   <input type="checkbox" class="custom-control-input" id="tran-quoc-hoan">
-                                   <label class="custom-control-label" for="tran-quoc-hoan">Trần Quốc Hoàn</label>
-                               </div>
-                               <div class="custom-control custom-checkbox">
-                                   <input type="checkbox" class="custom-control-input" id="nguyen-trai">
-                                   <label class="custom-control-label" for="nguyen-trai">Nguyễn Trãi</label>
-                               </div>
-                           </div>
-                           <a href="#" class="text-main-orange" data-toggle="collapse" data-target="#collapse">Xem thêm</a>
-                       </div>
-                    </div>
+          <div class="row">
+            <div class="col-3 mt-3">
+              <div class="p-3 box-shadow bg-white">
+                <div class="slider range">
+                  <h5 class="text-main-orange">Chọn khoảng giá</h5>
+                  <div class="min-max-slider" data-legendnum="2">
+                    <label for="min">Minimum price</label>
+                    <input
+                      id="min"
+                      class="min"
+                      name="min"
+                      type="range"
+                      step="1"
+                      min="0"
+                      max="3000"
+                    />
+                    <label for="max">Maximum price</label>
+                    <input
+                      id="max"
+                      class="max"
+                      name="max"
+                      type="range"
+                      step="1"
+                      min="0"
+                      max="3000"
+                    />
+                  </div>
                 </div>
-                <div class="col-9 mt-3 ">
-                    <div class="p-3 box-shadow bg-white">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card mb-2 single-item">
-                                    <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                                         alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card title</h4>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                            card's content.</p>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="col-md-4 d-none d-md-block">
-                                <div class="card mb-2 single-item">
-                                    <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                                         alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card title</h4>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                            card's content.</p>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="check-box">
+                  <h5 class="text-main-orange">Chọn địa điểm</h5>
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      id="cau-giay"
+                    />
+                    <label class="custom-control-label" for="cau-giay"
+                      >Cầu giấy</label
+                    >
+                  </div>
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      id="thanh-xuan"
+                    />
+                    <label class="custom-control-label" for="thanh-xuan"
+                      >Thanh Xuân</label
+                    >
+                  </div>
+                  <div class="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      id="xuan-thuy"
+                    />
+                    <label class="custom-control-label" for="xuan-thuy"
+                      >Xuân Thủy</label
+                    >
+                  </div>
 
-                            <div class="col-md-4 d-none d-md-block">
-                                <div class="card mb-2 single-item">
-                                    <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                                         alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card title</h4>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                            card's content.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-4">
-                                <div class="card mb-2 single-item">
-                                    <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                                         alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card title</h4>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                            card's content.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 d-none d-md-block">
-                                <div class="card mb-2 single-item">
-                                    <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                                         alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card title</h4>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                            card's content.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 d-none d-md-block">
-                                <div class="card mb-2 single-item">
-                                    <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                                         alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card title</h4>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                            card's content.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-4">
-                                <div class="card mb-2 single-item">
-                                    <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                                         alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card title</h4>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                            card's content.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 d-none d-md-block">
-                                <div class="card mb-2 single-item">
-                                    <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                                         alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card title</h4>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                            card's content.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 d-none d-md-block">
-                                <div class="card mb-2 single-item">
-                                    <img class="card-img-top" src="@/assets/img/back-gr10.jpg"
-                                         alt="Card image cap">
-                                    <div class="card-body">
-                                        <h4 class="card-title">Card title</h4>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                            card's content.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="paginate text-center align-middle">
-                            <ul class="pagination mt-3">
-                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
-                        </div>
+                  <div id="collapse" class="collapse">
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        id="hoang-quoc-viet"
+                      />
+                      <label class="custom-control-label" for="hoang-quoc-viet"
+                        >Hoàng Quốc Việt</label
+                      >
                     </div>
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        id="tran-quoc-hoan"
+                      />
+                      <label class="custom-control-label" for="tran-quoc-hoan"
+                        >Trần Quốc Hoàn</label
+                      >
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                      <input
+                        type="checkbox"
+                        class="custom-control-input"
+                        id="nguyen-trai"
+                      />
+                      <label class="custom-control-label" for="nguyen-trai"
+                        >Nguyễn Trãi</label
+                      >
+                    </div>
+                  </div>
+                  <a
+                    href="#"
+                    class="text-main-orange"
+                    data-toggle="collapse"
+                    data-target="#collapse"
+                    >Xem thêm</a
+                  >
                 </div>
+              </div>
             </div>
+            <div class="col-9 mt-3">
+              <div class="p-3 box-shadow bg-white">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="card mb-2 single-item">
+                      <img
+                        class="card-img-top"
+                        src="@/assets/img/back-gr10.jpg"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                          Some quick example text to build on the card title and
+                          make up the bulk of the card's content.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 d-none d-md-block">
+                    <div class="card mb-2 single-item">
+                      <img
+                        class="card-img-top"
+                        src="@/assets/img/back-gr10.jpg"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                          Some quick example text to build on the card title and
+                          make up the bulk of the card's content.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 d-none d-md-block">
+                    <div class="card mb-2 single-item">
+                      <img
+                        class="card-img-top"
+                        src="@/assets/img/back-gr10.jpg"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                          Some quick example text to build on the card title and
+                          make up the bulk of the card's content.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-4">
+                    <div class="card mb-2 single-item">
+                      <img
+                        class="card-img-top"
+                        src="@/assets/img/back-gr10.jpg"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                          Some quick example text to build on the card title and
+                          make up the bulk of the card's content.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 d-none d-md-block">
+                    <div class="card mb-2 single-item">
+                      <img
+                        class="card-img-top"
+                        src="@/assets/img/back-gr10.jpg"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                          Some quick example text to build on the card title and
+                          make up the bulk of the card's content.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 d-none d-md-block">
+                    <div class="card mb-2 single-item">
+                      <img
+                        class="card-img-top"
+                        src="@/assets/img/back-gr10.jpg"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                          Some quick example text to build on the card title and
+                          make up the bulk of the card's content.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-4">
+                    <div class="card mb-2 single-item">
+                      <img
+                        class="card-img-top"
+                        src="@/assets/img/back-gr10.jpg"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                          Some quick example text to build on the card title and
+                          make up the bulk of the card's content.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 d-none d-md-block">
+                    <div class="card mb-2 single-item">
+                      <img
+                        class="card-img-top"
+                        src="@/assets/img/back-gr10.jpg"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                          Some quick example text to build on the card title and
+                          make up the bulk of the card's content.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 d-none d-md-block">
+                    <div class="card mb-2 single-item">
+                      <img
+                        class="card-img-top"
+                        src="@/assets/img/back-gr10.jpg"
+                        alt="Card image cap"
+                      />
+                      <div class="card-body">
+                        <h4 class="card-title">Card title</h4>
+                        <p class="card-text">
+                          Some quick example text to build on the card title and
+                          make up the bulk of the card's content.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="paginate text-center align-middle">
+                  <ul class="pagination mt-3">
+                    <li class="page-item">
+                      <a class="page-link" href="#">Previous</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                      <a class="page-link" href="#">Next</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
   </div>
 </template>
 
 <script>
+import Navbar from "../../components/navbar.vue";
 export default {
   name: "RentoList",
+  components: {
+    Navbar,
+  },
   data() {
     return {};
   },
-
 };
 </script>
 
 
 <style scoped>
-
-
 .bg-main {
-  background-color: #FFBA00;
+  background-color: #ffba00;
 }
 .bg-grey {
   background-color: rgb(244, 244, 244);
@@ -262,7 +339,8 @@ export default {
   color: white;
 }
 
-.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
   color: #495057 !important;
 }
 .banner-wrapper::after {
@@ -276,14 +354,14 @@ export default {
   opacity: 0.5;
 }
 .btn-post {
-  background-color: #FC9807;
-  border-color: #FC9807;
+  background-color: #fc9807;
+  border-color: #fc9807;
 }
 .text-main-orange {
-  color: #FC9807;
+  color: #fc9807;
 }
-a.text-main-orange:hover{
-  color: #FC9807;
+a.text-main-orange:hover {
+  color: #fc9807;
 }
 .left-chevron-control {
   font-size: 50px;
@@ -305,22 +383,56 @@ a.text-main-orange:hover{
   border-top-right-radius: 25px !important;
 }
 
-
-.min-max-slider {position: relative; width: 200px; text-align: center; margin-bottom: 20px;}
-.min-max-slider > label {display: none;}
-span.value {height: 1.7em; font-weight: bold; display: inline-block;}
-span.value.lower::before {content: "€"; display: inline-block;}
-span.value.upper::before {content: "- €"; display: inline-block; margin-left: 0.4em;}
-.min-max-slider > .legend {display: flex; justify-content: space-between;}
-.min-max-slider > .legend > * {font-size: small; opacity: 0.25;}
-.min-max-slider > input {cursor: pointer; position: absolute;}
+.min-max-slider {
+  position: relative;
+  width: 200px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.min-max-slider > label {
+  display: none;
+}
+span.value {
+  height: 1.7em;
+  font-weight: bold;
+  display: inline-block;
+}
+span.value.lower::before {
+  content: "€";
+  display: inline-block;
+}
+span.value.upper::before {
+  content: "- €";
+  display: inline-block;
+  margin-left: 0.4em;
+}
+.min-max-slider > .legend {
+  display: flex;
+  justify-content: space-between;
+}
+.min-max-slider > .legend > * {
+  font-size: small;
+  opacity: 0.25;
+}
+.min-max-slider > input {
+  cursor: pointer;
+  position: absolute;
+}
 
 /* webkit specific styling */
 .min-max-slider > input {
   -webkit-appearance: none;
-  outline: none!important;
+  outline: none !important;
   background: transparent;
-  background-image: linear-gradient(to bottom, transparent 0%, transparent 30%, silver 30%, silver 60%, transparent 60%, transparent 100%);
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 30%,
+    silver 30%,
+    silver 60%,
+    transparent 60%,
+    transparent 100%
+  );
 }
 .min-max-slider > input::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
@@ -332,7 +444,9 @@ span.value.upper::before {content: "- €"; display: inline-block; margin-left: 
   border: 1px solid gray;
   border-radius: 100%;
 }
-.min-max-slider > input::-webkit-slider-runnable-track {cursor: pointer;}
+.min-max-slider > input::-webkit-slider-runnable-track {
+  cursor: pointer;
+}
 
 .box-shadow {
   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
@@ -341,8 +455,8 @@ fieldset.scheduler-border {
   border: 1px groove #ddd !important;
   padding: 0 1.4em 1.4em 1.4em !important;
   margin: 0 0 1.5em 0 !important;
-  -webkit-box-shadow:  0px 0px 0px 0px #000;
-  box-shadow:  0px 0px 0px 0px #000;
+  -webkit-box-shadow: 0px 0px 0px 0px #000;
+  box-shadow: 0px 0px 0px 0px #000;
 }
 
 /*legend.scheduler-border {*/
@@ -351,9 +465,9 @@ fieldset.scheduler-border {
 /*    text-align: left !important;*/
 /*}*/
 legend.scheduler-border {
-  width:inherit; /* Or auto */
-  padding:0 10px; /* To give a bit of padding on the left and right */
-  border-bottom:none;
+  width: inherit; /* Or auto */
+  padding: 0 10px; /* To give a bit of padding on the left and right */
+  border-bottom: none;
 }
 [data-toggle="collapse"] .fa:before {
   content: "\f139";
@@ -362,5 +476,4 @@ legend.scheduler-border {
 [data-toggle="collapse"].collapsed .fa:before {
   content: "\f13a";
 }
-
 </style>
