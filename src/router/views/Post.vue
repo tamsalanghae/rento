@@ -1,48 +1,6 @@
 <template>
   <div>
-    <div class="header bg-main">
-      <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-          <div class="d-flex justify-content-start">
-            <a class="navbar-brand" href="">
-              <img src="@/assets/img/logo.png" class="w-40" />
-            </a>
-          </div>
-          <div class="d-flex justify-content-end">
-            <div class="collapse navbar-collapse" id="navb">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item mr-3">
-                  <a href="#" class="nav-link text-white fs-20"
-                    ><i class="fas fa-home"></i> Home</a
-                  >
-                </li>
-                <li class="nav-item mr-3">
-                  <a href="#" class="nav-link text-white fs-20">Nguyên căn</a>
-                </li>
-                <li class="nav-item mr-3">
-                  <a href="#" class="nav-link text-white fs-20">Ở ghép</a>
-                </li>
-                <li class="nav-item mr-3">
-                  <a href="#" class="nav-link text-white fs-20">Phòng trọ</a>
-                </li>
-                <li class="nav-item mr-3">
-                  <a href="#" class="nav-link text-white fs-20"
-                    ><i class="fas fa-user-circle"></i> Đăng nhập</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a
-                    href="input.html"
-                    class="nav-link text-white fs-20 btn btn-post"
-                    ><i class="fas fa-edit"></i> Đăng bài</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </div>
+    <navbar />
     <div class="main-content">
       <div class="container">
         <div class="information mt-3 bg-white box-shadow">
@@ -109,21 +67,29 @@
                     editUpload="myIdEdit"
                   ></vue-upload-multiple-image>
                 </fieldset>
-                <button
-                  type="button"
-                  class="btn btn-success"
-                  v-on:click="addRoom"
-                >
-                  Thêm phòng
-                </button>
+                <div class="col-12 text-center">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    v-on:click="addRoom"
+                  >
+                    Tạo hồ sơ chủ nhà
+                  </button>
+                </div>
+
                 <div class="room-area">
                   <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Thông tin phòng</legend>
                     <div class="row">
-                      <div class="col-6">
+                      <div class="col-12">
                         <div class="form-group">
-                          <label>Diện tích phòng</label>
-                        
+                          <label>Tiêu đề bài viết</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Tiêu đề bài viết"
+                            v-model="caption"
+                          />
                         </div>
                       </div>
                       <div class="col-6">
@@ -131,7 +97,7 @@
                           <label>Diện tích phòng</label>
                           <input
                             class="form-control"
-                            placeholder="Họ và tên chủ nhà"
+                            placeholder="Diện tích phòng"
                           />
                         </div>
                       </div>
@@ -141,30 +107,60 @@
                           <input class="form-control" placeholder="Giá tiền" />
                         </div>
                       </div>
-                      <di class="col-6">
+                      <div class="col-4">
                         <div class="form-group">
-                          <label>Khu vực</label>
-                          <select class="form-control">
-                            <option>Thanh Xuân</option>
-                            <option>Xuân Thủy</option>
-                            <option>Nguyễn Trãi</option>
-                            <option>Hò Tùng Mậu</option>
-                            <option>Cầu Giấy</option>
-                          </select>
+                          <label>Thành phố:</label>
+                          <b-form-select
+                            v-model="cityCode"
+                            :options="cities"
+                          ></b-form-select>
                         </div>
-                      </di>
+                      </div>
+                      <div class="col-4">
+                        <div class="form-group">
+                          <label>Phường:</label>
+                          <b-form-select
+                            v-model="districtCode"
+                            :options="districts"
+                          ></b-form-select>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="form-group">
+                          <label>Xã:</label>
+                          <b-form-select
+                            v-model="wardCode"
+                            :options="wards"
+                          ></b-form-select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>Mô tả ngắn</label>
+                      <textarea
+                        type="text"
+                        class="form-control"
+                        placeholder="Mô tả ngắn"
+                        v-model="description"
+                        rows="3"
+                      />
                     </div>
                     <div class="text-center">
                       <label class="control-label">Danh sách Ảnh</label>
                     </div>
-                    <form action="/file-upload" class="dropzone">
-                      <input type="hidden" name="media" />
-                    </form>
+                    <vue-upload-multiple-image
+                      @upload-success="uploadImageSuccess"
+                      @before-remove="beforeRemove"
+                      @edit-image="editImage"
+                      :data-images="images"
+                      idUpload="myIdUpload"
+                      editUpload="myIdEdit"
+                    ></vue-upload-multiple-image>
                   </fieldset>
                 </div>
                 <div class="row">
                   <div class="col-12 text-center">
-                    <button class="btn btn-primary">Submit</button>
+                    <button class="btn btn-primary">Thêm phòng</button>
                   </div>
                 </div>
               </div>
@@ -178,43 +174,45 @@
 
 <script>
 import VueUploadMultipleImage from "vue-upload-multiple-image";
+import Navbar from "../../components/navbar.vue";
 
 export default {
   name: "Post",
-  components: { VueUploadMultipleImage },
+  components: { VueUploadMultipleImage, Navbar },
   data() {
     return {
-       arrays: [
-        {
-          text: 'Link 1',
-          link: '/about',
-        },
-        {
-          text: 'Link 2',
-          link: '/about',
-        },
-        {
-          text: 'Link 3',
-          link: '/about',
-        },
-        {
-          text: 'Link 4',
-          link: '/about',
-        },
-        {
-          text: 'Link 5',
-          link: '/about',
-        },
-      ],
       title: "",
       landlord: "",
       phonenumber: "",
       address: "",
       description: "",
       caption: "",
-      locationCode: "",
+      cityCode: null,
+      districtCode: null,
+      wardCode: null,
       location: "",
       images: [],
+      cities: [
+        { value: null, text: "Chọn khu vực" },
+        { value: "01", text: "Hà Nội" },
+        { value: "02", text: "Bắc Ninh" },
+        { value: "03", text: "Thanh Hóa" },
+        { value: "04", text: "Hồ Chí Minh" },
+      ],
+      districts: [
+        { value: null, text: "Chọn khu vực" },
+        { value: "01", text: "Thanh Xuân" },
+        { value: "02", text: "Cầu Giấy" },
+        { value: "03", text: "Bắc Từ Liêm" },
+        { value: "04", text: "Cổ Nhuế" },
+      ],
+      wards: [
+        { value: null, text: "Chọn khu vực" },
+        { value: "01", text: "Xuân Đỉnh" },
+        { value: "02", text: "Xuân Tảo" },
+        { value: "03", text: "Xuân La" },
+        { value: "04", text: "Cổ Nhuế" },
+      ],
     };
   },
   methods: {
@@ -239,6 +237,9 @@ export default {
       console.log(
         `${this.title} ${this.landlord} ${this.phonenumber} ${this.address} ${this.description}`
       );
+    },
+    selectLocalCode(index) {
+      console.log(index);
     },
   },
 };
@@ -279,7 +280,6 @@ export default {
 .text-light {
   color: white;
 }
-
 
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
@@ -390,7 +390,6 @@ span.value.upper::before {
 .min-max-slider > input::-webkit-slider-runnable-track {
   cursor: pointer;
 }
-
 
 .box-shadow {
   box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);

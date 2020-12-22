@@ -1,41 +1,6 @@
 <template>
   <div>
-    <div class="header bg-main">
-      <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-          <div class="d-flex justify-content-start">
-
-            <a class="navbar-brand" href="">
-              <img src="@/assets/img/logo.png" class="w-40" />
-            </a>
-          </div>
-          <div class="d-flex justify-content-end">
-            <div class="collapse navbar-collapse" id="navb">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item mr-3">
-                  <a href="Home" class="nav-link text-white fs-20"><i class="fas fa-home"></i> Home</a>
-                </li>
-                <li class="nav-item mr-3">
-                  <a href="RentoList" class="nav-link text-white fs-20">Nguyên căn</a>
-                </li>
-                <li class="nav-item mr-3">
-                  <a href="RentoList" class="nav-link text-white fs-20">Ở ghép</a>
-                </li>
-                <li class="nav-item mr-3">
-                  <a href="RentoList" class="nav-link text-white fs-20">Phòng trọ</a>
-                </li>
-                <li class="nav-item mr-3">
-                  <a href="Login" class="nav-link text-white fs-20"><i class="fas fa-user-circle"></i> Đăng nhập</a>
-                </li>
-                <li class="nav-item">
-                  <a href="Post" class="nav-link text-white fs-20 btn btn-post"><i class="fas fa-edit"></i> Đăng bài</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </div>
+    <navbar/>
     <div class="banner-wrapper">
       <div class="bx-wrapper">
         <img class="banner" src="@/assets/img/banner.jpg">
@@ -134,11 +99,13 @@
 
 <script>
 import Carousel from "../../components/carousel.vue";
+import Navbar from '../../components/navbar.vue';
 
 export default {
   name: "Home",
   components: {
     Carousel,
+    Navbar,
   },
   data() {
     return {
