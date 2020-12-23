@@ -2,12 +2,12 @@
   <div>
     <vue-horizontal-list :items="items" :options="options">
       <template v-slot:default="{ item }">
-        <div>
+        <div v-on:click="changePage(item.id)">
           <div class="image-container">
             <img :src="item.image" />
           </div>
 
-          <div class="subtitle">SUBTITLE • FOCUS</div>
+          <div class="subtitle">TIÊU ĐỀ</div>
 
           <h3 v-if="item.title != null">{{ item.title }}</h3>
           <p v-if="item.title != null">{{ item.content }}</p>
@@ -34,6 +34,14 @@ export default {
         ],
       },
     };
+  },
+  methods: {
+    changePage(index) {
+      this.$router.push({
+        name: "RentoDetail",
+        params: { id: index },
+      });
+    },
   },
   props: {
     items: Array,

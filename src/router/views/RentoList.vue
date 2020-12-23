@@ -12,10 +12,7 @@
                   <div class="min-max-slider" data-legendnum="2">
                     <label for="min">Minimum price</label>
 
-                    
-
                     <label for="max">Maximum price</label>
-                    
                   </div>
                 </div>
 
@@ -251,25 +248,6 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="paginate text-center align-middle">
-                  <ul class="pagination mt-3">
-                    <li class="page-item">
-                      <a class="page-link" href="#">Previous</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">Next</a>
-                    </li>
-                  </ul>
                 </div>
               </div>
             </div>

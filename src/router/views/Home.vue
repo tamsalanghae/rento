@@ -85,8 +85,8 @@
                     <img class="w-100" src="@/assets/img/cat-1.svg" />
                   </div>
                   <div class="col-md-7 d-table-cell align-middle">
-                    <h4>Nguyên căn</h4>
-                    <p>4,000 tin mua bán</p>
+                    <h4 class="w-100">Nguyên căn</h4>
+                    <p class="w-100">4,000 tin mua bán</p>
                   </div>
                 </div>
               </div>
@@ -122,21 +122,21 @@
         <div class="zone-1 mt-3">
           <div class="container my-4">
             <hr class="my-4" />
-            <a href="#"><h4 class="mb-3 text-main-orange">Nguyên căn</h4></a>
+            <h4 class="mb-3 text-main-orange">Nguyên căn</h4>
             <!--First slide-->
             <carousel :items="items" />
             <!--/.First slide-->
           </div>
           <div class="container my-4 mt-3">
             <hr class="my-4" />
-            <a href="#"><h4 class="mb-3 text-main-orange">Ở ghép</h4></a>
+            <h4 class="mb-3 text-main-orange">Ở ghép</h4>
             <!--Second slide-->
             <carousel :items="items" />
             <!--/.Second slide-->
           </div>
           <div class="container my-4 mt-3">
             <hr class="my-4" />
-            <a href="#"><h4 class="mb-3 text-main-orange">Phòng trọ</h4></a>
+            <h4 class="mb-3 text-main-orange">Phòng trọ</h4>
             <!--Third slide-->
             <carousel :items="items" />
             <!--/.Third slide-->
@@ -166,12 +166,13 @@ export default {
       console.log(res);
       res.data.result.forEach((element) => {
         this.items.push({
+          id: element.id,
           title: element.caption,
           content: element.description ?? "Bài viết chưa có nội dung",
           image:
             element.photos.length === 0
               ? "https://solidstarts.com/wp-content/uploads/when-can-babies-eat-watermelon.jpg"
-              : "https://images.heb.com/is/image/HEBGrocery/000583329",
+              : `https://localhost:44334/Posts/${element.id}/images?file=${element.photos[0]}`,
         });
       });
     });
@@ -199,7 +200,7 @@ export default {
       wardCode: null,
       query: "",
       minRent: 0,
-      maxRent: 100000000000,
+      maxRent: 9999999999,
     };
   },
 
@@ -227,9 +228,18 @@ export default {
       if (e.key == "Enter") {
         this.postSearchRequest().then((res) => {
           if (res.status == 200) {
+            this.items = [];
             console.log(res);
-            this.$router.push({
-              path: "/RentoList",
+            res.data.result.forEach((element) => {
+              this.items.push({
+                id: element.id,
+                title: element.caption,
+                content: element.description ?? "Bài viết chưa có nội dung",
+                image:
+                  element.photos.length === 0
+                    ? "https://solidstarts.com/wp-content/uploads/when-can-babies-eat-watermelon.jpg"
+                    : `https://localhost:44334/Posts/${element.id}/images?file=${element.photos[0]}`,
+              });
             });
           }
         });
@@ -238,11 +248,11 @@ export default {
     setPrice() {
       switch (this.rentValue) {
         case "00":
-          this.minRent = null;
-          this.maxRent = null;
+          this.minRent = 0;
+          this.maxRent = 9999999999;
           break;
         case "01":
-          this.minRent = null;
+          this.minRent = 0;
           this.maxRent = 1000000;
           break;
         case "02":
@@ -259,7 +269,7 @@ export default {
           break;
         case "05":
           this.minRent = 10000000;
-          this.maxRent = null;
+          this.maxRent = 9999999999;
           break;
       }
     },
@@ -355,8 +365,6 @@ export default {
 
 .search-box {
   margin-top: -25%;
-  z-index: 999;
-  position: relative;
 }
 
 .search-box .search-bar {
@@ -390,8 +398,7 @@ export default {
 
 .banner-wrapper::after {
   content: "";
-  position: absolute;
-  top: 80px;
+  margin-top:0% ;
   left: 0;
   height: 300px;
   width: 100%;
