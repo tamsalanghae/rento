@@ -36,19 +36,22 @@
                 <router-link
                   to="/rentoFavorite"
                   class="nav-link text-white fs-20"
-                  ><font-awesome-icon :icon="['fas', 'heart']" /> Yêu thích</router-link
+                  ><font-awesome-icon :icon="['fas', 'heart']" /> Yêu
+                  thích</router-link
                 >
               </b-nav-item>
               <b-nav-item>
                 <button
-                type="button"
-                 style="background-color: #fc9807; border-color: #fc9807; height:50px">
-            
-                <router-link
-                  to="/Post"
-                  class="nav-link text-white fs-20"
-                  ><font-awesome-icon style="font-size: 20px;" :icon="['far', 'edit']"></font-awesome-icon> Bài đăng</router-link
+                  type="button"
+                  style="background-color: #fc9807; border-color: #fc9807; height:50px"
                 >
+                  <router-link to="/Post" class="nav-link text-white fs-20"
+                    ><font-awesome-icon
+                      style="font-size: 20px;"
+                      :icon="['far', 'edit']"
+                    ></font-awesome-icon>
+                    Bài đăng</router-link
+                  >
                 </button>
               </b-nav-item>
               <b-nav-item>
@@ -56,11 +59,13 @@
                   >Đăng xuất</a
                 >
               </b-nav-item>
-              
-
 
               <b-nav-item href="Profile"
-                ><img src="@/assets/img/av.jpg" alt="Avatar" class="avatar" style="object-fit: cover;"
+                ><img
+                  src="@/assets/img/av.jpg"
+                  alt="Avatar"
+                  class="avatar"
+                  style="object-fit: cover;"
               /></b-nav-item>
             </b-navbar-nav>
 
@@ -85,7 +90,11 @@
                 >
               </b-nav-item>
               <b-nav-item href="Profile"
-                ><img src="@/assets/img/av.jpg" alt="Avatar" class="avatar" style="object-fit: cover;"
+                ><img
+                  src="@/assets/img/av.jpg"
+                  alt="Avatar"
+                  class="avatar"
+                  style="object-fit: cover;"
               /></b-nav-item>
             </b-navbar-nav>
             <b-navbar-nav v-else>
@@ -102,9 +111,6 @@
                 >
               </b-nav-item>
             </b-navbar-nav>
-            <b-nav-item href="Profile"
-              ><img src="@/assets/img/cat-1.svg" alt="Avatar" class="avatar"
-            /></b-nav-item>
           </b-collapse>
         </div>
       </div>
@@ -129,7 +135,7 @@ export default {
       role: "",
     };
   },
-  mounted: function () {
+  mounted: function() {
     this.role = localStorage.getItem("role");
   },
 };
