@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../../utils/axios";
 import { extend } from "vee-validate";
 import { required } from "vee-validate/dist/rules";
 extend("required", {
@@ -86,7 +86,7 @@ export default {
       console.log(localStorage.getItem("username"));
       console.log(localStorage.getItem("password"));
       axios
-        .post("https://localhost:44334/Users/login", {
+        .post("/Users/login", {
           username: "tamtam",
           password: "111",
         })

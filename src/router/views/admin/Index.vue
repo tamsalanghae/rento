@@ -123,7 +123,7 @@
 </style>
 
 <script>
-import axios from "axios";
+import axios from "../../../utils/axios";
 export default {
   name: "PostIndex",
   data() {
@@ -201,7 +201,7 @@ export default {
     },
     fetch() {
       return axios.post(
-        "https://localhost:44334/Posts/search",
+        "/Posts/search",
         this.searchParams,
         {
           headers: {

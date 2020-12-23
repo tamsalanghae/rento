@@ -213,7 +213,7 @@
 <script>
 import VueUploadMultipleImage from "vue-upload-multiple-image";
 import Navbar from "../../components/navbar.vue";
-import axios from "axios";
+import axios from "../../utils/axios";
 
 export default {
   name: "Post",
@@ -266,7 +266,7 @@ export default {
     addRoom() {
       return axios
         .post(
-          "https://localhost:44334/Posts",
+          "/Posts",
           {
             id: "",
             caption: this.caption,
@@ -300,7 +300,7 @@ export default {
       this.wardCode = null;
       return axios
         .get(
-          "https://localhost:44334/Locations/provinces",
+          "/Locations/provinces",
           {},
           {
             headers: {
@@ -328,7 +328,7 @@ export default {
 
       this.previousCityCode = this.cityCode;
       return axios
-        .get("https://localhost:44334/Locations/districts", {
+        .get("/Locations/districts", {
           headers: {
             // Authorization: `Bearer ${this.token}`,
           },
@@ -353,7 +353,7 @@ export default {
       console.log("fetch Wards");
       this.previousDistrictCode = this.districtCode;
       return axios
-        .get("https://localhost:44334/Locations/wards", {
+        .get("/Locations/wards", {
           headers: {
             Authorization: `Bearer ${this.token}`,
           },
