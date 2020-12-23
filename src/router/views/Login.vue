@@ -112,8 +112,6 @@ export default {
             localStorage.setItem("password", this.password);
             localStorage.setItem("token", res.data.token);
             localStorage.setItem("role", res.data.role)
-            console.log(res.status == 200);
-            console.log(localStorage.getItem("username"));
             const userRole = res.data.role;
             if (userRole === "Admin") {
               this.$router.push({ name: "AdminPostIndex" });

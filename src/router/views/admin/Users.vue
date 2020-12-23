@@ -154,8 +154,7 @@ export default {
         skip: 0,
         showRejected: true,
       },
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTBiOWJiYTIyOWMwOTljMzI3ZWJlYiIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTYwODU2MzEzMSwiZXhwIjoxNjA5MTY3OTMxLCJpYXQiOjE2MDg1NjMxMzF9.jcirT3_S0BPkh1LRgcx7tjYAupIm7wQDmS5pI11eCXA",
+      token: localStorage.getItem('token'),
       fields: [
         { key: "username", label: "Tên tài khoản" },
         { key: "email", label: "Email" },

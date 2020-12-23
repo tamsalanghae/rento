@@ -287,6 +287,7 @@ export default {
     },
     beforeRemove(index, done, fileList) {
       console.log("index", index, fileList);
+      this.imagesFormData.removeAt(index);
       var r = confirm("remove image");
       if (r == true) {
         done();

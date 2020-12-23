@@ -144,6 +144,7 @@
         </div>
       </div>
     </div>
+    <footerPage></footerPage>
   </div>
 </template>
 
@@ -151,12 +152,14 @@
 import Carousel from "../../components/carousel.vue";
 import Navbar from "../../components/navbar.vue";
 import axios from "../../utils/axios";
+import footerPage from "../../components/footer.vue";
 
 export default {
   name: "Home",
   components: {
     Carousel,
     Navbar,
+    footerPage,
   },
   created: function () {
     this.token = localStorage.getItem("token");
@@ -179,7 +182,7 @@ export default {
   },
   data() {
     return {
-      token: "",
+      token: localStorage.getItem("token"),
       items: [],
       cities: [{ value: null, text: "Chọn thành phố" }],
       districts: [{ value: null, text: "Chọn quận/huyện" }],
@@ -398,7 +401,7 @@ export default {
 
 .banner-wrapper::after {
   content: "";
-  margin-top:0% ;
+  margin-top: 0%;
   left: 0;
   height: 300px;
   width: 100%;

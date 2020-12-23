@@ -185,8 +185,7 @@ export default {
         maxRent: 100000000000000,
         showRejected: true,
       },
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTJiZjdlN2IyZmE5ZTU1NjFjMDEyOCIsInJvbGUiOiJIb3N0IiwibmJmIjoxNjA4Njk1Njc4LCJleHAiOjE2MDkzMDA0NzgsImlhdCI6MTYwODY5NTY3OH0.4mi2FT8KpJusSO3BeNJudhKjf0NUGXtgvkR9gmbtiGI",
+      token: localStorage.getItem('token'),
       fields: [
         { key: "caption", label: "Bài đăng", stickyColumn: true },
         { key: "address", label: "Địa chỉ" },
