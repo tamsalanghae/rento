@@ -9,28 +9,75 @@
         </div>
         <div class="d-flex justify-content-end">
           <div class="collapse navbar-collapse" id="navb">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto" v-if="role == 'Renter'">
               <li class="nav-item mr-3">
-                <router-link to="/home" class="nav-link text-white fs-20"><i class="fas fa-home"></i> Home</router-link> 
+                <router-link to="/home" class="nav-link text-white fs-20"
+                  ><i class="fas fa-home"></i> Home</router-link
+                >
               </li>
               <li class="nav-item mr-3">
-                 <router-link to="/rentoList" class="nav-link text-white fs-20">Nguyên căn</router-link> 
+                <router-link to="/rentoList" class="nav-link text-white fs-20"
+                  >Nguyên căn</router-link
+                >
               </li>
               <li class="nav-item mr-3">
-                <router-link to="/rentoList" class="nav-link text-white fs-20">Ở ghép</router-link> 
+                <router-link to="/rentoList" class="nav-link text-white fs-20"
+                  >Ở ghép</router-link
+                >
               </li>
               <li class="nav-item mr-3">
-                <router-link to="/rentoList" class="nav-link text-white fs-20">Phòng trọ</router-link> 
+                <router-link to="/rentoList" class="nav-link text-white fs-20"
+                  >Phòng trọ</router-link
+                >
               </li>
               <li class="nav-item mr-3">
-               <a class="nav-link text-white fs-20" @click="onSignOut">Đăng xuất</a> 
-              </li>
-              <li class="nav-item">
-                <router-link to="/post" class="nav-link text-white fs-20 btn btn-post"
-                  ><font-awesome-icon style="font-size: 20px;" :icon="['far', 'edit']"></font-awesome-icon> Đăng bài</router-link> 
+                <router-link
+                  to="/rentoFavorite"
+                  class="nav-link text-white fs-20"
+                  style="margin-left: 20px"
+                  >Yêu thích</router-link
+                >
               </li>
               <li class="nav-item mr-3">
-               <router-link to="/rentoFavorite" class="nav-link text-white fs-20" style="margin-left:20px">Yêu thích</router-link> 
+                <a class="nav-link text-white fs-20" @click="onSignOut"
+                  >Đăng xuất</a
+                >
+              </li>
+            </ul>
+
+            <ul class="navbar-nav mr-auto" v-else-if="role == 'Admin'">
+              <li class="nav-item mr-3">
+                <router-link
+                  to="/admin/userindex"
+                  class="nav-link text-white fs-20"
+                  ><i class="fas fa-home"></i>Chủ trọ</router-link
+                >
+              </li>
+              <li class="nav-item mr-3">
+                <router-link
+                  to="/admin/postindex"
+                  class="nav-link text-white fs-20"
+                  >Bài đăng</router-link
+                >
+              </li>
+              <li class="nav-item mr-3">
+                <a class="nav-link text-white fs-20" @click="onSignOut"
+                  >Đăng xuất</a
+                >
+              </li>
+            </ul>
+            <ul class="navbar-nav mr-auto" v-else>
+              <li class="nav-item mr-3">
+                <router-link
+                  to="/admin/postindex"
+                  class="nav-link text-white fs-20"
+                  >Bài đăng</router-link
+                >
+              </li>
+              <li class="nav-item mr-3">
+                <a class="nav-link text-white fs-20" @click="onSignOut"
+                  >Đăng xuất</a
+                >
               </li>
             </ul>
           </div>
@@ -50,8 +97,16 @@ export default {
       localStorage.removeItem("token");
       localStorage.removeItem("password");
       this.$router.push("/login");
-    }
-  }
+    },
+  },
+  data() {
+    return {
+      role: "",
+    };
+  },
+  mounted: function () {
+    this.role = localStorage.getItem("role");
+  },
 };
 </script>
 

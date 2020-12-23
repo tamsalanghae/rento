@@ -159,6 +159,8 @@ export default {
     Navbar,
   },
   created: function () {
+    this.token = localStorage.getItem("token");
+    window.console.log(localStorage.getItem("role"));
     this.getProvinces();
     this.postSearchRequest().then((res) => {
       console.log(res);
@@ -176,9 +178,7 @@ export default {
   },
   data() {
     return {
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTFkOGJhNDI2YWExMzVkM2MyMWY4MyIsInJvbGUiOiJIb3N0IiwibmJmIjoxNjA4NjM2NjAyLCJleHAiOjE2MDkyNDE0MDIsImlhdCI6MTYwODYzNjYwMn0.OPH5pJquyGripFVwUXwdujJswnq9J1AW5ZchIn7woJo",
-
+      token: "",
       items: [],
       cities: [{ value: null, text: "Chọn thành phố" }],
       districts: [{ value: null, text: "Chọn quận/huyện" }],
@@ -186,9 +186,9 @@ export default {
       rentPrice: [
         { value: "00", text: "Chọn mức giá" },
         { value: "01", text: "Dưới 1 triệu" },
-        { value: "02", text: "Từ 1- 3 triệu" },
-        { value: "03", text: "Từ 3- 5 triệu" },
-        { value: "04", text: "Từ 5- 10 triệu" },
+        { value: "02", text: "Từ 1 - 3 triệu" },
+        { value: "03", text: "Từ 3 - 5 triệu" },
+        { value: "04", text: "Từ 5 - 10 triệu" },
         { value: "05", text: "Trên 10 triệu" },
       ],
       rentValue: "00",
@@ -198,8 +198,8 @@ export default {
       districtCode: null,
       wardCode: null,
       query: "",
-      minRent: null,
-      maxRent: null,
+      minRent: 0,
+      maxRent: 100000000000,
     };
   },
 

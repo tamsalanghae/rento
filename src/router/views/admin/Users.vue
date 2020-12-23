@@ -7,34 +7,23 @@
         style="padding-top: 50px; padding-bottom: 50px"
       >
         <b-row>
-          <b-col lg="3" class="my-1">
+          <b-col lg="8" class="my-1">
             <b-form-group
-              label="Sắp xếp"
-              label-for="sort-by-select"
-              label-cols-sm="3"
+              label="Tìm kiếm"
+              label-for="filter-input"
+              label-cols-sm="2"
               label-align-sm="right"
               label-size="sm"
               class="mb-0"
             >
               <b-input-group size="sm">
-                <b-form-select
-                  id="sort-by-select"
-                  v-model="tempSort"
-                  :options="sortOptions"
-                  @change="mapSort(tempSort)"
-                  class="w-50"
-                >
-                </b-form-select>
-
-                <b-form-select
-                  v-model="tempDesc"
-                  :disabled="tempSort == 'Mặc định'"
-                  :options="['Tăng dần', 'Giảm dần']"
-                  @change="mapDesc(tempDesc)"
-                  size="sm"
-                  class="w-50"
-                >
-                </b-form-select>
+                <b-form-input
+                  id="filter-input"
+                  v-model="searchParams.keyword"
+                  type="search"
+                  placeholder="Nhập từ khóa"
+                  class="w-75"
+                ></b-form-input>
               </b-input-group>
             </b-form-group>
           </b-col>
@@ -52,33 +41,6 @@
               ></b-form-checkbox>
             </b-form-group>
           </b-col>
-          <b-col lg="5" class="my-1">
-            <b-form-group
-              label="Tìm kiếm"
-              label-for="filter-input"
-              label-cols-sm="2"
-              label-align-sm="right"
-              label-size="sm"
-              class="mb-0"
-            >
-              <b-input-group size="sm">
-                <b-form-input
-                  id="filter-input"
-                  v-model="tempKeyword"
-                  type="search"
-                  placeholder="Nhập từ khóa"
-                  class="w-75"
-                ></b-form-input>
-                <b-form-select
-                  v-model="tempField"
-                  :options="['Bài đăng', 'Địa chỉ']"
-                  size="sm"
-                  class="w-25"
-                >
-                </b-form-select>
-              </b-input-group>
-            </b-form-group>
-          </b-col>
           <b-col lg="1" class="my-1">
             <b-button size="sm" @click="search">Tìm kiếm</b-button>
           </b-col>
@@ -94,7 +56,7 @@
           ref="table"
           outlined
         >
-          <template #cell(actions)="row" class="text-center">
+          <template #cell(actions)="row">
             <b-row v-if="statusMap.indexOf(row.item.status) == 2" fluid>
               <div style="width: 40px"></div>
               <b-button size="sm" @click="remove(row.index)" variant="danger">
@@ -178,13 +140,8 @@ export default {
   data() {
     return {
       pageOptions: [5, 10, 20],
-      sortOptions: ["Mặc định", "Giá thuê", "Đánh giá", "Lượt xem"],
-      fieldOptions: ["Bài đăng", "Địa chỉ"],
 
-      tempSort: "Mặc định",
-      tempDesc: "Tăng dần",
       tempKeyword: "",
-      tempField: "Bài đăng",
 
       currentPage: 1,
       total: 0,
@@ -192,29 +149,19 @@ export default {
       statusMap: ["Chưa duyệt", "Đã từ chối", "Đã duyệt"],
 
       searchParams: {
-        captionKeyword: "",
-        addressKeyword: "",
-        wardCode: "",
-        districtCode: "",
-        provinceCode: "",
+        keyword: "",
         take: 5,
         skip: 0,
-        sort: 0,
-        desc: false,
-        minRent: 0,
-        maxRent: 100000000000000,
         showRejected: true,
       },
       token:
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTBiOWJiYTIyOWMwOTljMzI3ZWJlYiIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTYwODU2MzEzMSwiZXhwIjoxNjA5MTY3OTMxLCJpYXQiOjE2MDg1NjMxMzF9.jcirT3_S0BPkh1LRgcx7tjYAupIm7wQDmS5pI11eCXA",
       fields: [
-        { key: "caption", label: "Bài đăng", stickyColumn: true },
-        { key: "address", label: "Địa chỉ" },
-        { key: "rent", label: "Tiền trọ" },
-        { key: "views", label: "Lượt xem" },
-        { key: "rating", label: "Đánh giá" },
+        { key: "username", label: "Tên tài khoản" },
+        { key: "email", label: "Email" },
+        { key: "phonenumber", label: "Số điện thoại" },
         { key: "status", label: "Trạng thái" },
-        { key: "actions", label: "Hành động" },
+        { key: "actions", label: "Hành động", thClass: "" },
       ],
       items: [],
     };
@@ -225,9 +172,11 @@ export default {
   methods: {
     approve(index) {
       var ind = index + (this.currentPage - 1) * this.searchParams.take;
+              window.console.log(ind)
+
       axios
         .post(
-          `/Posts/${this.items[ind].id}/approve`,
+          `/Users/${this.items[ind].id}/approve`,
           {},
           {
             headers: {
@@ -244,7 +193,7 @@ export default {
       var ind = index + (this.currentPage - 1) * this.searchParams.take;
       axios
         .post(
-          `https://localhost:44334/Posts/${this.items[ind].id}/reject`,
+          `/Users/${this.items[ind].id}/reject`,
           {},
           {
             headers: {
@@ -261,7 +210,7 @@ export default {
       var ind = index + (this.currentPage - 1) * this.searchParams.take;
       window.console.log("yoooooooooooo");
       axios
-        .delete(`https://localhost:44334/Posts/${this.items[ind].id}`, {
+        .delete(`/Users/${this.items[ind].id}`, {
           headers: {
             Authorization: `Bearer ${this.token}`,
           },
@@ -310,7 +259,7 @@ export default {
       }
     },
     fetch() {
-      return axios.post("/Posts/search", this.searchParams, {
+      return axios.post("/Users/search", this.searchParams, {
         headers: {
           Authorization: `Bearer ${this.token}`,
         },

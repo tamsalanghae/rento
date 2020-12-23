@@ -6,8 +6,10 @@ import RentoDetail from "@/router/views/RentoDetail";
 import Signup from "@/router/views/Signup";
 import ChooseRole from "@/router/views/ChooseRole";
 import WaitingApprove from "@/router/views/WaitingApprove";
-import PostIndex from '@/router/views/admin/Index';
 import RentoFavorite from "@/router/views/RentoFavorite";
+import AdminPostIndex from '@/router/views/admin/Index';
+import HostPostIndex from '@/router/views/host/Index';
+import AdminUserIndex from '@/router/views/admin/Users';
 
 export default [
     {
@@ -22,7 +24,7 @@ export default [
         component: Home
     },
     {
-        path: '/post',
+        path: '/post/:id?',
         name: "Post",
         component: Post
     },
@@ -61,6 +63,16 @@ export default [
     {
         path: "/admin/postIndex",
         name: "AdminPostIndex",    
-        component: PostIndex
+        component: AdminPostIndex
     },
+    {
+        path: "/host/postIndex",
+        name: "HostPostIndex",    
+        component: HostPostIndex
+    },
+    {
+        path: "/admin/userIndex",
+        name: "AdminUserIndex",    
+        component: AdminUserIndex
+    }
 ]
