@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../../utils/axios";
 import { extend } from "vee-validate";
 import { required, email, numeric } from "vee-validate/dist/rules";
 extend("required", {
@@ -119,7 +119,7 @@ export default {
     signup() {
       axios
         .post(
-          "https://localhost:44334/Users/signup",
+          "/Users/signup",
           {
             username: this.username,
             password: this.password,
