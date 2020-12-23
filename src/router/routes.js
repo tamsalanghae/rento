@@ -10,6 +10,8 @@ import RentoFavorite from "@/router/views/RentoFavorite";
 import AdminPostIndex from '@/router/views/admin/Index';
 import HostPostIndex from '@/router/views/host/Index';
 import AdminUserIndex from '@/router/views/admin/Users';
+import Profile from "@/router/views/Profile";
+
 
 export default [
     {
@@ -74,5 +76,11 @@ export default [
         path: "/admin/userIndex",
         name: "AdminUserIndex",    
         component: AdminUserIndex
-    }
+    },
+    {
+        path: "/Profile",
+        name: "Profile",
+        alias: "/",
+        component: Profile
+    },
 ]

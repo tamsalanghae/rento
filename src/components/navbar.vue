@@ -40,10 +40,28 @@
                 >
               </b-nav-item>
               <b-nav-item>
+                <button
+                type="button"
+                 style="background-color: #fc9807; border-color: #fc9807; height:50px">
+            
+                <router-link
+                  to="/Post"
+                  class="nav-link text-white fs-20"
+                  ><font-awesome-icon style="font-size: 20px;" :icon="['far', 'edit']"></font-awesome-icon> Bài đăng</router-link
+                >
+                </button>
+              </b-nav-item>
+              <b-nav-item>
                 <a class="nav-link text-white fs-20" @click="onSignOut"
                   >Đăng xuất</a
                 >
               </b-nav-item>
+              
+
+
+              <b-nav-item href="Profile"
+                ><img src="@/assets/img/av.jpg" alt="Avatar" class="avatar" style="object-fit: cover;"
+              /></b-nav-item>
             </b-navbar-nav>
 
             <b-navbar-nav v-else-if="role == 'Admin'">
@@ -66,6 +84,9 @@
                   >Đăng xuất</a
                 >
               </b-nav-item>
+              <b-nav-item href="Profile"
+                ><img src="@/assets/img/av.jpg" alt="Avatar" class="avatar" style="object-fit: cover;"
+              /></b-nav-item>
             </b-navbar-nav>
             <b-navbar-nav v-else>
               <b-nav-item>
