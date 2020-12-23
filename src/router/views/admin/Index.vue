@@ -1,156 +1,164 @@
 <template>
-  <div id="background" class="d-flex justify-content-center">
-    <div class="container-fluid col-lg-10">
-      <b-row>
-        <b-col lg="3" class="my-1">
-          <b-form-group
-            label="Sắp xếp"
-            label-for="sort-by-select"
-            label-cols-sm="3"
-            label-align-sm="right"
-            label-size="sm"
-            class="mb-0"
-          >
-            <b-input-group size="sm">
-              <b-form-select
-                id="sort-by-select"
-                v-model="tempSort"
-                :options="sortOptions"
-                @change="mapSort(tempSort)"
-                class="w-50"
-              >
-              </b-form-select>
-
-              <b-form-select
-                v-model="tempDesc"
-                :disabled="tempSort == 'Mặc định'"
-                :options="['Tăng dần', 'Giảm dần']"
-                @change="mapDesc(tempDesc)"
-                size="sm"
-                class="w-50"
-              >
-              </b-form-select>
-            </b-input-group>
-          </b-form-group>
-        </b-col>
-        <b-col lg="3" class="my-1">
-          <b-form-group
-            label="Hiển thị bài đã từ chối"
-            label-for="filter-input"
-            label-cols-lg="9"
-            label-align-sm="right"
-            label-size="sm"
-          >
-            <b-form-checkbox size="lg" v-model="searchParams.showRejected"></b-form-checkbox>
-          </b-form-group>
-        </b-col>
-        <b-col lg="5" class="my-1">
-          <b-form-group
-            label="Tìm kiếm"
-            label-for="filter-input"
-            label-cols-sm="2"
-            label-align-sm="right"
-            label-size="sm"
-            class="mb-0"
-          >
-            <b-input-group size="sm">
-              <b-form-input
-                id="filter-input"
-                v-model="tempKeyword"
-                type="search"
-                placeholder="Nhập từ khóa"
-                class="w-75"
-              ></b-form-input>
-              <b-form-select
-                v-model="tempField"
-                :options="['Bài đăng', 'Địa chỉ']"
-                size="sm"
-                class="w-25"
-              >
-              </b-form-select>
-            </b-input-group>
-          </b-form-group>
-        </b-col>
-        <b-col lg="1" class="my-1">
-          <b-button size="sm" @click="search">Tìm kiếm</b-button>
-        </b-col>
-      </b-row>
-
-      <b-table
-        :fields="fields"
-        :items="items"
-        id="my-table"
-        :per-page="searchParams.take"
-        :current-page="currentPage"
-        responsive
-        ref="table"
-        outlined
+  <div>
+    <navbar></navbar>
+    <div id="background" class="d-flex justify-content-center">
+      <div
+        class="container-fluid col-lg-10"
+        style="padding-top: 50px; padding-bottom: 50px"
       >
-        <template #cell(actions)="row">
-          <b-row
-            v-if="statusMap.indexOf(row.item.status) == 2"
-            align-h="center"
-            fluid
-            ><b-button size="sm" @click="remove(row.index)" variant="danger">
-              <b-icon-trash style="color: white"></b-icon-trash> </b-button
-          ></b-row>
+        <b-row>
+          <b-col lg="3" class="my-1">
+            <b-form-group
+              label="Sắp xếp"
+              label-for="sort-by-select"
+              label-cols-sm="3"
+              label-align-sm="right"
+              label-size="sm"
+              class="mb-0"
+            >
+              <b-input-group size="sm">
+                <b-form-select
+                  id="sort-by-select"
+                  v-model="tempSort"
+                  :options="sortOptions"
+                  @change="mapSort(tempSort)"
+                  class="w-50"
+                >
+                </b-form-select>
 
-          <b-row
-            v-else-if="statusMap.indexOf(row.item.status) == 0"
-            align-h="center"
-          >
-            <b-button size="sm" @click="approve(row.index)" variant="success">
-              <b-icon-check-circle></b-icon-check-circle>
-            </b-button>
-            <div style="width: 10px"></div>
-            <b-button size="sm" @click="reject(row.index)" variant="warning">
-              <b-icon-x-circle></b-icon-x-circle>
-            </b-button>
-          </b-row>
-          <b-row v-else align-h="center">
-            <b-button size="sm" @click="approve(row.index)" variant="success">
-              <b-icon-check-circle></b-icon-check-circle>
-            </b-button>
-            <div style="width: 10px"></div>
-            <b-button size="sm" @click="remove(row.index)" variant="danger">
-              <b-icon-trash style="color: white"></b-icon-trash>
-            </b-button>
-          </b-row>
-        </template>
-      </b-table>
-      <b-row class="justify-content-end">
-        <b-col lg="3" class="my-1">
-          <b-form-group
-            label="Kích cỡ trang"
-            label-for="per-page-select"
-            label-cols="6"
-            label-align-sm="right"
-            label-size="sm"
-            class="mb-0"
-          >
-            <b-form-select
-              id="per-page-select"
-              v-model="searchParams.take"
-              :options="pageOptions"
-              @change="search"
+                <b-form-select
+                  v-model="tempDesc"
+                  :disabled="tempSort == 'Mặc định'"
+                  :options="['Tăng dần', 'Giảm dần']"
+                  @change="mapDesc(tempDesc)"
+                  size="sm"
+                  class="w-50"
+                >
+                </b-form-select>
+              </b-input-group>
+            </b-form-group>
+          </b-col>
+          <b-col lg="3" class="my-1">
+            <b-form-group
+              label="Hiển thị bài đã từ chối"
+              label-for="filter-input"
+              label-cols-lg="9"
+              label-align-sm="right"
+              label-size="sm"
+            >
+              <b-form-checkbox
+                size="lg"
+                v-model="searchParams.showRejected"
+              ></b-form-checkbox>
+            </b-form-group>
+          </b-col>
+          <b-col lg="5" class="my-1">
+            <b-form-group
+              label="Tìm kiếm"
+              label-for="filter-input"
+              label-cols-sm="2"
+              label-align-sm="right"
+              label-size="sm"
+              class="mb-0"
+            >
+              <b-input-group size="sm">
+                <b-form-input
+                  id="filter-input"
+                  v-model="tempKeyword"
+                  type="search"
+                  placeholder="Nhập từ khóa"
+                  class="w-75"
+                ></b-form-input>
+                <b-form-select
+                  v-model="tempField"
+                  :options="['Bài đăng', 'Địa chỉ']"
+                  size="sm"
+                  class="w-25"
+                >
+                </b-form-select>
+              </b-input-group>
+            </b-form-group>
+          </b-col>
+          <b-col lg="1" class="my-1">
+            <b-button size="sm" @click="search">Tìm kiếm</b-button>
+          </b-col>
+        </b-row>
+
+        <b-table
+          :fields="fields"
+          :items="items"
+          id="my-table"
+          :per-page="searchParams.take"
+          :current-page="currentPage"
+          fixed
+          ref="table"
+          outlined
+        >
+          <template #cell(actions)="row" class="text-center">
+            <b-row v-if="statusMap.indexOf(row.item.status) == 2" fluid>
+              <div style="width: 40px"></div>
+              <b-button size="sm" @click="remove(row.index)" variant="danger">
+                <b-icon-trash style="color: white"></b-icon-trash> </b-button
+            ></b-row>
+
+            <b-row v-else-if="statusMap.indexOf(row.item.status) == 0">
+              <div style="width: 15px"></div>
+
+              <b-button size="sm" @click="approve(row.index)" variant="success">
+                <b-icon-check-circle></b-icon-check-circle>
+              </b-button>
+              <div style="width: 10px"></div>
+              <b-button size="sm" @click="reject(row.index)" variant="warning">
+                <b-icon-x-circle></b-icon-x-circle>
+              </b-button>
+            </b-row>
+            <b-row v-else>
+              <div style="width: 15px"></div>
+
+              <b-button size="sm" @click="approve(row.index)" variant="success">
+                <b-icon-check-circle></b-icon-check-circle>
+              </b-button>
+              <div style="width: 10px"></div>
+              <b-button size="sm" @click="remove(row.index)" variant="danger">
+                <b-icon-trash style="color: white"></b-icon-trash>
+              </b-button>
+            </b-row>
+          </template>
+        </b-table>
+        <b-row class="justify-content-end">
+          <b-col lg="3" class="my-1">
+            <b-form-group
+              label="Kích cỡ trang"
+              label-for="per-page-select"
+              label-cols="6"
+              label-align-sm="right"
+              label-size="sm"
+              class="mb-0"
+            >
+              <b-form-select
+                id="per-page-select"
+                v-model="searchParams.take"
+                :options="pageOptions"
+                @change="search"
+                size="sm"
+              ></b-form-select>
+            </b-form-group>
+          </b-col>
+
+          <b-col lg="4" class="my-1">
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="total"
+              :per-page="searchParams.take"
+              @change="handlePageChange"
+              align="fill"
               size="sm"
-            ></b-form-select>
-          </b-form-group>
-        </b-col>
-
-        <b-col lg="4" class="my-1">
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="total"
-            :per-page="searchParams.take"
-            @change="handlePageChange"
-            align="fill"
-            size="sm"
-            class="my-0 justify-content-end"
-            aria-controls="my-table"
-          ></b-pagination>
-        </b-col>
-      </b-row>
+              class="my-0 justify-content-end"
+              aria-controls="my-table"
+            ></b-pagination>
+          </b-col>
+        </b-row>
+      </div>
     </div>
   </div>
 </template>
@@ -160,8 +168,13 @@
 
 <script>
 import axios from "../../../utils/axios";
+import navbar from "../../../components/navbar.vue";
+
 export default {
   name: "PostIndex",
+  components: {
+    navbar,
+  },
   data() {
     return {
       pageOptions: [5, 10, 20],
@@ -214,7 +227,7 @@ export default {
       var ind = index + (this.currentPage - 1) * this.searchParams.take;
       axios
         .post(
-          `https://localhost:44334/Posts/${this.items[ind].id}/approve`,
+          `/Posts/${this.items[ind].id}/approve`,
           {},
           {
             headers: {
@@ -297,15 +310,11 @@ export default {
       }
     },
     fetch() {
-      return axios.post(
-        "/Posts/search",
-        this.searchParams,
-        {
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-          },
-        }
-      );
+      return axios.post("/Posts/search", this.searchParams, {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      });
     },
   },
 };

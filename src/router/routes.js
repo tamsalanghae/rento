@@ -9,6 +9,7 @@ import WaitingApprove from "@/router/views/WaitingApprove";
 import RentoFavorite from "@/router/views/RentoFavorite";
 import AdminPostIndex from '@/router/views/admin/Index';
 import HostPostIndex from '@/router/views/host/Index';
+import AdminUserIndex from '@/router/views/admin/Users';
 
 export default [
     {
@@ -68,5 +69,10 @@ export default [
         path: "/host/postIndex",
         name: "HostPostIndex",    
         component: HostPostIndex
+    },
+    {
+        path: "/admin/userIndex",
+        name: "AdminUserIndex",    
+        component: AdminUserIndex
     }
 ]

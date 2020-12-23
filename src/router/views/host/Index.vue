@@ -1,4 +1,6 @@
 <template>
+<div>
+  <navbar></navbar>
   <div id="background" class="d-flex justify-content-center">
     <div class="container-fluid col-lg-10">
       <b-row>
@@ -135,6 +137,7 @@
       </b-row>
     </div>
   </div>
+</div>
 </template>
 
 <style scoped>
@@ -142,10 +145,12 @@
 
 <script>
 import axios from "axios";
+import Navbar from '../../../components/navbar.vue';
 
 export default {
   name: "PostIndex",
-
+    
+components:{Navbar},
   data() {
     return {
       connection: "",

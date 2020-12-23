@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navbar-admin></navbar-admin>
+    <navbar></navbar>
     <div id="background" class="d-flex justify-content-center">
       <div
         class="container-fluid col-lg-10"
@@ -130,12 +130,12 @@
 
 <script>
 import axios from "../../../utils/axios";
-import navbarAdmin from "../../../components/navbar-admin.vue";
+import navbar from "../../../components/navbar.vue";
 
 export default {
   name: "PostIndex",
   components: {
-    navbarAdmin,
+    navbar,
   },
   data() {
     return {
@@ -172,6 +172,8 @@ export default {
   methods: {
     approve(index) {
       var ind = index + (this.currentPage - 1) * this.searchParams.take;
+              window.console.log(ind)
+
       axios
         .post(
           `/Users/${this.items[ind].id}/approve`,
