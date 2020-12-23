@@ -4,61 +4,74 @@
     <div class="main-content">
       <div class="container">
         <div class="information bg-white box-shadow">
-          <div id="demo" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ul class="carousel-indicators">
-              <li data-target="#demo" data-slide-to="0" class="active"></li>
-              <li data-target="#demo" data-slide-to="1"></li>
-              <li data-target="#demo" data-slide-to="2"></li>
-            </ul>
+          <b-carousel
+            id="carousel-1"
+            v-model="slide"
+            :interval="3000"
+            controls
+            indicators
+            background="#ababab"
+            img-width="1024"
+            img-height="480"
+            style="text-shadow: 1px 1px 2px #333"
+            @sliding-start="onSlideStart"
+            @sliding-end="onSlideEnd"
+          >
+            <!-- Text slides with image -->
+            <b-carousel-slide
+              img-src="https://picsum.photos/1024/480/?image=58"
+            ></b-carousel-slide>
 
-            <!-- The slideshow -->
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img
-                  class="w-100"
-                  src="@/assets/img/la.jpg"
-                  
-                  alt="Los Angeles"
-                />
-              </div>
-              <div class="carousel-item">
-                <img class="w-100" src="@/assets/img/la.jpg" alt="Chicago" />
-              </div>
-              <div class="carousel-item">
-                <img class="w-100" src="@/assets/img/la.jpg" alt="New York" />
-              </div>
-            </div>
+            <!-- Slides with custom text -->
+            <b-carousel-slide
+              img-src="https://picsum.photos/1024/480/?image=58"
+            ></b-carousel-slide>
 
-            <!-- Left and right controls -->
-            <a class="carousel-control-prev" href="#demo" data-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </a>
-            <a class="carousel-control-next" href="#demo" data-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </a>
-          </div>
+            <!-- Slides with image only -->
+            <b-carousel-slide
+              img-src="https://picsum.photos/1024/480/?image=58"
+            ></b-carousel-slide>
+
+            <!-- Slides with img slot -->
+            <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
+            <b-carousel-slide
+              img-src="https://picsum.photos/1024/480/?image=58"
+            ></b-carousel-slide>
+
+            <!-- Slide with blank fluid image to maintain slide aspect ratio -->
+            <b-carousel-slide
+              img-src="https://picsum.photos/1024/480/?image=58"
+            ></b-carousel-slide>
+          </b-carousel>
           <div class="detail-infor">
-            <h3 class="text-main-orange text-center p-3">Tiêu đề cho thuê</h3>
+            <h3 class="text-main-orange text-center p-3">{{ caption }}</h3>
             <div class="row mt-3">
               <div class="col-6">
                 <div class="p-3">
                   <table class="table table-striped p-3">
                     <tr>
                       <th>Tên chủ nhà</th>
-                      <td>Nguyễn Văn A</td>
+                      <td>{{ hostName }}</td>
                     </tr>
                     <tr>
                       <th>SĐT</th>
-                      <td>0123456789</td>
+                      <td>{{ hostNumber }}</td>
                     </tr>
                     <tr>
                       <th>Khu vực</th>
-                      <td>Láng</td>
+                      <td>{{ province }}</td>
                     </tr>
                     <tr>
                       <th>Địa chỉ</th>
-                      <td>Chùa láng</td>
+                      <td>{{ address }}</td>
+                    </tr>
+                    <tr>
+                      <th>Diện tích</th>
+                      <td>{{ area }} m2</td>
+                    </tr>
+                    <tr>
+                      <th>Giá thuê phòng/tháng</th>
+                      <td>{{ rent }} VNĐ</td>
                     </tr>
                   </table>
                 </div>
@@ -66,7 +79,8 @@
               <div class="col-6">
                 <div class="p-3">
                   <h5 class="text-center">Mô tả</h5>
-                  <span
+                  <span v-if="description != null">{{ description }} </span>
+                  <span v-else
                     >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Donec nec pharetra lorem. Pellentesque id est sem. Aenean at
                     augue eu tortor convallis interdum. Phasellus id vulputate
@@ -85,135 +99,6 @@
               </div>
             </div>
           </div>
-          <div class="detail-room mt-3">
-            <h3 class="text-main-orange text-center p-3">Danh sách phòng</h3>
-            <div class="container">
-              <div id="accordion">
-                <div class="card">
-                  <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                      <button
-                        class="btn btn-link"
-                        data-toggle="collapse"
-                        data-target="#collapseOne"
-                        aria-expanded="true"
-                        aria-controls="collapseOne"
-                      >
-                        <i class="fa" aria-hidden="true"></i>
-                        Phòng 1
-                      </button>
-                    </h5>
-                  </div>
-                  <div
-                    id="collapseOne"
-                    class="collapse"
-                    aria-labelledby="headingOne"
-                    data-parent="#accordion"
-                  >
-                    <div class="card-body">
-                      <div class="row mb-2">
-                        <div class="col-12">
-                          <span><strong>Diện tích:</strong> 20m2</span>
-                        </div>
-                      </div>
-                      <div class="row lightgallery">
-                        <a class="col-3" href="#">
-                          <img class="w-100" src="@/assets/img/la.jpg" />
-                        </a>
-                        <a class="col-3" href="#">
-                          <img class="w-100" src="@/assets/img/la.jpg" />
-                        </a>
-                        <a class="col-3" href="#">
-                          <img class="w-100" src="@/assets/img/la.jpg" />
-                        </a>
-                        <a class="col-3" href="#">
-                          <img class="w-100" src="@/assets/img/la.jpg" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                      <button
-                        class="btn btn-link collapsed"
-                        data-toggle="collapse"
-                        data-target="#collapseTwo"
-                        aria-expanded="false"
-                        aria-controls="collapseTwo"
-                      >
-                        <i class="fa" aria-hidden="true"></i>
-                        Phòng 2
-                      </button>
-                    </h5>
-                  </div>
-                  <div
-                    id="collapseTwo"
-                    class="collapse"
-                    aria-labelledby="headingTwo"
-                    data-parent="#accordion"
-                  >
-                    <div class="card-body">
-                      <div class="row lightgallery">
-                        <a class="col-3" href="#">
-                          <img class="w-100" src="@/assets/img/la.jpg" />
-                        </a>
-                        <a class="col-3" href="#">
-                          <img class="w-100" src="@/assets/img/la.jpg" />
-                        </a>
-                        <a class="col-3" href="#">
-                          <img class="w-100" src="@/assets/img/la.jpg" />
-                        </a>
-                        <a class="col-3" href="#">
-                          <img class="w-100" src="@/assets/img/la.jpg" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                      <button
-                        class="btn btn-link collapsed"
-                        data-toggle="collapse"
-                        data-target="#collapseThree"
-                        aria-expanded="false"
-                        aria-controls="collapseThree"
-                      >
-                        <i class="fa" aria-hidden="true"></i>
-                        Phòng 3
-                      </button>
-                    </h5>
-                  </div>
-                  <div
-                    id="collapseThree"
-                    class="collapse"
-                    aria-labelledby="headingThree"
-                    data-parent="#accordion"
-                  >
-                    <div class="card-body">
-                      <div class="row lightgallery">
-                        <a class="col-3" href="#">
-                          <img class="w-100" src="@/assets/img/la.jpg" />
-                        </a>
-                        <a class="col-3" href="#">
-                          <img class="w-100" src="@/assets/img/la.jpg" />
-                        </a>
-                        <a class="col-3" href="#">
-                          <img class="w-100" src="@/assets/img/la.jpg" />
-                        </a>
-                        <a class="col-3" href="#">
-                          <img class="w-100" src="@/assets/img/la.jpg" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -222,11 +107,53 @@
 
 <script>
 import navbar from "../../components/navbar.vue";
+import axios from "../../utils/axios";
+
 export default {
   components: { navbar },
   name: "RentoList",
+  created() {
+    this.getRoomData();
+  },
   data() {
-    return {};
+    return {
+      roomId: this.$route.params.id,
+      hostName: "",
+      hostNumber: "",
+      description: "",
+      caption: "",
+      area: "",
+      province: "",
+      address: "",
+      rent: 0,
+      photos: [],
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTFkOGJhNDI2YWExMzVkM2MyMWY4MyIsInJvbGUiOiJIb3N0IiwibmJmIjoxNjA4NjM2NjAyLCJleHAiOjE2MDkyNDE0MDIsImlhdCI6MTYwODYzNjYwMn0.OPH5pJquyGripFVwUXwdujJswnq9J1AW5ZchIn7woJo",
+    };
+  },
+  methods: {
+    getRoomData() {
+      return axios
+        .get(`/Posts/${this.roomId}`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
+        .then((res) => {
+          if (res.status == 200) {
+            var data = res.data;
+            this.hostName = data.host.username;
+            this.hostNumber = data.host.phoneNumber;
+            this.description = data.description;
+            this.province = data.ward.district.province.province;
+            this.address = `${data.address}, ${data.ward.ward}, ${data.ward.district.district}, ${data.ward.district.province.province}`;
+            this.photos = data.photos;
+            this.caption = data.caption;
+            this.area = data.area;
+            this.rent = data.rent;
+          }
+        });
+    },
   },
 };
 </script>

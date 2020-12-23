@@ -18,43 +18,36 @@ export default [
     {
         path: '/home',
         name: "Home",
-        alias: "/",
         component: Home
     },
     {
         path: '/post',
         name: "Post",
-        alias: "/",
         component: Post
     },
     {
         path: '/rentoList',
         name: "RentoList",
-        alias: "/",
         component: RentoList
     },
     {
-        path: '/rentoDetail',
+        path: '/rentoDetail/:id',
         name: "RentoDetail",
-        alias: "/",
         component: RentoDetail
     },
     {
         path: "/signup",
         name: "signup",
-        alias: "/",
         component: Signup
     },
     {
         path: "/chooserole",
         name: "chooserole",
-        alias: "/",
         component: ChooseRole
     },
     {
         path: "/waitingApprove",
         name: "WaitingApprove",
-        alias: "/",
         component: WaitingApprove
     },
     
