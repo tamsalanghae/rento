@@ -11,25 +11,11 @@
                   <h5 class="text-main-orange">Chọn khoảng giá</h5>
                   <div class="min-max-slider" data-legendnum="2">
                     <label for="min">Minimum price</label>
-                    <input
-                      id="min"
-                      class="min"
-                      name="min"
-                      type="range"
-                      step="1"
-                      min="0"
-                      max="3000"
-                    />
+
+                    
+
                     <label for="max">Maximum price</label>
-                    <input
-                      id="max"
-                      class="max"
-                      name="max"
-                      type="range"
-                      step="1"
-                      min="0"
-                      max="3000"
-                    />
+                    
                   </div>
                 </div>
 
@@ -302,7 +288,9 @@ export default {
     Navbar,
   },
   data() {
-    return {};
+    return {
+      price: 0,
+    };
   },
 };
 </script>

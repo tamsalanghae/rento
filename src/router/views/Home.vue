@@ -1,23 +1,73 @@
 <template>
   <div>
-    <navbar/>
+    <navbar />
     <div class="banner-wrapper">
       <div class="bx-wrapper">
-        <img class="banner" src="@/assets/img/banner.jpg">
+        <img class="banner" src="@/assets/img/banner.jpg" />
       </div>
       <div class="container position-relative">
         <div class="row">
           <div class="col-2"></div>
           <div class="col-8">
             <div class="search-box">
-              <div class="search-box">
-                <input
-                  type="text"
-                  class="search-bar"
-                  placeholder="Search..."
-                  v-model="query"
-                  @keypress="search"
-                />
+              <input
+                type="text"
+                class="search-bar"
+                placeholder="Search..."
+                v-model="query"
+                @keypress="search"
+              />
+              <div class="row">
+                <div class="col-3">
+                  <div class="type">
+                    <b-form-select
+                      v-model="cityCode"
+                      v-on:change="getDistricts"
+                      :options="cities"
+                    ></b-form-select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="type">
+                    <b-form-select
+                      v-on:change="getWards"
+                      v-if="cityCode == previousCityCode"
+                      v-model="districtCode"
+                      :options="districts"
+                    ></b-form-select>
+                    <b-form-select v-else v-model="districtCode" class="mb-3"
+                      ><b-form-select-option :value="null"
+                        >Chọn quận/huyện</b-form-select-option
+                      >
+                    </b-form-select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="type">
+                    <b-form-select
+                      v-if="
+                        districtCode == previousDistrictCode &&
+                        cityCode == previousCityCode
+                      "
+                      v-model="wardCode"
+                      :options="wards"
+                    ></b-form-select>
+                    <b-form-select v-else v-model="wardCode" class="mb-3"
+                      ><b-form-select-option :value="null"
+                        >Chọn xã/phường</b-form-select-option
+                      >
+                    </b-form-select>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="type">
+                    <b-form-select
+                      v-on:change="setPrice"
+                      v-model="rentValue"
+                      :options="rentPrice"
+                    ></b-form-select>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -32,8 +82,8 @@
               <div class="p-4">
                 <div class="row d-table">
                   <div class="col-md-5 d-table-cell align-middle">
-                    <img class="w-100" src="@/assets/img/cat-1.svg">
-                    </div>
+                    <img class="w-100" src="@/assets/img/cat-1.svg" />
+                  </div>
                   <div class="col-md-7 d-table-cell align-middle">
                     <h4>Nguyên căn</h4>
                     <p>4,000 tin mua bán</p>
@@ -45,8 +95,8 @@
               <div class="p-4">
                 <div class="row d-table">
                   <div class="col-md-5 d-table-cell align-middle">
-                    <img class="w-100" src="@/assets/img/cat-2.svg">
-                    </div>
+                    <img class="w-100" src="@/assets/img/cat-2.svg" />
+                  </div>
                   <div class="col-md-7 d-table-cell align-middle">
                     <h4>Ở ghép</h4>
                     <p>4,000 tin mua bán</p>
@@ -58,7 +108,7 @@
               <div class="p-4">
                 <div class="row d-table">
                   <div class="col-md-5 d-table-cell align-middle">
-                    <img class="w-100" src="@/assets/img/cat-3.svg">
+                    <img class="w-100" src="@/assets/img/cat-3.svg" />
                   </div>
                   <div class="col-md-7 d-table-cell align-middle">
                     <h4>Phòng trọ</h4>
@@ -99,7 +149,8 @@
 
 <script>
 import Carousel from "../../components/carousel.vue";
-import Navbar from '../../components/navbar.vue';
+import Navbar from "../../components/navbar.vue";
+import axios from "../../utils/axios";
 
 export default {
   name: "Home",
@@ -107,111 +158,195 @@ export default {
     Carousel,
     Navbar,
   },
+  created: function () {
+    this.getProvinces();
+    this.postSearchRequest().then((res) => {
+      console.log(res);
+      res.data.result.forEach((element) => {
+        this.items.push({
+          title: element.caption,
+          content: element.description ?? "Bài viết chưa có nội dung",
+          image:
+            element.photos.length === 0
+              ? "https://solidstarts.com/wp-content/uploads/when-can-babies-eat-watermelon.jpg"
+              : "https://images.heb.com/is/image/HEBGrocery/000583329",
+        });
+      });
+    });
+  },
   data() {
     return {
-      items: [
-        {
-          title: "Sed non ante non cras amet",
-          content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas non sagittis leo. Vestibulum sit amet metus nec neque dignissim dapibus.",
-          image: "https://picsum.photos/id/1015/600/600",
-        },
-        {
-          title: "Curabitur sit amet nunc",
-          content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id mollis erat. Aliquam erat volutpat. Nunc erat lacus, rhoncus nec.",
-          image: "https://picsum.photos/id/1019/600/600",
-        },
-        {
-          title: "Proin pharetra, ante metus",
-          content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac diam ac ex efficitur posuere. Pellentesque cursus pellentesque risus, non.",
-          image: "https://picsum.photos/id/1039/600/600",
-        },
-        {
-          title: "Cras pharetra non enim a",
-          content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi malesuada varius nibh, a malesuada nisi feugiat eget. Aenean convallis semper.",
-          image: "https://picsum.photos/id/1042/600/600",
-        },
-        {
-          title: "Proin vulputate, augue eu accumsan",
-          content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas fringilla tempor libero sit amet mollis. Praesent quis leo erat. Integer.",
-          image: "https://picsum.photos/id/1044/600/600",
-        },
-        {
-          title: "Maecenas feugiat magna sapien in",
-          content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet fringilla ante. Quisque at ipsum non lacus consequat dictum.",
-          image: "https://picsum.photos/id/1057/600/600",
-        },
-        {
-          title: "Donec commodo sed enim at",
-          content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eu condimentum risus. Praesent dignissim, neque nec pharetra vestibulum, libero odio.",
-          image: "https://picsum.photos/id/1063/600/600",
-        },
-        {
-          title: "In bibendum urna et turpis",
-          content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae ante volutpat leo vulputate volutpat et sed ex. Vivamus eu.",
-          image: "https://picsum.photos/id/1076/600/600",
-        },
-        {
-          title: "Phasellus iaculis dignissim erat at",
-          content:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla mattis quam scelerisque, eleifend purus gravida, scelerisque orci. Ut et turpis.",
-          image: "https://picsum.photos/id/1083/600/600",
-        },
+      token:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTFkOGJhNDI2YWExMzVkM2MyMWY4MyIsInJvbGUiOiJIb3N0IiwibmJmIjoxNjA4NjM2NjAyLCJleHAiOjE2MDkyNDE0MDIsImlhdCI6MTYwODYzNjYwMn0.OPH5pJquyGripFVwUXwdujJswnq9J1AW5ZchIn7woJo",
+
+      items: [],
+      cities: [{ value: null, text: "Chọn thành phố" }],
+      districts: [{ value: null, text: "Chọn quận/huyện" }],
+      wards: [{ value: null, text: "Chọn xã/phường" }],
+      rentPrice: [
+        { value: "00", text: "Chọn mức giá" },
+        { value: "01", text: "Dưới 1 triệu" },
+        { value: "02", text: "Từ 1- 3 triệu" },
+        { value: "03", text: "Từ 3- 5 triệu" },
+        { value: "04", text: "Từ 5- 10 triệu" },
+        { value: "05", text: "Trên 10 triệu" },
       ],
-    
-      url_base: "https://api...",
+      rentValue: "00",
+      previousCityCode: null,
+      cityCode: null,
+      previousDistrictCode: null,
+      districtCode: null,
+      wardCode: null,
       query: "",
+      minRent: null,
+      maxRent: null,
     };
   },
-  created: function () {
-    // `this` points to the vm instance
-    console.log('a is: ' + this.items)
-    // fetch(`${this.url_base}search?q=${this.query}`)
-    //       .then((res) => {
-    //         return res.json();
-    //       })
-    //       .then(this.setResults);
-  },
+
   methods: {
+    postSearchRequest() {
+      return axios.post(
+        "/Posts/search",
+        {
+          captionKeyword: this.query,
+          addressKeyWord: "",
+          wardCode: this.wardCode ?? "",
+          districtCode: this.districtCode ?? "",
+          provinceCode: this.cityCode ?? "",
+          minRent: this.minRent,
+          maxRent: this.maxRent,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        }
+      );
+    },
     search(e) {
       if (e.key == "Enter") {
-        console.log(this.query);
-        fetch(`${this.url_base}search?q=${this.query}`)
-          .then((res) => {
-            return res.json();
-          })
-          .then(this.setResults);
+        this.postSearchRequest().then((res) => {
+          if (res.status == 200) {
+            console.log(res);
+            this.$router.push({
+              path: "/RentoList",
+            });
+          }
+        });
       }
     },
-    setResults(results) {
-      this.weather = results;
+    setPrice() {
+      switch (this.rentValue) {
+        case "00":
+          this.minRent = null;
+          this.maxRent = null;
+          break;
+        case "01":
+          this.minRent = null;
+          this.maxRent = 1000000;
+          break;
+        case "02":
+          this.minRent = 1000000;
+          this.maxRent = 3000000;
+          break;
+        case "03":
+          this.minRent = 3000000;
+          this.maxRent = 5000000;
+          break;
+        case "04":
+          this.minRent = 5000000;
+          this.maxRent = 10000000;
+          break;
+        case "05":
+          this.minRent = 10000000;
+          this.maxRent = null;
+          break;
+      }
+    },
+    getProvinces() {
+      console.log("fetch Provinces");
+      (this.cities = [{ value: null, text: "Chọn thành phố" }]),
+        (this.districts = [{ value: null, text: "Chọn quận/huyện" }]),
+        (this.wards = [{ value: null, text: "Chọn xã/phường" }]),
+        (this.districtCode = null);
+      this.wardCode = null;
+      return axios
+        .get(
+          "/Locations/provinces",
+          {},
+          {
+            headers: {
+              // Authorization: `Bearer ${this.token}`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data);
+          res.data.forEach((element) => {
+            this.cities.push({
+              value: element.provinceCode,
+              text: element.province,
+            });
+          });
+        });
+    },
+
+    getDistricts() {
+      console.log("fetch Districts");
+      (this.districts = [{ value: null, text: "Chọn quận/huyện" }]),
+        (this.wards = [{ value: null, text: "Chọn xã/phường" }]),
+        (this.wardCode = null);
+      this.districtCode = null;
+
+      this.previousCityCode = this.cityCode;
+      return axios
+        .get("/Locations/districts", {
+          headers: {
+            // Authorization: `Bearer ${this.token}`,
+          },
+          params: {
+            provinceCode: this.cityCode,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          res.data.forEach((element) => {
+            this.districts.push({
+              value: element.districtCode,
+              text: element.district,
+            });
+          });
+        });
+    },
+    getWards() {
+      this.wards = [{ value: null, text: "Chọn xã/phường" }];
+      this.wardCode = null;
+      console.log("fetch Wards");
+      this.previousDistrictCode = this.districtCode;
+      return axios
+        .get("/Locations/wards", {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+          params: {
+            districtCode: this.districtCode,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          res.data.forEach((element) => {
+            this.wards.push({
+              value: element.wardCode,
+              text: element.ward,
+            });
+          });
+        });
     },
   },
 };
 </script>
 
 <style scoped>
-.bg-main {
-  background-color: #ffba00;
-}
-.bg-grey {
-  background-color: rgb(244, 244, 244);
-}
-.w-40 {
-  width: 40%;
-}
-
-.fs-20 {
-  font-size: 1.25rem;
-}
-
 .banner {
   width: 100%;
   max-height: 300px;
@@ -219,7 +354,7 @@ export default {
 }
 
 .search-box {
-  margin-top: -15%;
+  margin-top: -25%;
   z-index: 999;
   position: relative;
 }
@@ -237,25 +372,22 @@ export default {
   outline: none;
   background: none;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 0px 16px 0px 16px;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 5px 5px 5px 5px;
   transition: 0.4s;
 }
-.search-box .search-bar:focus {
-  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.25);
-  background-color: rgba(255, 255, 255, 1);
-  border-radius: 16px 0px 16px 0px;
+.search-box .type {
+  display: block;
+  width: 100%;
+  margin-top: 5%;
+
+  font-size: 20px;
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none;
 }
 
-.text-light {
-  color: white;
-}
-
-.nav-tabs .nav-item.show .nav-link,
-.nav-tabs .nav-link.active {
-
-  color: #495057 !important;
-}
 .banner-wrapper::after {
   content: "";
   position: absolute;
@@ -266,130 +398,15 @@ export default {
   background-color: #000;
   opacity: 0.5;
 }
-.btn-post {
-  background-color: #fc9807;
-  border-color: #fc9807;
-}
 .text-main-orange {
   color: #fc9807;
 }
 a.text-main-orange:hover {
   color: #fc9807;
 }
-.left-chevron-control {
-  font-size: 50px;
-  z-index: 100;
-  top: 185px;
-  left: -25px;
-}
-.right-chevron-control {
-  font-size: 50px;
-  z-index: 100;
-  top: 185px;
-  right: -25px;
-}
-.single-item {
-  border-radius: 25px;
-}
+
 .card-img-top {
   border-top-left-radius: 25px !important;
   border-top-right-radius: 25px !important;
 }
-
-.min-max-slider {
-  position: relative;
-  width: 200px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-.min-max-slider > label {
-  display: none;
-}
-span.value {
-  height: 1.7em;
-  font-weight: bold;
-  display: inline-block;
-}
-span.value.lower::before {
-  content: "€";
-  display: inline-block;
-}
-span.value.upper::before {
-  content: "- €";
-  display: inline-block;
-  margin-left: 0.4em;
-}
-.min-max-slider > .legend {
-  display: flex;
-  justify-content: space-between;
-}
-.min-max-slider > .legend > * {
-  font-size: small;
-  opacity: 0.25;
-}
-.min-max-slider > input {
-  cursor: pointer;
-  position: absolute;
-}
-
-/* webkit specific styling */
-.min-max-slider > input {
-  -webkit-appearance: none;
-  outline: none !important;
-  background: transparent;
-  background-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 30%,
-    silver 30%,
-    silver 60%,
-    transparent 60%,
-    transparent 100%
-  );
-}
-.min-max-slider > input::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  width: 14px; /* Set a specific slider handle width */
-  height: 14px; /* Slider handle height */
-  background: #eee; /* Green background */
-  cursor: pointer; /* Cursor on hover */
-  border: 1px solid gray;
-  border-radius: 100%;
-}
-
-.min-max-slider > input::-webkit-slider-runnable-track {
-  cursor: pointer;
-}
-
-
-.box-shadow {
-  box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
-}
-fieldset.scheduler-border {
-  border: 1px groove #ddd !important;
-  padding: 0 1.4em 1.4em 1.4em !important;
-  margin: 0 0 1.5em 0 !important;
-  -webkit-box-shadow: 0px 0px 0px 0px #000;
-  box-shadow: 0px 0px 0px 0px #000;
-}
-
-/*legend.scheduler-border {*/
-/*    font-size: 1.2em !important;*/
-/*    font-weight: bold !important;*/
-/*    text-align: left !important;*/
-/*}*/
-legend.scheduler-border {
-  width: inherit; /* Or auto */
-  padding: 0 10px; /* To give a bit of padding on the left and right */
-  border-bottom: none;
-}
-[data-toggle="collapse"] .fa:before {
-  content: "\f139";
-}
-
-[data-toggle="collapse"].collapsed .fa:before {
-  content: "\f13a";
-}
-
 </style>

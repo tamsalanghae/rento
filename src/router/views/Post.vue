@@ -55,17 +55,6 @@
                       rows="3"
                     />
                   </div>
-                  <div class="text-center">
-                    <label class="control-label">Danh sách Ảnh</label>
-                  </div>
-                  <vue-upload-multiple-image
-                    @upload-success="uploadImageSuccess"
-                    @before-remove="beforeRemove"
-                    @edit-image="editImage"
-                    :data-images="images"
-                    idUpload="myIdUpload"
-                    editUpload="myIdEdit"
-                  ></vue-upload-multiple-image>
                 </fieldset>
                 <div class="col-12 text-center">
                   <button
@@ -188,7 +177,7 @@
                       @upload-success="uploadImageSuccess"
                       @before-remove="beforeRemove"
                       @edit-image="editImage"
-                      :data-images="images"
+                      :data-images="roomImages"
                       idUpload="myIdUpload"
                       editUpload="myIdEdit"
                     ></vue-upload-multiple-image>
@@ -236,7 +225,9 @@ export default {
       wardCode: null,
       location: "",
       area: "",
-      images: [],
+      postId: "",
+      imagesFormData: [],
+      roomImages: [],
       cities: [{ value: null, text: "Chọn khu vực" }],
       districts: [{ value: null, text: "Chọn khu vực" }],
       wards: [{ value: null, text: "Chọn khu vực" }],
@@ -248,10 +239,7 @@ export default {
   methods: {
     uploadImageSuccess(formData, index, fileList) {
       console.log("data", formData, index, fileList);
-      // Upload image api
-      // axios.post('http://your-url-upload', formData).then(response => {
-      //   console.log(response)
-      // })
+      this.imagesFormData.push(formData);
     },
     beforeRemove(index, done, fileList) {
       console.log("index", index, fileList);
@@ -274,7 +262,7 @@ export default {
             address: this.address,
             rent: this.rent,
             description: this.description,
-            area: this.area
+            area: this.area,
           },
           {
             headers: {
@@ -283,8 +271,15 @@ export default {
           }
         )
         .then((res) => {
-          if(res.status == 200) {
-            this.$router.replace({path:'/RentoDetail', params: {id: res.id}});
+          if (res.status == 200) {
+            console.log(res);
+            console.log(res.data.id);
+            this.postId = res.data.id;
+            this.postImages();
+            this.$router.push({
+              name: "RentoDetail",
+              params: { id: res.data.id },
+            });
           }
         });
     },
@@ -293,14 +288,14 @@ export default {
     },
     getProvinces() {
       console.log("fetch Provinces");
-      this.cities = [{ value: null, text: "Chọn khu vực" }];
-      this.districts = [{ value: null, text: "Chọn khu vực" }];
-      this.wards = [{ value: null, text: "Chọn khu vực" }];
-      this.districtCode = null;
+      (this.cities = [{ value: null, text: "Chọn thành phố" }]),
+        (this.districts = [{ value: null, text: "Chọn quận/huyện" }]),
+        (this.wards = [{ value: null, text: "Chọn xã/phường" }]),
+        (this.districtCode = null);
       this.wardCode = null;
       return axios
         .get(
-          "/Locations/provinces",
+          "https://localhost:44334/Locations/provinces",
           {},
           {
             headers: {
@@ -321,14 +316,14 @@ export default {
 
     getDistricts() {
       console.log("fetch Districts");
-      this.districts = [{ value: null, text: "Chọn khu vực" }];
-      this.wards = [{ value: null, text: "Chọn khu vực" }];
-      this.wardCode = null;
+      (this.districts = [{ value: null, text: "Chọn quận/huyện" }]),
+        (this.wards = [{ value: null, text: "Chọn xã/phường" }]),
+        (this.wardCode = null);
       this.districtCode = null;
 
       this.previousCityCode = this.cityCode;
       return axios
-        .get("/Locations/districts", {
+        .get("https://localhost:44334/Locations/districts", {
           headers: {
             // Authorization: `Bearer ${this.token}`,
           },
@@ -347,13 +342,12 @@ export default {
         });
     },
     getWards() {
-      this.wards = [{ value: null, text: "Chọn khu vực" }];
+      this.wards = [{ value: null, text: "Chọn xã/phường" }];
       this.wardCode = null;
-
       console.log("fetch Wards");
       this.previousDistrictCode = this.districtCode;
       return axios
-        .get("/Locations/wards", {
+        .get("https://localhost:44334/Locations/wards", {
           headers: {
             Authorization: `Bearer ${this.token}`,
           },
@@ -370,6 +364,23 @@ export default {
             });
           });
         });
+    },
+    postImages() {
+      this.imagesFormData.forEach((element) =>
+        axios
+          .post(
+            `https://localhost:44334/Posts/${this.postId}/images`,
+            element,
+            {
+              headers: {
+                Authorization: `Bearer ${this.token}`,
+              },
+            }
+          )
+          .then((response) => {
+            console.log(response);
+          })
+      );
     },
   },
 };

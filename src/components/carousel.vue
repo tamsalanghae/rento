@@ -9,8 +9,8 @@
 
           <div class="subtitle">SUBTITLE • FOCUS</div>
 
-          <h3>{{ item.title }}</h3>
-          <p>{{ item.content }}</p>
+          <h3 v-if="item.title != null">{{ item.title }}</h3>
+          <p v-if="item.title != null">{{ item.content }}</p>
         </div>
       </template>
     </vue-horizontal-list>
