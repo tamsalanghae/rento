@@ -6,7 +6,6 @@
         <div class="information bg-white box-shadow">
           <b-carousel
             id="carousel-1"
-            v-model="slide"
             :interval="3000"
             controls
             indicators
@@ -14,33 +13,12 @@
             img-width="1024"
             img-height="480"
             style="text-shadow: 1px 1px 2px #333"
-            @sliding-start="onSlideStart"
-            @sliding-end="onSlideEnd"
           >
             <!-- Text slides with image -->
             <b-carousel-slide
-              img-src="https://picsum.photos/1024/480/?image=58"
-            ></b-carousel-slide>
-
-            <!-- Slides with custom text -->
-            <b-carousel-slide
-              img-src="https://picsum.photos/1024/480/?image=58"
-            ></b-carousel-slide>
-
-            <!-- Slides with image only -->
-            <b-carousel-slide
-              img-src="https://picsum.photos/1024/480/?image=58"
-            ></b-carousel-slide>
-
-            <!-- Slides with img slot -->
-            <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-            <b-carousel-slide
-              img-src="https://picsum.photos/1024/480/?image=58"
-            ></b-carousel-slide>
-
-            <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-            <b-carousel-slide
-              img-src="https://picsum.photos/1024/480/?image=58"
+              v-for="item in photos"
+              :key="item"
+              :img-src="getPhoto(item)"
             ></b-carousel-slide>
           </b-carousel>
           <div class="detail-infor">
@@ -102,17 +80,37 @@
         </div>
       </div>
     </div>
+
+    <div class="comments-outside">
+      <hr class="my-4" />
+      <div class="comments-header">
+        <div class="comments-stats">
+          <span><font-awesome-icon :icon="['fas', 'eye']" /> {{ view }} </span>
+          <span
+            ><font-awesome-icon :icon="['fas', 'thumbs-up']" /> {{ rating }} / 5
+          </span>
+        </div>
+      </div>
+      <comments
+        :comments_wrapper_classes="['custom-scrollbar', 'comments-wrapper']"
+        :comments="comments.slice().reverse()"
+        :current_user="current_user"
+        @submit-comment="submitComment"
+      ></comments>
+    </div>
   </div>
 </template>
 
 <script>
 import navbar from "../../components/navbar.vue";
 import axios from "../../utils/axios";
+import comments from "../../components/comments.vue";
 
 export default {
-  components: { navbar },
+  components: { navbar, comments },
   name: "RentoList",
   created() {
+    this.getComment();
     this.getRoomData();
   },
   data() {
@@ -126,12 +124,83 @@ export default {
       province: "",
       address: "",
       rent: 0,
+      view: 20,
+      rating: 5.0,
       photos: [],
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTFkOGJhNDI2YWExMzVkM2MyMWY4MyIsInJvbGUiOiJIb3N0IiwibmJmIjoxNjA4NjM2NjAyLCJleHAiOjE2MDkyNDE0MDIsImlhdCI6MTYwODYzNjYwMn0.OPH5pJquyGripFVwUXwdujJswnq9J1AW5ZchIn7woJo",
+      token: localStorage.getItem('token'),
+        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTFkOGJhNDI2YWExMzVkM2MyMWY4MyIsInJvbGUiOiJIb3N0IiwibmJmIjoxNjA4NjM2NjAyLCJleHAiOjE2MDkyNDE0MDIsImlhdCI6MTYwODYzNjYwMn0.OPH5pJquyGripFVwUXwdujJswnq9J1AW5ZchIn7woJo",
+        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTFjNjJmMzY0M2ZhZTRhOTU3MGI3YyIsInJvbGUiOiJSZW50ZXIiLCJuYmYiOjE2MDg3MzE2MDUsImV4cCI6MTYwOTMzNjQwNSwiaWF0IjoxNjA4NzMxNjA1fQ.guphM1n273DlIFsAwbXRE8UdVZz1kR9R9EGz-C9wWLo",
+      likes: 15,
+
+      current_user: {
+        avatar:
+          "https://w7.pngwing.com/pngs/7/618/png-transparent-man-illustration-avatar-icon-fashion-men-avatar-face-fashion-girl-heroes-thumbnail.png",
+        user: "Me",
+      },
+      comments: [],
     };
   },
   methods: {
+    // getView() {
+    //   axios
+    //     .get(`/Posts/${this.roomId}/view`, {
+    //       headers: {
+    //         Authorization: `Bearer ${this.token}`,
+    //       },
+    //     })
+    //     .then((res) => {
+    //       console.log(res);
+    //       this.view = res.data;
+    //     });
+    // },
+    // postView() {
+    //   axios
+    //     .post(`/Posts/${this.roomId}/view`, {
+    //       headers: {
+    //         Authorization: `Bearer ${this.token}`,
+    //       },
+    //     })
+    //     .then((res) => {
+    //       console.log(res);
+    //     });
+    // },
+    getComment: function () {
+      this.comments = [];
+      axios
+        .get(`/Posts/${this.roomId}/comment`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          res.data.forEach((element, index) => {
+            this.comments.push({
+              id: index,
+              text: element.content,
+              user: "Unknown",
+              avatar:
+                "https://w7.pngwing.com/pngs/7/618/png-transparent-man-illustration-avatar-icon-fashion-men-avatar-face-fashion-girl-heroes-thumbnail.png",
+            });
+          });
+        });
+    },
+    submitComment: function (reply) {
+      axios
+        .post(
+          `/Posts/${this.roomId}/comment`,
+          { content: reply },
+          {
+            headers: {
+              Authorization: `Bearer ${this.token}`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          this.getComment();
+        });
+    },
     getRoomData() {
       return axios
         .get(`/Posts/${this.roomId}`, {
@@ -148,11 +217,17 @@ export default {
             this.province = data.ward.district.province.province;
             this.address = `${data.address}, ${data.ward.ward}, ${data.ward.district.district}, ${data.ward.district.province.province}`;
             this.photos = data.photos;
+            this.rating = data.rating;
+            this.view = data.views;
             this.caption = data.caption;
             this.area = data.area;
             this.rent = data.rent;
           }
         });
+    },
+    getPhoto(string) {
+      // return `https://picsum.photos/1024/480/?image=${string}`;
+      return `https://localhost:44334/Posts/${this.roomId}/images?file=${string}`
     },
   },
 };
@@ -160,171 +235,45 @@ export default {
 
 
 <style scoped>
-.bg-main {
-  background-color: #ffba00;
+a {
+  text-decoration: none;
 }
-.bg-grey {
-  background-color: rgb(244, 244, 244);
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ececec;
+  margin: 1em 0;
+  padding: 0;
 }
-.w-40 {
-  width: 40%;
+.comments-outside {
+  margin: 0 auto;
+  max-width: 80%;
 }
-
-.fs-20 {
-  font-size: 1.25rem;
-}
-
-.banner {
-  width: 100%;
-  max-height: 450px;
-  object-fit: cover;
-}
-
-.box-search {
-  margin-top: -15%;
-  z-index: 999;
-  position: relative;
-}
-
-.text-light {
-  color: white;
-}
-
-.nav-tabs .nav-item.show .nav-link,
-.nav-tabs .nav-link.active {
-  color: #495057 !important;
-}
-.banner-wrapper::after {
-  content: "";
-  position: absolute;
-  bottom: 435px;
-  left: 0;
-  height: 120px;
-  width: 100%;
-  background-color: #000;
-  opacity: 0.5;
-}
-.btn-post {
-  background-color: #fc9807;
-  border-color: #fc9807;
-}
-.text-main-orange {
-  color: #fc9807;
-}
-a.text-main-orange:hover {
-  color: #fc9807;
-}
-.left-chevron-control {
-  font-size: 50px;
-  z-index: 100;
-  top: 185px;
-  left: -25px;
-}
-.right-chevron-control {
-  font-size: 50px;
-  z-index: 100;
-  top: 185px;
-  right: -25px;
-}
-.single-item {
-  border-radius: 25px;
-}
-.card-img-top {
-  border-top-left-radius: 25px !important;
-  border-top-right-radius: 25px !important;
-}
-
-.min-max-slider {
-  position: relative;
-  width: 200px;
-  text-align: center;
-  margin-bottom: 20px;
-}
-.min-max-slider > label {
-  display: none;
-}
-span.value {
-  height: 1.7em;
-  font-weight: bold;
-  display: inline-block;
-}
-span.value.lower::before {
-  content: "€";
-  display: inline-block;
-}
-span.value.upper::before {
-  content: "- €";
-  display: inline-block;
-  margin-left: 0.4em;
-}
-.min-max-slider > .legend {
+.comments-header {
+  padding: 10px;
+  align-items: center;
   display: flex;
   justify-content: space-between;
+  min-height: 80px;
+  font-size: 20px;
 }
-.min-max-slider > .legend > * {
-  font-size: small;
-  opacity: 0.25;
+.comments-header .comments-stats span {
+  margin-left: 10px;
 }
-.min-max-slider > input {
-  cursor: pointer;
-  position: absolute;
+.post-owner {
+  display: flex;
+  align-items: center;
 }
-
-/* webkit specific styling */
-.min-max-slider > input {
-  -webkit-appearance: none;
-  outline: none !important;
-  background: transparent;
-  background-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 30%,
-    silver 30%,
-    silver 60%,
-    transparent 60%,
-    transparent 100%
-  );
-}
-.min-max-slider > input::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  width: 14px; /* Set a specific slider handle width */
-  height: 14px; /* Slider handle height */
-  background: #eee; /* Green background */
-  cursor: pointer; /* Cursor on hover */
-  border: 1px solid gray;
+.post-owner .avatar > img {
+  width: 30px;
+  height: 30px;
   border-radius: 100%;
 }
-.min-max-slider > input::-webkit-slider-runnable-track {
-  cursor: pointer;
+.post-owner .username {
+  margin-left: 5px;
 }
-
-.box-shadow {
-  box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
-}
-fieldset.scheduler-border {
-  border: 1px groove #ddd !important;
-  padding: 0 1.4em 1.4em 1.4em !important;
-  margin: 0 0 1.5em 0 !important;
-  -webkit-box-shadow: 0px 0px 0px 0px #000;
-  box-shadow: 0px 0px 0px 0px #000;
-}
-
-/*legend.scheduler-border {*/
-/*    font-size: 1.2em !important;*/
-/*    font-weight: bold !important;*/
-/*    text-align: left !important;*/
-/*}*/
-legend.scheduler-border {
-  width: inherit; /* Or auto */
-  padding: 0 10px; /* To give a bit of padding on the left and right */
-  border-bottom: none;
-}
-[data-toggle="collapse"] .fa:before {
-  content: "\f139";
-}
-
-[data-toggle="collapse"].collapsed .fa:before {
-  content: "\f13a";
+.post-owner .username > a {
+  color: #333;
 }
 </style>

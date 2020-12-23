@@ -50,6 +50,7 @@ export default {
     return {};
   },
   methods: {
+      getFavourite() {},
       deletePost() {}
   }
 };

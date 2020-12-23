@@ -1,92 +1,94 @@
 <template>
   <div class="header bg-main">
-    <nav class="navbar navbar-expand-lg navbar-dark">
-      <div class="container" style="max-width: 1200px;">
+    <b-navbar toggleable="lg" type="dark">
+      <div class="container" style="max-width: 1200px">
         <div class="d-flex justify-content-start">
-          <a class="navbar-brand" href="">
+          <b-navbar-brand>
             <img src="@/assets/img/logo.png" class="w-40" />
-          </a>
+          </b-navbar-brand>
         </div>
+        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
         <div class="d-flex justify-content-end">
-          <div class="collapse navbar-collapse" id="navb">
-            <ul class="navbar-nav mr-auto" v-if="role == 'Renter'">
-              <li class="nav-item mr-3">
+          <b-collapse id="nav-collapse" is-nav>
+            <b-navbar-nav v-if="role == 'Renter'">
+              <b-nav-item>
                 <router-link to="/home" class="nav-link text-white fs-20"
                   ><i class="fas fa-home"></i> Home</router-link
                 >
-              </li>
-              <li class="nav-item mr-3">
+              </b-nav-item>
+              <b-nav-item>
                 <router-link to="/rentoList" class="nav-link text-white fs-20"
                   >Nguyên căn</router-link
                 >
-              </li>
-              <li class="nav-item mr-3">
+              </b-nav-item>
+              <b-nav-item>
                 <router-link to="/rentoList" class="nav-link text-white fs-20"
                   >Ở ghép</router-link
                 >
-              </li>
-              <li class="nav-item mr-3">
+              </b-nav-item>
+              <b-nav-item>
                 <router-link to="/rentoList" class="nav-link text-white fs-20"
                   >Phòng trọ</router-link
                 >
-              </li>
-              <li class="nav-item mr-3">
+              </b-nav-item>
+              <b-nav-item>
                 <router-link
                   to="/rentoFavorite"
                   class="nav-link text-white fs-20"
                   style="margin-left: 20px"
                   >Yêu thích</router-link
                 >
-              </li>
-              <li class="nav-item mr-3">
+              </b-nav-item>
+              <b-nav-item>
                 <a class="nav-link text-white fs-20" @click="onSignOut"
                   >Đăng xuất</a
                 >
-              </li>
-            </ul>
+              </b-nav-item>
+            </b-navbar-nav>
 
-            <ul class="navbar-nav mr-auto" v-else-if="role == 'Admin'">
-              <li class="nav-item mr-3">
+            <b-navbar-nav v-else-if="role == 'Admin'">
+              <b-nav-item>
                 <router-link
                   to="/admin/userindex"
                   class="nav-link text-white fs-20"
                   ><i class="fas fa-home"></i>Chủ trọ</router-link
                 >
-              </li>
-              <li class="nav-item mr-3">
+              </b-nav-item>
+              <b-nav-item>
                 <router-link
                   to="/admin/postindex"
                   class="nav-link text-white fs-20"
                   >Bài đăng</router-link
                 >
-              </li>
-              <li class="nav-item mr-3">
+              </b-nav-item>
+              <b-nav-item>
                 <a class="nav-link text-white fs-20" @click="onSignOut"
                   >Đăng xuất</a
                 >
-              </li>
-            </ul>
-            <ul class="navbar-nav mr-auto" v-else>
-              <li class="nav-item mr-3">
+              </b-nav-item>
+            </b-navbar-nav>
+            <b-navbar-nav v-else>
+              <b-nav-item>
                 <router-link
                   to="/admin/postindex"
                   class="nav-link text-white fs-20"
                   >Bài đăng</router-link
                 >
-              </li>
-              <li class="nav-item mr-3">
+              </b-nav-item>
+              <b-nav-item>
                 <a class="nav-link text-white fs-20" @click="onSignOut"
                   >Đăng xuất</a
                 >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <a href="Profile"><img src="@/assets/img/cat-1.svg" alt="Avatar" class="avatar" /></a>
-          </div>
+              </b-nav-item>
+              <b-nav-item href="Profile"
+                ><img src="@/assets/img/cat-1.svg" alt="Avatar" class="avatar"
+              /></b-nav-item>
+            </b-navbar-nav>
+          </b-collapse>
         </div>
       </div>
-    </nav>
+    </b-navbar>
   </div>
 </template>
 
@@ -117,20 +119,16 @@ export default {
 .bg-main {
   background-color: #ffba00;
 }
-
 .w-40 {
   width: 40%;
 }
-
 .fs-20 {
   font-size: 1.25rem;
 }
-
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
   color: #495057 !important;
 }
-
 .nav-link:hover {
   cursor: pointer;
 }
@@ -144,11 +142,9 @@ export default {
 a.text-main-orange:hover {
   color: #fc9807;
 }
-
 [data-toggle="collapse"] .fa:before {
   content: "\f139";
 }
-
 [data-toggle="collapse"].collapsed .fa:before {
   content: "\f13a";
 }

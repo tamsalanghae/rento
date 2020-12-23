@@ -6,9 +6,10 @@
         dismissible
         variant="danger"
         class="position-fixed"
-        style="top: 1rem; right: 1rem;"
+        style="top: 1rem; right: 1rem"
         fade
-        >Bạn đã nhập sai username hoặc mật khẩu. Vui lòng thử lại.</b-alert>
+        >Bạn đã nhập sai username hoặc mật khẩu. Vui lòng thử lại.</b-alert
+      >
       <b-card-body>
         <div class="login-box">
           <h1>Login</h1>
@@ -21,7 +22,7 @@
                   name="fieldName"
                 />
                 <br />
-                <div style="color: red; font-size:14px">{{ errors[0] }}</div>
+                <div style="color: red; font-size: 14px">{{ errors[0] }}</div>
               </ValidationProvider>
             </ValidationObserver>
           </div>
@@ -41,12 +42,12 @@
                     passwordType === 'password' ? 'eye' : 'eye-slash',
                   ]"
                   class="text-dark"
-                  style="cursor:pointer;"
+                  style="cursor: pointer"
                   @click="Show"
                   title="Toggle Show Password"
                 />
                 <br />
-                <span style="color: red; font-size:14px">{{ errors[0] }}</span>
+                <span style="color: red; font-size: 14px">{{ errors[0] }}</span>
               </ValidationProvider>
             </ValidationObserver>
           </div>
@@ -85,7 +86,7 @@ export default {
     };
   },
 
-  mounted: function() {
+  mounted: function () {
     if (
       localStorage.getItem("username") != null &&
       localStorage.getItem("password") != null
