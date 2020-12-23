@@ -1,11 +1,19 @@
 <template>
   <div id="background" class="d-flex justify-content-center">
-    <b-card tag="article" class="mb-2 col-4">
+    <b-card tag="article" class="mb-2 col-md-6 col-12">
+      <b-alert
+        v-model="showWrongPasswordAlert"
+        dismissible
+        variant="danger"
+        class="position-fixed"
+        style="top: 1rem; right: 1rem;"
+        fade
+        >Bạn đã nhập sai username hoặc mật khẩu. Vui lòng thử lại.</b-alert
+      >
       <b-card-body>
         <div class="login-box">
           <h1>Login</h1>
           <div class="textbox">
-            
             <ValidationObserver>
               <ValidationProvider rules="required" v-slot="{ errors }">
                 <input
@@ -14,7 +22,7 @@
                   name="fieldName"
                 />
                 <br />
-                <span style="color: red; font-size:14px">{{ errors[0] }}</span>
+                <div style="color: red; font-size:14px">{{ errors[0] }}</div>
               </ValidationProvider>
             </ValidationObserver>
           </div>
@@ -66,6 +74,7 @@ export default {
       username: "",
       password: "",
       passwordType: "password",
+      showWrongPasswordAlert: false,
     };
   },
 
@@ -98,8 +107,15 @@ export default {
             localStorage.setItem("token", res.data.token);
             console.log(res.status == 200);
             console.log(localStorage.getItem("username"));
-            this.$router.push("/Home");
+            const userRole = res.data.role;
+            if (userRole === "admin") {
+              this.$router.push({ name: "AdminPostIndex" });
+            } else this.$router.push("/Home");
+          } else if (res.status === 401) {
+            this.showWrongPasswordAlert = true;
           }
+        }).catch(err => {
+          console.error(err);
         });
     },
     Show() {
