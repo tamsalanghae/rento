@@ -30,17 +30,6 @@
                   >Phòng trọ</router-link
                 >
               </li>
-              <li class="nav-item">
-                <router-link
-                  to="/post"
-                  class="nav-link text-white fs-20 btn btn-post"
-                  ><font-awesome-icon
-                    style="font-size: 20px"
-                    :icon="['far', 'edit']"
-                  ></font-awesome-icon>
-                  Đăng bài</router-link
-                >
-              </li>
               <li class="nav-item mr-3">
                 <router-link
                   to="/rentoFavorite"
@@ -55,6 +44,7 @@
                 >
               </li>
             </ul>
+
             <ul class="navbar-nav mr-auto" v-else-if="role == 'Admin'">
               <li class="nav-item mr-3">
                 <router-link

@@ -6,65 +6,7 @@
         <div class="information mt-3 bg-white box-shadow">
           <div class="row">
             <div class="col-12">
-              <div class="p-3">
-                <fieldset class="scheduler-border">
-                  <legend class="scheduler-border">Thông tin Chủ nhà</legend>
-                  <div class="form-group">
-                    <label>Tiêu đề cho thuê</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Tiêu đề"
-                      v-model="title"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label>Họ và tên chủ nhà</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Họ và tên chủ nhà"
-                      v-model="landlord"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label>Số điện thoại chủ nhà</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Số điện thoại chủ nhà"
-                      v-model="phonenumber"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label>Địa chỉ nhà</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder="Địa chỉ nhà"
-                      v-model="address"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label>Mô tả ngắn</label>
-                    <textarea
-                      type="text"
-                      class="form-control"
-                      placeholder="Mô tả ngắn"
-                      v-model="description"
-                      rows="3"
-                    />
-                  </div>
-                </fieldset>
-                <div class="col-12 text-center">
-                  <button
-                    type="button"
-                    class="btn btn-success"
-                    v-on:click="addRoom"
-                  >
-                    Tạo hồ sơ chủ nhà
-                  </button>
-                </div>
+              <div class="p-3">                
 
                 <div class="room-area">
                   <fieldset class="scheduler-border">
@@ -209,14 +151,10 @@ export default {
   components: { VueUploadMultipleImage, Navbar },
   data() {
     return {
-      token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTFkOGJhNDI2YWExMzVkM2MyMWY4MyIsInJvbGUiOiJIb3N0IiwibmJmIjoxNjA4NjM2NjAyLCJleHAiOjE2MDkyNDE0MDIsImlhdCI6MTYwODYzNjYwMn0.OPH5pJquyGripFVwUXwdujJswnq9J1AW5ZchIn7woJo",
-      title: "",
-      landlord: "",
-      phonenumber: "",
-      address: "",
+      token: "",
       description: "",
       caption: "",
+      address: "",
       rent: 0,
       previousCityCode: null,
       cityCode: null,
@@ -234,7 +172,35 @@ export default {
     };
   },
   created: function () {
+    this.token = localStorage.getItem("token");
+    this.postId = this.$route.params.id;  
     this.getProvinces();
+    if(this.postId != null && this
+    .postId != undefined){
+       axios
+        .get(`/Posts/${this.postId}`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
+        .then((res) => {
+          if (res.status == 200) {
+            var data = res.data;
+            this.description = data.description;
+            this.province = data.ward.district.province.province;
+            this.address = data.address;
+            this.photos = data.photos;
+            this.caption = data.caption;
+            this.area = data.area;
+            this.rent = data.rent;
+            this.cityCode = data.ward.district.province.provinceCode;
+            this.getDistricts();            
+            this.districtCode = data.ward.district.districtCode;
+            this.getWards();
+            this.wardCode = data.ward.wardCode;            
+          }
+        });
+    }
   },
   methods: {
     uploadImageSuccess(formData, index, fileList) {
@@ -276,10 +242,7 @@ export default {
             console.log(res.data.id);
             this.postId = res.data.id;
             this.postImages();
-            this.$router.push({
-              name: "RentoDetail",
-              params: { id: res.data.id },
-            });
+            this.$router.push("/host/postindex");
           }
         });
     },

@@ -1,143 +1,144 @@
 <template>
-<div>
-  <navbar></navbar>
-  <div id="background" class="d-flex justify-content-center">
-    <div class="container-fluid col-lg-10">
-      <b-row>
-        <b-col lg="3" class="my-1">
-          <b-form-group
-            label="Sắp xếp"
-            label-for="sort-by-select"
-            label-cols-sm="3"
-            label-align-sm="right"
-            label-size="sm"
-            class="mb-0"
-          >
-            <b-input-group size="sm">
-              <b-form-select
-                id="sort-by-select"
-                v-model="tempSort"
-                :options="sortOptions"
-                @change="mapSort(tempSort)"
-                class="w-50"
-              >
-              </b-form-select>
+  <div>
+    <navbar></navbar>
+    <div id="background" class="d-flex justify-content-center">
+      <div class="container-fluid col-lg-10">
+        <b-row>
+          <b-col lg="3" class="my-1">
+            <b-form-group
+              label="Sắp xếp"
+              label-for="sort-by-select"
+              label-cols-sm="3"
+              label-align-sm="right"
+              label-size="sm"
+              class="mb-0"
+            >
+              <b-input-group size="sm">
+                <b-form-select
+                  id="sort-by-select"
+                  v-model="tempSort"
+                  :options="sortOptions"
+                  @change="mapSort(tempSort)"
+                  class="w-50"
+                >
+                </b-form-select>
 
-              <b-form-select
-                v-model="tempDesc"
-                :disabled="tempSort == 'Mặc định'"
-                :options="['Tăng dần', 'Giảm dần']"
-                @change="mapDesc(tempDesc)"
-                size="sm"
-                class="w-50"
-              >
-              </b-form-select>
-            </b-input-group>
-          </b-form-group>
-        </b-col>
-        <b-col lg="3" class="my-1">
-          <b-form-group
-            label="Hiển thị bài đã từ chối"
-            label-for="filter-input"
-            label-cols-lg="9"
-            label-align-sm="right"
-            label-size="sm"
-          >
-            <b-form-checkbox
-              size="lg"
-              v-model="searchParams.showRejected"
-            ></b-form-checkbox>
-          </b-form-group>
-        </b-col>
-        <b-col lg="5" class="my-1">
-          <b-form-group
-            label="Tìm kiếm"
-            label-for="filter-input"
-            label-cols-sm="2"
-            label-align-sm="right"
-            label-size="sm"
-            class="mb-0"
-          >
-            <b-input-group size="sm">
-              <b-form-input
-                id="filter-input"
-                v-model="tempKeyword"
-                type="search"
-                placeholder="Nhập từ khóa"
-                class="w-75"
-              ></b-form-input>
-              <b-form-select
-                v-model="tempField"
-                :options="['Bài đăng', 'Địa chỉ']"
-                size="sm"
-                class="w-25"
-              >
-              </b-form-select>
-            </b-input-group>
-          </b-form-group>
-        </b-col>
-        <b-col lg="1" class="my-1">
-          <b-button size="sm" @click="search">Tìm kiếm</b-button>
-        </b-col>
-      </b-row>
+                <b-form-select
+                  v-model="tempDesc"
+                  :disabled="tempSort == 'Mặc định'"
+                  :options="['Tăng dần', 'Giảm dần']"
+                  @change="mapDesc(tempDesc)"
+                  size="sm"
+                  class="w-50"
+                >
+                </b-form-select>
+              </b-input-group>
+            </b-form-group>
+          </b-col>
+          <b-col lg="3" class="my-1">
+            <b-form-group
+              label="Hiển thị bài đã từ chối"
+              label-for="filter-input"
+              label-cols-lg="9"
+              label-align-sm="right"
+              label-size="sm"
+            >
+              <b-form-checkbox
+                size="lg"
+                v-model="searchParams.showRejected"
+              ></b-form-checkbox>
+            </b-form-group>
+          </b-col>
+          <b-col lg="5" class="my-1">
+            <b-form-group
+              label="Tìm kiếm"
+              label-for="filter-input"
+              label-cols-sm="2"
+              label-align-sm="right"
+              label-size="sm"
+              class="mb-0"
+            >
+              <b-input-group size="sm">
+                <b-form-input
+                  id="filter-input"
+                  v-model="tempKeyword"
+                  type="search"
+                  placeholder="Nhập từ khóa"
+                  class="w-75"
+                ></b-form-input>
+                <b-form-select
+                  v-model="tempField"
+                  :options="['Bài đăng', 'Địa chỉ']"
+                  size="sm"
+                  class="w-25"
+                >
+                </b-form-select>
+              </b-input-group>
+            </b-form-group>
+          </b-col>
+          <b-col lg="1" class="my-1">
+            <b-button size="sm" @click="search">Tìm kiếm</b-button>
+          </b-col>
+        </b-row>
 
-      <b-table
-        :fields="fields"
-        :items="items"
-        id="my-table"
-        :per-page="searchParams.take"
-        :current-page="currentPage"
-        responsive
-        ref="table"
-        outlined
-      >
-        <template #cell(actions)="row">
-          <b-row align-h="center" fluid>
-            <b-button size="sm" @click="edit(row.index)" variant="info">
-              <b-icon-pencil style="color: white"></b-icon-pencil>
-            </b-button>
-            <div style="width: 10px"></div>
-            <b-button size="sm" @click="remove(row.index)" variant="danger">
-              <b-icon-trash style="color: white"></b-icon-trash> </b-button
-          ></b-row>
-        </template>
-      </b-table>
-      <b-row class="justify-content-end">
-        <b-col lg="3" class="my-1">
-          <b-form-group
-            label="Kích cỡ trang"
-            label-for="per-page-select"
-            label-cols="6"
-            label-align-sm="right"
-            label-size="sm"
-            class="mb-0"
-          >
-            <b-form-select
-              id="per-page-select"
-              v-model="searchParams.take"
-              :options="pageOptions"
-              @change="search"
+        <b-table
+          :fields="fields"
+          :items="items"
+          id="my-table"
+          :per-page="searchParams.take"
+          :current-page="currentPage"
+          fixed
+          ref="table"
+          outlined
+        >
+          <template #cell(actions)="row">
+            <b-row fluid>
+              <div style="width: 15px"></div>
+              <b-button size="sm" @click="edit(row.index)" variant="info">
+                <b-icon-pencil style="color: white"></b-icon-pencil>
+              </b-button>
+              <div style="width: 10px"></div>
+              <b-button size="sm" @click="remove(row.index)" variant="danger">
+                <b-icon-trash style="color: white"></b-icon-trash> </b-button
+            ></b-row>
+          </template>
+        </b-table>
+        <b-row class="justify-content-end">
+          <b-col lg="3" class="my-1">
+            <b-form-group
+              label="Kích cỡ trang"
+              label-for="per-page-select"
+              label-cols="6"
+              label-align-sm="right"
+              label-size="sm"
+              class="mb-0"
+            >
+              <b-form-select
+                id="per-page-select"
+                v-model="searchParams.take"
+                :options="pageOptions"
+                @change="search"
+                size="sm"
+              ></b-form-select>
+            </b-form-group>
+          </b-col>
+
+          <b-col lg="4" class="my-1">
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="total"
+              :per-page="searchParams.take"
+              @change="handlePageChange"
+              align="fill"
               size="sm"
-            ></b-form-select>
-          </b-form-group>
-        </b-col>
-
-        <b-col lg="4" class="my-1">
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="total"
-            :per-page="searchParams.take"
-            @change="handlePageChange"
-            align="fill"
-            size="sm"
-            class="my-0 justify-content-end"
-            aria-controls="my-table"
-          ></b-pagination>
-        </b-col>
-      </b-row>
+              class="my-0 justify-content-end"
+              aria-controls="my-table"
+            ></b-pagination>
+          </b-col>
+        </b-row>
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <style scoped>
@@ -145,15 +146,16 @@
 
 <script>
 import axios from "axios";
-import Navbar from '../../../components/navbar.vue';
+import Navbar from "../../../components/navbar.vue";
 
 export default {
   name: "PostIndex",
-    
-components:{Navbar},
+
+  components: { Navbar },
   data() {
     return {
       connection: "",
+      myval: "",
 
       pageOptions: [5, 10, 20],
       sortOptions: ["Mặc định", "Giá thuê", "Đánh giá", "Lượt xem"],
@@ -199,19 +201,28 @@ components:{Navbar},
   },
   mounted() {
     this.search();
-    setInterval(() => this.checkNoti(), 5000);
+    this.myval =  setInterval(() => this.checkNoti(), 5000);
+  },  
+  beforeDestroy(){
+clearInterval(this.myval);
   },
   methods: {
     checkNoti() {
-      axios.get("https://localhost:44334/Notifications", {
-        headers: {
-          Authorization: `Bearer ${this.token}`,
-        },
-      }).then(res => res.data.forEach( n => this.$bvToast.toast(n.post.caption, {
-        title: n.content,
-        variant: n.success ?  "success" : "danger",
-        autoHideDelay: 3000,        
-      })));
+      axios
+        .get("https://localhost:44334/Notifications", {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
+        .then((res) =>
+          res.data.forEach((n) =>
+            this.$bvToast.toast(n.post.caption, {
+              title: n.content,
+              variant: n.success ? "success" : "danger",
+              autoHideDelay: 3000,
+            })
+          )
+        );
     },
     approve(index) {
       var ind = index + (this.currentPage - 1) * this.searchParams.take;
@@ -260,6 +271,10 @@ components:{Navbar},
           if (res.status == 200) this.items.splice(ind, 1);
           this.mapStatus();
         });
+    },
+    edit(index) {
+      var ind = index + (this.currentPage - 1) * this.searchParams.take;
+      this.$router.push(`/post/${this.items[ind].id}`);
     },
     mapStatus() {
       this.items.forEach((item) => {
