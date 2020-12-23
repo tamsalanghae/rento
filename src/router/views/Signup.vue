@@ -2,17 +2,26 @@
   <div>
     <div id="background" class="d-flex justify-content-center">
       <b-card tag="article" class="mb-2 col-4">
+        <b-alert
+          v-model="showWrongPasswordAlert"
+          dismissible
+          variant="danger"
+          class="position-fixed"
+          style="top: 1rem; right: 1rem;"
+          fade
+          >Bạn đã nhập sai username hoặc mật khẩu. Vui lòng thử lại.</b-alert
+        >
         <b-card-body>
           <div class="login-box">
             <h2>Create Account</h2>
             <div class="textbox">
-              
               <ValidationObserver>
                 <ValidationProvider rules="required" v-slot="{ errors }">
                   <input
                     v-model="username"
                     placeholder="Username*"
                     name="fieldName"
+                    autocomplete="off"
                   />
                   <br />
                   <span style="color: red; font-size:14px">{{
@@ -30,6 +39,17 @@
                     name=""
                     :type="passwordType"
                     ref="password"
+                    autocomplete="off"
+                  />
+                  <font-awesome-icon
+                    :icon="[
+                      'fas',
+                      passwordType === 'password' ? 'eye' : 'eye-slash',
+                    ]"
+                    class="text-dark"
+                    style="cursor:pointer;"
+                    @click="Show"
+                    title="Toggle Show Password"
                   />
                   <br />
                   <span style="color: red; font-size:14px">{{
@@ -40,7 +60,6 @@
             </div>
 
             <div class="textbox">
-              
               <ValidationObserver>
                 <ValidationProvider rules="email" v-slot="{ errors }">
                   <input
@@ -56,7 +75,6 @@
               </ValidationObserver>
             </div>
             <div class="textbox">
-              
               <ValidationObserver>
                 <ValidationProvider rules="numeric" v-slot="{ errors }">
                   <input
@@ -72,7 +90,6 @@
               </ValidationObserver>
             </div>
 
-            <input type="checkbox" @click="Show()" />
             <input
               class="btn"
               type="button"
@@ -112,7 +129,7 @@ export default {
       passwordType: "password",
       email: "",
       phoneNumber: "",
-      role: localStorage.getItem('role'),
+      role: localStorage.getItem("role"),
     };
   },
   methods: {
@@ -130,12 +147,10 @@ export default {
           { headers: { "Content-type": "application/json" } }
         )
         .then(() => {
-          if (this.role === "Renter"){
-            this.$router.push("/Home")
-          }
-          else if(this.role === "Host") this.$router.push("/WaitingApprove")
-        }
-        );
+          if (this.role === "Renter") {
+            this.$router.push("/Home");
+          } else if (this.role === "Host") this.$router.push("/WaitingApprove");
+        });
     },
     Show() {
       if (this.passwordType == "password") {

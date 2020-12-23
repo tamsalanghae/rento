@@ -8,8 +8,7 @@
         class="position-fixed"
         style="top: 1rem; right: 1rem;"
         fade
-        >Bạn đã nhập sai username hoặc mật khẩu. Vui lòng thử lại.</b-alert
-      >
+        >Bạn đã nhập sai username hoặc mật khẩu. Vui lòng thử lại.</b-alert>
       <b-card-body>
         <div class="login-box">
           <h1>Login</h1>
@@ -86,7 +85,7 @@ export default {
     };
   },
 
-  beforeCreate: function() {
+  mounted: function() {
     if (
       localStorage.getItem("username") != null &&
       localStorage.getItem("password") != null
@@ -94,8 +93,6 @@ export default {
       this.username = localStorage.getItem("username");
       this.password = localStorage.getItem("password");
       console.log("this.signin();");
-
-      this.signin();
     }
   },
   methods: {
@@ -104,8 +101,8 @@ export default {
       console.log(localStorage.getItem("password"));
       axios
         .post("/Users/login", {
-          username: "tamtam",
-          password: "111",
+          username: this.username,
+          password: this.password,
         })
         .then((res) => {
           console.log(res);
@@ -119,12 +116,10 @@ export default {
             if (userRole === "admin") {
               this.$router.push({ name: "AdminPostIndex" });
             } else this.$router.push("/Home");
-          } else if (res.status === 401) {
-            this.showWrongPasswordAlert = true;
           }
         })
-        .catch((err) => {
-          console.error(err);
+        .catch(() => {
+          this.showWrongPasswordAlert = true;
         });
     },
     Show() {

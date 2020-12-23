@@ -23,11 +23,14 @@
                 <router-link to="/rentoList" class="nav-link text-white fs-20">Phòng trọ</router-link> 
               </li>
               <li class="nav-item mr-3">
-               <router-link to="/login" class="nav-link text-white fs-20">Đăng nhập</router-link> 
+               <a class="nav-link text-white fs-20" @click="onSignOut">Đăng xuất</a> 
               </li>
               <li class="nav-item">
                 <router-link to="/post" class="nav-link text-white fs-20 btn btn-post"
-                  ><i class="fas fa-edit"></i> Đăng bài</router-link> 
+                  ><font-awesome-icon style="font-size: 20px;" :icon="['far', 'edit']"></font-awesome-icon> Đăng bài</router-link> 
+              </li>
+              <li class="nav-item mr-3">
+               <router-link to="/rentoFavorite" class="nav-link text-white fs-20" style="margin-left:20px">Yêu thích</router-link> 
               </li>
             </ul>
           </div>
@@ -40,6 +43,15 @@
 <script>
 export default {
   name: "navbar",
+  methods: {
+    onSignOut() {
+      localStorage.removeItem("username");
+      localStorage.removeItem("role");
+      localStorage.removeItem("token");
+      localStorage.removeItem("password");
+      this.$router.push("/login");
+    }
+  }
 };
 </script>
 
@@ -59,6 +71,10 @@ export default {
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
   color: #495057 !important;
+}
+
+.nav-link:hover {
+  cursor: pointer;
 }
 .btn-post {
   background-color: #fc9807;

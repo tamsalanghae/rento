@@ -7,6 +7,7 @@ import Signup from "@/router/views/Signup";
 import ChooseRole from "@/router/views/ChooseRole";
 import WaitingApprove from "@/router/views/WaitingApprove";
 import PostIndex from '@/router/views/admin/Index';
+import RentoFavorite from "@/router/views/RentoFavorite";
 
 export default [
     {
@@ -49,6 +50,12 @@ export default [
         path: "/waitingApprove",
         name: "WaitingApprove",
         component: WaitingApprove
+    },
+    {
+        path: "/rentoFavorite",
+        name: "RentoFavorite",
+        alias: "/",
+        component: RentoFavorite
     },
     
     {

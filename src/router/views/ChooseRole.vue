@@ -7,7 +7,7 @@
           <br /><br />
           <div class="form-check">
             <div class="row">
-              <div class="card" @click="setRole('Host')">
+              <div :class="['card', role === 'Host' ? 'selectedRole' : '']" @click="setRole('Host')">
                 <img
                   src="@/assets/img/cat-2.svg"
                   alt="Avatar"
@@ -18,7 +18,7 @@
                 </div>
               </div>
 
-              <div class="card" @click="setRole('Renter')">
+              <div  :class="['card', role === 'Renter' ? 'selectedRole' : '']" @click="setRole('Renter')">
                 <img
                   src="@/assets/img/cat-2.svg"
                   alt="Avatar"
@@ -101,5 +101,9 @@ input {
   margin-left: 25%;
 }
 .container {
+}
+
+.selectedRole {
+  border: 5px solid #fc9807;
 }
 </style>
