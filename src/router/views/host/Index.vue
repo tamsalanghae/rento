@@ -41,7 +41,10 @@
             label-align-sm="right"
             label-size="sm"
           >
-            <b-form-checkbox size="lg" v-model="searchParams.showRejected"></b-form-checkbox>
+            <b-form-checkbox
+              size="lg"
+              v-model="searchParams.showRejected"
+            ></b-form-checkbox>
           </b-form-group>
         </b-col>
         <b-col lg="5" class="my-1">
@@ -87,35 +90,14 @@
         outlined
       >
         <template #cell(actions)="row">
-          <b-row
-            v-if="statusMap.indexOf(row.item.status) == 2"
-            align-h="center"
-            fluid
-            ><b-button size="sm" @click="remove(row.index)" variant="danger">
-              <b-icon-trash style="color: white"></b-icon-trash> </b-button
-          ></b-row>
-
-          <b-row
-            v-else-if="statusMap.indexOf(row.item.status) == 0"
-            align-h="center"
-          >
-            <b-button size="sm" @click="approve(row.index)" variant="success">
-              <b-icon-check-circle></b-icon-check-circle>
-            </b-button>
-            <div style="width: 10px"></div>
-            <b-button size="sm" @click="reject(row.index)" variant="warning">
-              <b-icon-x-circle></b-icon-x-circle>
-            </b-button>
-          </b-row>
-          <b-row v-else align-h="center">
-            <b-button size="sm" @click="approve(row.index)" variant="success">
-              <b-icon-check-circle></b-icon-check-circle>
+          <b-row align-h="center" fluid>
+            <b-button size="sm" @click="edit(row.index)" variant="info">
+              <b-icon-pencil style="color: white"></b-icon-pencil>
             </b-button>
             <div style="width: 10px"></div>
             <b-button size="sm" @click="remove(row.index)" variant="danger">
-              <b-icon-trash style="color: white"></b-icon-trash>
-            </b-button>
-          </b-row>
+              <b-icon-trash style="color: white"></b-icon-trash> </b-button
+          ></b-row>
         </template>
       </b-table>
       <b-row class="justify-content-end">
@@ -159,11 +141,15 @@
 </style>
 
 <script>
-import axios from "../../../utils/axios";
+import axios from "axios";
+
 export default {
   name: "PostIndex",
+
   data() {
     return {
+      connection: "",
+
       pageOptions: [5, 10, 20],
       sortOptions: ["Mặc định", "Giá thuê", "Đánh giá", "Lượt xem"],
       fieldOptions: ["Bài đăng", "Địa chỉ"],
@@ -193,7 +179,7 @@ export default {
         showRejected: true,
       },
       token:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTBiOWJiYTIyOWMwOTljMzI3ZWJlYiIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTYwODU2MzEzMSwiZXhwIjoxNjA5MTY3OTMxLCJpYXQiOjE2MDg1NjMxMzF9.jcirT3_S0BPkh1LRgcx7tjYAupIm7wQDmS5pI11eCXA",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTJiZjdlN2IyZmE5ZTU1NjFjMDEyOCIsInJvbGUiOiJIb3N0IiwibmJmIjoxNjA4Njk1Njc4LCJleHAiOjE2MDkzMDA0NzgsImlhdCI6MTYwODY5NTY3OH0.4mi2FT8KpJusSO3BeNJudhKjf0NUGXtgvkR9gmbtiGI",
       fields: [
         { key: "caption", label: "Bài đăng", stickyColumn: true },
         { key: "address", label: "Địa chỉ" },
@@ -208,8 +194,20 @@ export default {
   },
   mounted() {
     this.search();
+    setInterval(() => this.checkNoti(), 5000);
   },
   methods: {
+    checkNoti() {
+      axios.get("https://localhost:44334/Notifications", {
+        headers: {
+          Authorization: `Bearer ${this.token}`,
+        },
+      }).then(res => res.data.forEach( n => this.$bvToast.toast(n.post.caption, {
+        title: n.content,
+        variant: n.success ?  "success" : "danger",
+        autoHideDelay: 3000,        
+      })));
+    },
     approve(index) {
       var ind = index + (this.currentPage - 1) * this.searchParams.take;
       axios
@@ -298,7 +296,7 @@ export default {
     },
     fetch() {
       return axios.post(
-        "/Posts/search",
+        "https://localhost:44334/Posts/search",
         this.searchParams,
         {
           headers: {
