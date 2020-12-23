@@ -1,7 +1,7 @@
 <template>
   <div class="header bg-main">
     <nav class="navbar navbar-expand-lg navbar-dark">
-      <div class="container">
+      <div class="container" style="max-width: 1200px;">
         <div class="d-flex justify-content-start">
           <a class="navbar-brand" href="">
             <img src="@/assets/img/logo.png" class="w-40" />
@@ -81,6 +81,9 @@
               </li>
             </ul>
           </div>
+          <div>
+            <a href="Profile"><img src="@/assets/img/cat-1.svg" alt="Avatar" class="avatar" /></a>
+          </div>
         </div>
       </div>
     </nav>
@@ -148,5 +151,11 @@ a.text-main-orange:hover {
 
 [data-toggle="collapse"].collapsed .fa:before {
   content: "\f13a";
+}
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 </style>

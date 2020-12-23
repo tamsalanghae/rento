@@ -1,105 +1,123 @@
 <template>
   <div>
     <div id="background" class="d-flex justify-content-center">
-      <b-card tag="article" class="mb-2 col-4">
-        <b-alert
-          v-model="showWrongPasswordAlert"
-          dismissible
-          variant="danger"
-          class="position-fixed"
-          style="top: 1rem; right: 1rem;"
-          fade
-          >Bạn đã nhập sai username hoặc mật khẩu. Vui lòng thử lại.</b-alert
-        >
-        <b-card-body>
-          <div class="login-box">
-            <h2>Create Account</h2>
-            <div class="textbox">
-              <ValidationObserver>
-                <ValidationProvider rules="required" v-slot="{ errors }">
-                  <input
-                    v-model="username"
-                    placeholder="Username*"
-                    name="fieldName"
-                    autocomplete="off"
-                  />
-                  <br />
-                  <span style="color: red; font-size:14px">{{
-                    errors[0]
-                  }}</span>
-                </ValidationProvider>
-              </ValidationObserver>
-            </div>
-            <div class="textbox">
-              <ValidationObserver>
-                <ValidationProvider rules="required" v-slot="{ errors }">
-                  <input
-                    v-model="password"
-                    placeholder="Password*"
-                    name=""
-                    :type="passwordType"
-                    ref="password"
-                    autocomplete="off"
-                  />
-                  <font-awesome-icon
-                    :icon="[
-                      'fas',
-                      passwordType === 'password' ? 'eye' : 'eye-slash',
-                    ]"
-                    class="text-dark"
-                    style="cursor:pointer;"
-                    @click="Show"
-                    title="Toggle Show Password"
-                  />
-                  <br />
-                  <span style="color: red; font-size:14px">{{
-                    errors[0]
-                  }}</span>
-                </ValidationProvider>
-              </ValidationObserver>
-            </div>
+      <div class="card">
+        <div class="row">
+          <div class="col-12">
+            <div class="p-3" style="width:70%; margin-left:15%; margin-top:10%">
+              <fieldset class="scheduler-border">
+                <legend class="scheduler-border" style="font-size:30px">
+                  Đăng ký tài khoản
+                </legend>
+                <div class="form-group" style="margin-top:30px">
+                  <label>Tên đăng nhập*</label>
+                  <ValidationObserver>
+                    <ValidationProvider rules="required" v-slot="{ errors }">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Vui lòng điền tên đăng nhập!"
+                        v-model="username"
+                        name="fieldName"
+                        autocomplete="off"
+                      />
 
-            <div class="textbox">
-              <ValidationObserver>
-                <ValidationProvider rules="email" v-slot="{ errors }">
-                  <input
-                    v-model="email"
-                    placeholder="Email*"
-                    name="fieldName"
-                  />
-                  <br />
-                  <span style="color: red; font-size:14px">{{
-                    errors[0]
-                  }}</span>
-                </ValidationProvider>
-              </ValidationObserver>
-            </div>
-            <div class="textbox">
-              <ValidationObserver>
-                <ValidationProvider rules="numeric" v-slot="{ errors }">
-                  <input
-                    v-model="phoneNumber"
-                    placeholder="Phone Number*"
-                    name="fieldName"
-                  />
-                  <br />
-                  <span style="color: red; font-size:14px">{{
-                    errors[0]
-                  }}</span>
-                </ValidationProvider>
-              </ValidationObserver>
-            </div>
+                      <span style="color: red; font-size:14px">{{
+                        errors[0]
+                      }}</span>
+                    </ValidationProvider>
+                  </ValidationObserver>
+                </div>
 
-            <input
-              class="btn"
-              type="button"
-              name=""
-              value="Sign up"
-              @click="signup"
-            />
+                <div class="form-group">
+                  <label>Mật khẩu*</label>
+                  <ValidationObserver>
+                    <ValidationProvider rules="required" v-slot="{ errors }">
+                      <div class="row">
+                        <div class="col-10">
+                          <input
+                            class="form-control"
+                            placeholder="Vui lòng điền mật khẩu!"
+                            v-model="password"
+                            name=""
+                            :type="passwordType"
+                            ref="password"
+                            autocomplete="off"
+                          />
+                        </div>
+                        <div class="col-2">
+                          <font-awesome-icon
+                            :icon="[
+                              'fas',
+                              passwordType === 'password' ? 'eye' : 'eye-slash',
+                            ]"
+                            class="text-dark"
+                            style="cursor:pointer"
+                            @click="Show"
+                            title="Toggle Show Password"
+                          />
+                        </div>
+                      </div>
+
+                      <span style="color: red; font-size:14px">{{
+                        errors[0]
+                      }}</span>
+                    </ValidationProvider>
+                  </ValidationObserver>
+                </div>
+               
+                <div class="form-group">
+                  <label>Địa chỉ email*</label>
+                  <ValidationObserver>
+                    <ValidationProvider rules="email" v-slot="{ errors }">
+                      <input
+                        class="form-control"
+                        placeholder="Vui lòng điền email!"
+                        v-model="email"
+                        name="fieldName"
+                      />
+
+                      <span style="color: red; font-size:14px">{{
+                        errors[0]
+                      }}</span>
+                    </ValidationProvider>
+                  </ValidationObserver>
+                </div>
+
+                <div class="form-group">
+                  <label>Số điện thoại*</label>
+                  <ValidationObserver>
+                    <ValidationProvider rules="numeric" v-slot="{ errors }">
+                      <input
+                        class="form-control"
+                        placeholder="Vui lòng điền số điện thoại!"
+                        v-model="phoneNumber"
+                        name="fieldName"
+                      />
+
+                      <span style="color: red; font-size:14px">{{
+                        errors[0]
+                      }}</span>
+                    </ValidationProvider>
+                  </ValidationObserver>
+                </div>
+              </fieldset>
+
+              <div class="col-12 text-center">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  name=""
+                  value="Sign up"
+                  @click="signup"
+                >
+                  Đăng ký 
+                </button>
+              </div>
+            </div>
           </div>
-        </b-card-body>
-      </b-card>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -110,18 +128,19 @@ import { extend } from "vee-validate";
 import { required, email, numeric } from "vee-validate/dist/rules";
 extend("required", {
   ...required,
-  message: "*This field cannot be empty",
+  message: "*Trường này không được để trống",
 });
 extend("email", {
   ...email,
-  message: "*The email invalid",
+  message: "*Email không hợp lệ",
 });
 extend("numeric", {
   ...numeric,
-  message: "*The field invalid",
+  message: "*Số điện thoại không hợp lệ",
 });
 export default {
   name: "Signup",
+
   data() {
     return {
       username: "",
@@ -170,73 +189,34 @@ export default {
   height: 100vh;
   background-image: url(~@/assets/img/back-gr10.jpg);
 }
-
-.login-box {
-  margin-top: 10px;
-  margin-right: 30px;
-  margin-left: 30px;
-}
-
-.login-box h2 {
-  float: left;
-  font-size: 47px;
-  color: #fc9807;
-  border-bottom: 6px solid #fc9807;
-  margin-bottom: 10%;
-  padding: 13px 0;
-}
-
-.textbox {
+.form-group {
   width: 100%;
   overflow: hidden;
   font-size: 20px;
-  padding: 8px 0;
-  margin: 8px 0;
-  border-bottom: 1px solid #fc9807;
+}
+.card {
+  height: 100%;
+  width: 50%;
 }
 
-.textbox i {
-  width: 60px;
-  float: left;
-  text-align: center;
-  color: #fc9807;
+fieldset.scheduler-border {
+  border: 1px groove #ddd !important;
+  padding: 0 1.4em 1.4em 1.4em !important;
+  margin: 0 0 1.5em 0 !important;
+  -webkit-box-shadow: 0px 0px 0px 0px #000;
+  box-shadow: 0px 0px 0px 0px #000;
 }
 
-.textbox input {
-  border: none;
-  outline: none;
-  background: none;
-  color: #000000;
-  font-size: 18px;
-  width: 80%;
-  float: left;
-  margin: 0 10px;
+legend.scheduler-border {
+  width: inherit; /* Or auto */
+  padding: 0 10px; /* To give a bit of padding on the left and right */
+  border-bottom: none;
+}
+[data-toggle="collapse"] .fa:before {
+  content: "\f139";
 }
 
-.btn {
-  width: 100%;
-  background: none;
-  border: 2px solid #eee;
-  color: #fc9807;
-  padding: 10px;
-  font-size: 18px;
-  cursor: pointer;
-  margin: 30px 0;
-
-  outline: none;
-  border: #eee;
-  box-shadow: 0 4px #fc9807;
-}
-
-.btn:hover {
-  background-color: #fc9807;
-  color: #eeeeee;
-}
-
-.btn:active {
-  background-color: #fc9807;
-  box-shadow: 0 5px #bfbfbf;
-  transform: translateY(4px);
-  color: #eeeeee;
+[data-toggle="collapse"].collapsed .fa:before {
+  content: "\f13a";
 }
 </style>

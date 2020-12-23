@@ -10,6 +10,7 @@
     <ChooseRole />
     <WaitingApprove />
     <RentoFavorite />
+    <Profile />
 
     </router-view>
   </div>
@@ -25,6 +26,7 @@ import Signup from './router/views/Signup.vue'
 import ChooseRole from './router/views/ChooseRole.vue'
 import WaitingApprove from './router/views/WaitingApprove.vue'
 import RentoFavorite from './router/views/RentoFavorite.vue'
+import Profile from './router/views/Profile.vue'
 export default {
   name: 'App',
   components: {
@@ -38,6 +40,7 @@ export default {
     ChooseRole,
     WaitingApprove,
     RentoFavorite,
+    Profile,
   }
 }
 </script>
