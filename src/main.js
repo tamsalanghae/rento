@@ -3,8 +3,9 @@ import Vuex from 'vuex'
 import App from './App.vue'
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faSearch} from '@fortawesome/free-solid-svg-icons'
-import {faLock} from '@fortawesome/free-solid-svg-icons'
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
 import VueRouter from 'vue-router'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -13,7 +14,7 @@ import router from "@/router"
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
 
 
-library.add(faSearch, faLock)
+library.add(fas, far, fab);
 Vue.component('ValidationProvider', ValidationProvider);
 Vue.component('ValidationObserver', ValidationObserver);
 Vue.component('font-awesome-icon', FontAwesomeIcon)
