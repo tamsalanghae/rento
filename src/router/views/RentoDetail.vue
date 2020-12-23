@@ -13,11 +13,30 @@
             img-width="1024"
             img-height="480"
             style="text-shadow: 1px 1px 2px #333"
+            v-if="photos.length != 0"
           >
             <!-- Text slides with image -->
-            <b-carousel-slide
+            <b-carousel-slide 
               v-for="item in photos"
-              :key="item"
+              :key="item"  img-height="480"
+              :img-src="getPhoto(item)"
+            ></b-carousel-slide>
+          </b-carousel>
+          <b-carousel
+            id="carousel-1"
+            :interval="3000"
+            controls
+            indicators
+            background="#ababab"
+            img-width="1024"
+            img-height="480"
+            style="text-shadow: 1px 1px 2px #333"
+            v-else
+          >
+            <!-- Text slides with image -->
+            <b-carousel-slide 
+              v-for="item in ['58','59']"
+              :key="item" 
               :img-src="getPhoto(item)"
             ></b-carousel-slide>
           </b-carousel>
@@ -89,6 +108,10 @@
           <span
             ><font-awesome-icon :icon="['fas', 'thumbs-up']" /> {{ rating }} / 5
           </span>
+          
+           <button v-on:click="addToFavorite"
+            ><font-awesome-icon :icon="['fas', 'star']" />Yêu thích
+           </button>
         </div>
       </div>
       <comments
@@ -127,9 +150,9 @@ export default {
       view: 20,
       rating: 5.0,
       photos: [],
-      token: localStorage.getItem('token'),
-        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTFkOGJhNDI2YWExMzVkM2MyMWY4MyIsInJvbGUiOiJIb3N0IiwibmJmIjoxNjA4NjM2NjAyLCJleHAiOjE2MDkyNDE0MDIsImlhdCI6MTYwODYzNjYwMn0.OPH5pJquyGripFVwUXwdujJswnq9J1AW5ZchIn7woJo",
-        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTFjNjJmMzY0M2ZhZTRhOTU3MGI3YyIsInJvbGUiOiJSZW50ZXIiLCJuYmYiOjE2MDg3MzE2MDUsImV4cCI6MTYwOTMzNjQwNSwiaWF0IjoxNjA4NzMxNjA1fQ.guphM1n273DlIFsAwbXRE8UdVZz1kR9R9EGz-C9wWLo",
+      token: localStorage.getItem("token"),
+      // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTFkOGJhNDI2YWExMzVkM2MyMWY4MyIsInJvbGUiOiJIb3N0IiwibmJmIjoxNjA4NjM2NjAyLCJleHAiOjE2MDkyNDE0MDIsImlhdCI6MTYwODYzNjYwMn0.OPH5pJquyGripFVwUXwdujJswnq9J1AW5ZchIn7woJo",
+      // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmZTFjNjJmMzY0M2ZhZTRhOTU3MGI3YyIsInJvbGUiOiJSZW50ZXIiLCJuYmYiOjE2MDg3MzE2MDUsImV4cCI6MTYwOTMzNjQwNSwiaWF0IjoxNjA4NzMxNjA1fQ.guphM1n273DlIFsAwbXRE8UdVZz1kR9R9EGz-C9wWLo",
       likes: 15,
 
       current_user: {
@@ -217,8 +240,6 @@ export default {
             this.province = data.ward.district.province.province;
             this.address = `${data.address}, ${data.ward.ward}, ${data.ward.district.district}, ${data.ward.district.province.province}`;
             this.photos = data.photos;
-            this.rating = data.rating;
-            this.view = data.views;
             this.caption = data.caption;
             this.area = data.area;
             this.rent = data.rent;
@@ -227,8 +248,18 @@ export default {
     },
     getPhoto(string) {
       // return `https://picsum.photos/1024/480/?image=${string}`;
-      return `https://localhost:44334/Posts/${this.roomId}/images?file=${string}`
+      return this.photos.length === 0
+        ? `https://picsum.photos/1024/480/?image=${string}`
+        : `https://localhost:44334/Posts/${this.roomId}/images?file=${string}`;
     },
+    addToFavorite(){
+      axios
+        .post(`/Posts/${this.roomId}/favorite`, {
+          headers: {
+            Authorization: `Bearer ${this.token}`,
+          },
+        })
+    }
   },
 };
 </script>

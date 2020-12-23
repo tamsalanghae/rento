@@ -36,8 +36,7 @@
                 <router-link
                   to="/rentoFavorite"
                   class="nav-link text-white fs-20"
-                  style="margin-left: 20px"
-                  >Yêu thích</router-link
+                  ><font-awesome-icon :icon="['fas', 'heart']" /> Yêu thích</router-link
                 >
               </b-nav-item>
               <b-nav-item>
@@ -81,10 +80,10 @@
                   >Đăng xuất</a
                 >
               </b-nav-item>
-              <b-nav-item href="Profile"
-                ><img src="@/assets/img/cat-1.svg" alt="Avatar" class="avatar"
-              /></b-nav-item>
             </b-navbar-nav>
+            <b-nav-item href="Profile"
+              ><img src="@/assets/img/cat-1.svg" alt="Avatar" class="avatar"
+            /></b-nav-item>
           </b-collapse>
         </div>
       </div>
