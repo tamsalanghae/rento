@@ -18,7 +18,8 @@
             <!-- Text slides with image -->
             <b-carousel-slide 
               v-for="item in photos"
-              :key="item"  img-height="480"
+              :key="item"
+              class="image-container"
               :img-src="getPhoto(item)"
             ></b-carousel-slide>
           </b-carousel>
@@ -276,6 +277,13 @@ hr {
   border-top: 1px solid #ececec;
   margin: 1em 0;
   padding: 0;
+}
+.image-container {
+  overflow: hidden;
+  position: relative;
+  align-self: center;
+  width: 100%;
+  height: 480px;
 }
 .comments-outside {
   margin: 0 auto;
