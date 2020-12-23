@@ -110,6 +110,7 @@
                   name=""
                   value="Sign up"
                   @click="signup"
+                  style="background-color: #fc9807; border-color: #fc9807; margin-top: 3%"
                 >
                   Đăng ký 
                 </button>

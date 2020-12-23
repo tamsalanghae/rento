@@ -6,58 +6,102 @@
         <div class="information mt-3 bg-white box-shadow">
           <div class="row">
             <div class="col-12">
-              <div class="p-3">                
-
+              <div class="p-3">
                 <div class="room-area">
                   <fieldset class="scheduler-border">
                     <legend class="scheduler-border">Thông tin phòng</legend>
                     <div class="row">
                       <div class="col-12">
                         <div class="form-group">
-                          <label>Tiêu đề bài viết</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Tiêu đề bài viết"
-                            v-model="caption"
-                          />
+                          <label>Tiêu đề bài viết*</label>
+                          <ValidationObserver>
+                            <ValidationProvider
+                              rules="required"
+                              v-slot="{ errors }"
+                            >
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Tiêu đề bài viết"
+                                v-model="caption"
+                              />
+                              <span style="color: red; font-size:14px">{{
+                                errors[0]
+                              }}</span>
+                            </ValidationProvider>
+                          </ValidationObserver>
                         </div>
                       </div>
                       <div class="col-6">
                         <div class="form-group">
-                          <label>Diện tích phòng</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Diện tích phòng"
-                            v-model="area"
-                          />
+                          <label>Diện tích phòng (m²)*</label>
+                          <ValidationObserver>
+                            <ValidationProvider
+                              rules="numeric"
+                              v-slot="{ errors }"
+                            >
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Diện tích phòng"
+                                v-model="area"
+                              />
+                              <span style="color: red; font-size:14px">{{
+                                errors[0]
+                              }}</span>
+                            </ValidationProvider>
+                          </ValidationObserver>
                         </div>
                       </div>
                       <div class="col-6">
                         <div class="form-group">
-                          <label>Giá tiền/tháng</label>
+                          <label>Giá tiền/tháng*</label>
+                          <ValidationObserver>
+                            <ValidationProvider
+                              rules="required"
+                              v-slot="{ errors }"
+                            >
                           <input
                             type="number"
                             class="form-control"
                             placeholder="Giá tiền"
                             v-model="rent"
                           />
+                          <span style="color: red; font-size:14px">{{
+                                errors[0]
+                              }}</span>
+                            </ValidationProvider>
+                          </ValidationObserver>
                         </div>
                       </div>
                       <div class="col-4">
                         <div class="form-group">
-                          <label>Thành phố:</label>
+                          <label>Thành phố:*</label>
+                          <ValidationObserver>
+                            <ValidationProvider
+                              rules="required"
+                              v-slot="{ errors }"
+                            >
                           <b-form-select
                             v-on:change="getDistricts"
                             v-model="cityCode"
                             :options="cities"
                           ></b-form-select>
+                          <span style="color: red; font-size:14px">{{
+                                errors[0]
+                              }}</span>
+                            </ValidationProvider>
+                          </ValidationObserver>
                         </div>
                       </div>
                       <div class="col-4">
                         <div class="form-group">
-                          <label>Phường:</label>
+                          <label>Phường:*</label>
+                          <ValidationObserver>
+                            <ValidationProvider
+                              rules="required"
+                              v-slot="{ errors }"
+                            >
                           <b-form-select
                             v-on:change="getWards"
                             v-if="cityCode == previousCityCode"
@@ -72,15 +116,25 @@
                               >Chọn khu vực</b-form-select-option
                             >
                           </b-form-select>
+                          <span style="color: red; font-size:14px">{{
+                                errors[0]
+                              }}</span>
+                            </ValidationProvider>
+                          </ValidationObserver>
                         </div>
                       </div>
                       <div class="col-4">
                         <div class="form-group">
-                          <label>Xã:</label>
+                          <label>Xã:*</label>
+                           <ValidationObserver>
+                            <ValidationProvider
+                              rules="required"
+                              v-slot="{ errors }"
+                            >
                           <b-form-select
                             v-if="
                               districtCode == previousDistrictCode &&
-                              cityCode == previousCityCode
+                                cityCode == previousCityCode
                             "
                             v-model="wardCode"
                             :options="wards"
@@ -90,17 +144,33 @@
                               >Chọn khu vực</b-form-select-option
                             >
                           </b-form-select>
+                          <span style="color: red; font-size:14px">{{
+                                errors[0]
+                              }}</span>
+                            </ValidationProvider>
+                          </ValidationObserver>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label>Địa chỉ</label>
+                      <label>Địa chỉ*</label>
+                       <ValidationObserver>
+                            <ValidationProvider
+                              rules="required"
+                              v-slot="{ errors }"
+                            >
                       <input
                         type="text"
                         class="form-control"
                         placeholder="Địa chỉ"
                         v-model="address"
                       />
+                      <span style="color: red; font-size:14px">{{
+                                errors[0]
+                              }}</span>
+                            </ValidationProvider>
+                          </ValidationObserver>
+                      
                     </div>
                     <div class="form-group">
                       <label>Mô tả ngắn</label>
@@ -127,8 +197,8 @@
                 </div>
                 <div class="row">
                   <div class="col-12 text-center">
-                    <button class="btn btn-primary" v-on:click="addRoom">
-                      Thêm phòng
+                    <button class="btn btn-primary" v-on:click="addRoom" style="background-color: #fc9807; border-color: #fc9807">
+                      Hoàn tất
                     </button>
                   </div>
                 </div>
@@ -145,7 +215,16 @@
 import VueUploadMultipleImage from "vue-upload-multiple-image";
 import Navbar from "../../components/navbar.vue";
 import axios from "../../utils/axios";
-
+import { extend } from "vee-validate";
+import { required, numeric } from "vee-validate/dist/rules";
+extend("required", {
+  ...required,
+  message: "*Trường này không được để trống",
+});
+extend("numeric", {
+  ...numeric,
+  message: "*Vui lòng điền số diện tích phòng",
+});
 export default {
   name: "Post",
   components: { VueUploadMultipleImage, Navbar },
@@ -171,13 +250,12 @@ export default {
       wards: [{ value: null, text: "Chọn khu vực" }],
     };
   },
-  created: function () {
+  created: function() {
     this.token = localStorage.getItem("token");
-    this.postId = this.$route.params.id;  
+    this.postId = this.$route.params.id;
     this.getProvinces();
-    if(this.postId != null && this
-    .postId != undefined){
-       axios
+    if (this.postId != null && this.postId != undefined) {
+      axios
         .get(`/Posts/${this.postId}`, {
           headers: {
             Authorization: `Bearer ${this.token}`,
@@ -194,10 +272,10 @@ export default {
             this.area = data.area;
             this.rent = data.rent;
             this.cityCode = data.ward.district.province.provinceCode;
-            this.getDistricts();            
+            this.getDistricts();
             this.districtCode = data.ward.district.districtCode;
             this.getWards();
-            this.wardCode = data.ward.wardCode;            
+            this.wardCode = data.ward.wardCode;
           }
         });
     }
@@ -348,7 +426,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .bg-main {

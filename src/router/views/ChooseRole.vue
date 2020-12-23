@@ -9,7 +9,7 @@
             <div class="row">
               <div :class="['card', role === 'Host' ? 'selectedRole' : '']" @click="setRole('Host')">
                 <img
-                  src="@/assets/img/cat-2.svg"
+                  src="@/assets/img/cho-thue.png"
                   alt="Avatar"
                   style="width:50%"
                 />
@@ -20,7 +20,7 @@
 
               <div  :class="['card', role === 'Renter' ? 'selectedRole' : '']" @click="setRole('Renter')">
                 <img
-                  src="@/assets/img/cat-2.svg"
+                  src="@/assets/img/ng-thue.png"
                   alt="Avatar"
                   style="width:50%"
                 />
@@ -32,13 +32,6 @@
             </div>
           </div>
           <br />
-          <input
-            class="float-right btn btn-primary"
-            type="submit"
-            value="Tiếp tục"
-            @click="submit"
-            style="background-color: #fc9807; border-color: #fc9807"
-          />
         </div>
       </b-card-body>
     </b-card>
@@ -59,11 +52,10 @@ export default {
       this.role = value;
         localStorage.setItem("role", this.role);
         console.log(this.role);
+             this.$router.push("/Signup");
+
   },
-    submit() {
-      // 
-     this.$router.push("/Signup");
-    },
+  
   },
   
 };
@@ -99,6 +91,7 @@ input {
 .card img {
   height: 100px;
   margin-left: 25%;
+  width: 100%;
 }
 .container {
 }
