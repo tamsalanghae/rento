@@ -36,18 +36,26 @@
                   name=""
                   :type="passwordType"
                 />
+                <font-awesome-icon
+                  :icon="[
+                    'fas',
+                    passwordType === 'password' ? 'eye' : 'eye-slash',
+                  ]"
+                  class="text-dark"
+                  style="cursor:pointer;"
+                  @click="Show"
+                  title="Toggle Show Password"
+                />
                 <br />
                 <span style="color: red; font-size:14px">{{ errors[0] }}</span>
               </ValidationProvider>
             </ValidationObserver>
           </div>
-          <input type="checkbox" @click="Show()" />
-
           <input
             class="btn"
             type="button"
             name=""
-            value="Sign in"
+            value="Đăng nhập"
             @click="signin"
           />
           <p style="color: black">
@@ -114,7 +122,8 @@ export default {
           } else if (res.status === 401) {
             this.showWrongPasswordAlert = true;
           }
-        }).catch(err => {
+        })
+        .catch((err) => {
           console.error(err);
         });
     },
@@ -150,7 +159,7 @@ export default {
   font-size: 60px;
   color: #fc9807;
   border-bottom: 6px solid #fc9807;
-  margin-bottom: 50%;
+  margin-bottom: 30%;
   padding: 13px 0;
 }
 
